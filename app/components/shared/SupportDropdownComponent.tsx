@@ -1,0 +1,44 @@
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React, { Dispatch, SetStateAction } from 'react'
+import { ApplicationRoutes } from '../constants/applicationRoutes'
+
+type Props = {
+    setIsSupportDropDownOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setMobileNavIsvisible: Dispatch<SetStateAction<boolean>>
+}
+
+const SupportDropdownComponent = ({ setIsSupportDropDownOpen, setMobileNavIsvisible }: Props) => {
+  const pathname = usePathname();
+    return (
+        <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFFFFF4D] text-white  top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+            <Link
+                href={ApplicationRoutes.ServiveEngineer}
+                onClick={() => {
+                    setIsSupportDropDownOpen(false)
+                    setMobileNavIsvisible(false)
+                }}
+                className={`w-fit ${pathname == ApplicationRoutes.ServiveEngineer ? "text-[#FFCC29] font-semibold" : ""}`}
+            >
+                <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                Become a Service Engineer
+                </li>
+            </Link>
+            <Link
+                href={ApplicationRoutes.ServicePolicy}
+                onClick={() => {
+                    setIsSupportDropDownOpen(false)
+                    setMobileNavIsvisible(false)
+                }}
+                target="_blank"
+                className={`w-fit ${pathname == ApplicationRoutes.ServicePolicy ? "text-[#FFCC29] font-semibold" : ""}`}
+            >
+                <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                Service Policy
+                </li>
+            </Link>
+        </ul>
+    )
+}
+
+export default SupportDropdownComponent
