@@ -14,3 +14,15 @@
         display: none;
     }
 }
+
+.clip-left {
+  clip-path: polygon(0 0, 100% 0, 99% 100%, 0% 100%);
+}
+
+.clip-right {
+  clip-path: polygon(1% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.react-datepicker__day--selected {
+  background-color: #FFCC29 !important;
+}
