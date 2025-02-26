@@ -79,7 +79,7 @@ const Footer = () => {
                             name='email'
                             placeholder='Enter your email address'
                         />
-                        <button className='bg-white rounded-[10px] w-full xl:w-1/2 p-3 font-medium text-[#211D1D] flex items-center gap-3'>Subscribe <Icons.Bell /></button>
+                        <button className='bg-white rounded-[10px] w-full xl:w-1/2 p-3 font-medium text-[#211D1D] flex items-center justify-between gap-3'>Subscribe <Icons.Bell /></button>
                     </div>
                 </div>
             </div>

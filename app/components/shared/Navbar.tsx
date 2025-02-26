@@ -17,12 +17,15 @@ function Navbar() {
     const [mobileNavIsVisible, setMobileNavIsvisible] = useState(false);
     const [isServiceDropDownOpen, setIsServiceDropDownOpen] = useState(false);
     const [isSupportDropDownOpen, setIsSupportDropDownOpen] = useState(false);
+    const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false);
 
     const servicesDropdownRef = useRef<HTMLDivElement>(null);
     const supportDropdownRef = useRef<HTMLDivElement>(null);
+    const profileDropdownRef = useRef<HTMLDivElement>(null);
 
     useOuterClick(servicesDropdownRef, setIsServiceDropDownOpen);
     useOuterClick(supportDropdownRef, setIsSupportDropDownOpen);
+    useOuterClick(profileDropdownRef, setIsProfileDropDownOpen);
 
     return (
         <nav className={`${sectionPadding} absolute top-0 left-0 w-full z-50 p-5 bg-transparent`}>
@@ -42,7 +45,7 @@ function Navbar() {
                         <Link href={ApplicationRoutes.Home} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.Home ? "text-[#FFCC29]" : "text-white"}`}>
                             <li>Home</li>
                         </Link>
-                        <div ref={servicesDropdownRef} className="relative">
+                        <div ref={servicesDropdownRef} className="relative" >
                             <li className={`flex items-center gap-1 transition-all duration-300 ease-in-out text-white`} onClick={() => setIsServiceDropDownOpen(!isServiceDropDownOpen)}>Our Services <span>{isServiceDropDownOpen ? <Icons.UpArrow /> : <Icons.DownArrow />}</span></li>
                             {isServiceDropDownOpen && (
                                 <ServiceDropdowComponent
@@ -67,13 +70,42 @@ function Navbar() {
                             <li>Contact Us</li>
                         </Link>
                     </ul>
-                    <Link href={ApplicationRoutes.Contact}>
-                        <button
-                            className="text-[#211D1D] bg-[#FFCC29] text-sm py-3 px-8 rounded-xl"
-                        >
-                            Login
-                        </button>
-                    </Link>
+
+                    <div ref={profileDropdownRef} className="relative">
+                        <li onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)}>
+                            <Icons.User />
+                        </li>
+                      {isProfileDropDownOpen && (
+                          <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFCC294D] text-white top-8 -left-12 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+                          <Link
+                              href={ApplicationRoutes.SignIn}
+                              onClick={() => {
+                                  setIsProfileDropDownOpen(false)
+                                  setMobileNavIsvisible(false)
+                              }}
+                              className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                          >
+                              <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                              Sign in (User)
+                              </li>
+                          </Link>
+                          <Link
+                              href={ApplicationRoutes.EngineerSignIn}
+                              onClick={() => {
+                                  setIsProfileDropDownOpen(false)
+                                  setMobileNavIsvisible(false)
+                              }}
+                            
+                              className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                          >
+                              <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                              Sign in (Engineer)
+                              </li>
+                          </Link>
+                      </ul>
+                      )}
+                    </div>
+
                 </div>
 
                 <button className="p-1 rounded lg:hidden" onClick={() => setMobileNavIsvisible(true)}>
