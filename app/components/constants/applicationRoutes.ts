@@ -49,12 +49,17 @@ export class ApplicationRoutes {
   /**
    * The route to the sign in page
    */
-  static readonly SignIn = '/auth/signin';
+  static readonly SignIn = '/user/signin';
+  /**
+   * The route to the sign in page
+   */
+  static readonly EngineerSignIn = '/engineer/signin';
+  static readonly EngineerSignUp = '/engineer/signup';
 
   /**
    * The route to the sign up page
    */
-  static readonly SignUp = '/auth/signup';
+  static readonly SignUp = '/user/signup';
 
   /**
    * The route to the service policy page
