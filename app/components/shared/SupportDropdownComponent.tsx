@@ -11,14 +11,14 @@ type Props = {
 const SupportDropdownComponent = ({ setIsSupportDropDownOpen, setMobileNavIsvisible }: Props) => {
   const pathname = usePathname();
     return (
-        <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFFFFF4D] text-white  top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+        <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
             <Link
-                href={ApplicationRoutes.ServiveEngineer}
+                href={ApplicationRoutes.ServiceEngineer}
                 onClick={() => {
                     setIsSupportDropDownOpen(false)
                     setMobileNavIsvisible(false)
                 }}
-                className={`w-fit ${pathname == ApplicationRoutes.ServiveEngineer ? "text-[#FFCC29] font-semibold" : ""}`}
+                className={`w-fit ${pathname == ApplicationRoutes.ServiceEngineer ? "text-[#FFCC29] font-semibold" : ""}`}
             >
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                 Become a Service Engineer

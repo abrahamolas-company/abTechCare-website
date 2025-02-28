@@ -72,11 +72,45 @@ function Navbar() {
                     </ul>
 
                     <div ref={profileDropdownRef} className="relative">
+                        <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-mediu flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
+                            Login
+                        </button>
+                        {isProfileDropDownOpen && (
+                            <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-[60px] -left-9 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+                                <Link
+                                    href={ApplicationRoutes.SignIn}
+                                    onClick={() => {
+                                        setIsProfileDropDownOpen(false)
+                                        setMobileNavIsvisible(false)
+                                    }}
+                                    className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                >
+                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                        Sign in (User)
+                                    </li>
+                                </Link>
+                                <Link
+                                    href={ApplicationRoutes.EngineerSignIn}
+                                    onClick={() => {
+                                        setIsProfileDropDownOpen(false)
+                                        setMobileNavIsvisible(false)
+                                    }}
+
+                                    className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                >
+                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                        Sign in (Engineer)
+                                    </li>
+                                </Link>
+                            </ul>
+                        )}
+                    </div>
+                    {/* <div ref={profileDropdownRef} className="relative">
                         <li onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)}>
                             <Icons.User />
                         </li>
                       {isProfileDropDownOpen && (
-                          <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFCC294D] text-white top-8 -left-12 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+                          <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 -left-12 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
                           <Link
                               href={ApplicationRoutes.SignIn}
                               onClick={() => {
@@ -104,7 +138,7 @@ function Navbar() {
                           </Link>
                       </ul>
                       )}
-                    </div>
+                    </div> */}
 
                 </div>
 

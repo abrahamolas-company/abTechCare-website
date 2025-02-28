@@ -11,7 +11,7 @@ type Props = {
 const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisible }: Props) => {
     const pathname = usePathname();
     return (
-        <ul className="z-50 absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFFFFF4D] text-white  top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl animate-slideDown">
+        <ul className="z-50 absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl animate-slideDown">
             <Link
                 href={ApplicationRoutes.GadgetRepair}
                 onClick={() => {

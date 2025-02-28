@@ -6,13 +6,14 @@ import Image from 'next/image'
 import { Toaster } from 'sonner'
 import images from '@/public/images'
 import { usePathname } from 'next/navigation'
+import DashboardNavbar from './DashboardNavbar'
 
 type Props = {
     children: ReactNode
 }
 
 export default function Layout({ children }: Props) {
-const pathname = usePathname();
+    const pathname = usePathname();
     const [loaderIsVisible, setLoaderIsVisible] = useState(true);
     const iswindow = typeof window !== 'undefined' ? true : false;
 
@@ -35,9 +36,17 @@ const pathname = usePathname();
                             unstyled: false,
                         }}
                     />
-                  {!pathname.includes('/user/signin') && !pathname.includes('/user/forgot-password') && !pathname.includes('/user/signup') && !pathname.includes('/user/reset-password') && !pathname.includes('/engineer/signin') && !pathname.includes('/engineer/signup')  && !pathname.includes('/engineer/forgot-password') && !pathname.includes('/engineer/reset-password') && <Navbar />}
+                    {!pathname.includes('/user/dashboard') && !pathname.includes('/engineer/dashboard') && !pathname.includes('/user/account') && !pathname.includes('/engineer/account') && !pathname.includes('/user/payments') && !pathname.includes('/user/invoice') && !pathname.includes('/user/repair-history') && !pathname.includes('/user/signin') && !pathname.includes('/user/forgot-password') && !pathname.includes('/user/signup') && !pathname.includes('/user/reset-password') && !pathname.includes('/engineer/signin') && !pathname.includes('/engineer/signup') && !pathname.includes('/engineer/forgot-password') && !pathname.includes('/engineer/reset-password') && <Navbar />}
+                    {(pathname.includes('/user/dashboard') ||
+                    pathname.includes('/engineer/dashboard') ||
+                        pathname.includes('/user/payments') ||
+                        pathname.includes('/user/invoice') ||
+                        pathname.includes('/user/account') ||
+                        pathname.includes('/engineer/account') ||
+                        pathname.includes('/user/repair-history')) && <DashboardNavbar />}
                     {children}
-                    <Footer />
+                    {!pathname.includes('/user/dashboard') && !pathname.includes('/engineer/dashboard') && !pathname.includes('/user/account') && !pathname.includes('/engineer/account') && !pathname.includes('/user/payments') && !pathname.includes('/user/invoice') && !pathname.includes('/user/repair-history') && <Footer />}
+
                 </>
             )}
             {loaderIsVisible && (

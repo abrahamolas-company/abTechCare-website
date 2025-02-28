@@ -15,7 +15,7 @@ export class ApplicationRoutes {
     /**
    * The route to the become our engineer page
    */
-    static readonly ServiveEngineer = '/service-engineer';
+    static readonly ServiceEngineer = '/become-a-service-engineer';
   /**
    * The route to the flexible payment page
    */
