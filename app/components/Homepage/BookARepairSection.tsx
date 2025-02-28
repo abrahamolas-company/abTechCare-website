@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import { motion } from 'framer-motion'
 import { easeOutExpo } from '../constants/easings'
+import Link from 'next/link'
 
 function BookARepairSection() {
     return (
@@ -26,10 +27,10 @@ function BookARepairSection() {
                 className="mt-3">
                     <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>Book a <br /> Repair Service</h2>
                     <p className='max-w-[500px] leading-6 mb-2 text-sm font-light'>Experience a seamless solution to your gadget woes with our professional repair services. </p>
-                    <p className='max-w-[500px] leading-6 text-sm font-light mb-4'>
+                    <p className='max-w-[500px] leading-6 text-sm font-light !pb-6'>
                         We understand the frustration of dealing with a broken device, which is why we&apos;re here to provide you with fast, reliable, affordable repairs and delivery to get you back up and running in no time.
                     </p>
-                    <button className='bg-[#FFCC29] rounded-[10px] text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]'>Book Now</button>
+                    <Link href={'/gadget-repair'} className='bg-[#FFCC29] rounded-[10px] text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]'>Book Now</Link>
                 </motion.div>
             </div>
         </section>

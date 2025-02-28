@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import { motion } from 'framer-motion'
 import { easeOutExpo } from '../constants/easings'
+import Link from 'next/link'
 
 function B2BSection() {
     return (
@@ -19,9 +20,9 @@ function B2BSection() {
                     className="mt-3 w-full">
                     <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>B2B Services </h2>
                     <p className='max-w-[500px] leading-6 mb-2 text-sm font-light'> At Abtechcare, we offer businesses, organizations, and service providers a dedicated B2B platform for efficient and scalable gadget repair solutions. </p>
-                    <p className='max-w-[500px] leading-6 text-sm font-light mb-4'>
+                    <p className='max-w-[500px] leading-6 text-sm font-light !pb-6'>
                         Whether you manage a corporate fleet of devices, run a retail business, or provide warranty services, our platform ensures smooth operations with end-to-end repair and maintenance support.            </p>
-                    <button className='bg-[#FFCC29] rounded-[10px] text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]'>Partner with us</button>
+                    <Link href={'/b2b-services'} className='bg-[#FFCC29] rounded-[10px] text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]'>Partner with us</Link>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, x: 30 }}

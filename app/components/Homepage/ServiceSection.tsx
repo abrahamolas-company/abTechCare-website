@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import { Icons } from '../ui/icons'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 function ServiceSection() {
   const services = [
@@ -13,21 +14,24 @@ function ServiceSection() {
       title: 'Flexible Payment',
       text: 'Repair now, pay later with flexible options.',
       btnText: 'Book Now',
-      image: images.payment_image
+      image: images.payment_image,
+      link:'/'
     },
     {
       icon: Icons.Insurance,
       title: 'Gadget Insurance',
       text: 'Secure your device against unexpected damage',
       btnText: 'Start Now ',
-      image: images.insurance_image
+      image: images.insurance_image,
+      link:'/gadget-insurance'
     },
     {
       icon: Icons.Tracker,
       title: 'Track your Repair Status',
       text: 'Stay updated on your gadget’s repair progress',
       btnText: 'Track Status',
-      image: images.tracker_image
+      image: images.tracker_image,
+      link:'/track-your-repair'
     }
   ]
   return (
@@ -66,9 +70,9 @@ function ServiceSection() {
                 alt={service.title}
                 className="w-full h-[150px] object-cover rounded-md mb-4"
               />
-              <button className="bg-[#FFCC29] flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-2 px-8 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]">
+              <Link href={service.link as string} className="bg-[#FFCC29] w-fit flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-2 px-8 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]">
                 {service.btnText}
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>
