@@ -10,6 +10,9 @@ import tracker_image from './images/tracker_image.png';
 import about_section from './images/about_section.png';
 import globe from './images/globe.jpg';
 import home from './images/home.png';
+import movies from './images/movies.png';
+import office from './images/office.png';
+import family from './images/family.png';
 import speaker from './images/speaker.png';
 import drones from './images/drones.png';
 import phone from './images/phone.png';
@@ -53,5 +56,8 @@ export default {
     pickup_delivery_image,
     engineer,
     b2b_img,
-    dashboard_hero
+    dashboard_hero,
+    movies,
+    office,
+    family
 }

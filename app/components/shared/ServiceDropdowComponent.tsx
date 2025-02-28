@@ -30,7 +30,6 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                     setIsServiceDropDownOpen(false)
                     setMobileNavIsvisible(false)
                 }}
-                target="_blank"
                 className={`w-fit ${pathname == ApplicationRoutes.FlexiblePayment ? "text-[#FFCC29] font-semibold" : ""}`}
             >
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">

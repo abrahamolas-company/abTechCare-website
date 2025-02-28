@@ -30,7 +30,6 @@ const SupportDropdownComponent = ({ setIsSupportDropDownOpen, setMobileNavIsvisi
                     setIsSupportDropDownOpen(false)
                     setMobileNavIsvisible(false)
                 }}
-                target="_blank"
                 className={`w-fit ${pathname == ApplicationRoutes.ServicePolicy ? "text-[#FFCC29] font-semibold" : ""}`}
             >
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
