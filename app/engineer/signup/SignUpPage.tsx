@@ -47,14 +47,14 @@ function SignUpPage() {
                             <Input className='!mt-1' placeholder='Enter your Account Name' />
                         </div>
                         <div className="flex mb-7 items-center gap-6 w-full flex-col md:flex-row">
-                        <div className="w-full">
-                            <Label>Account Number</Label>
-                            <Input className='!mt-1' placeholder='Enter your Account Number' />
-                        </div>
-                        <div className="w-full">
-                            <Label>Bank Name</Label>
-                            <Input className='!mt-1' placeholder='Enter your Bank Name' />
-                        </div>  
+                            <div className="w-full">
+                                <Label>Account Number</Label>
+                                <Input className='!mt-1' placeholder='Enter your Account Number' />
+                            </div>
+                            <div className="w-full">
+                                <Label>Bank Name</Label>
+                                <Input className='!mt-1' placeholder='Enter your Bank Name' />
+                            </div>
                         </div>
                         <div className="mb-7">
                             <Label>Create a new Password</Label>
@@ -70,7 +70,8 @@ function SignUpPage() {
                     Create your Account
                 </button>
                 <p className='max-w-[290px] text-center mx-auto text-sm'><span className='text-[#211D1D]'>By creating an account you agree to our </span>
-                    <Link href={ApplicationRoutes.TermsAndConditions} className='text-[#979281]'>Terms of Service</Link> <span className='text-[#211D1D]'>and</span> <Link className='text-[#979281]' href={ApplicationRoutes.ServicePolicy}>Privacy Policy.</Link>  </p>
+                    <Link href={ApplicationRoutes.ServicePolicy} className='text-[#979281] hover:text-[#FFCC29]'>Terms of Service</Link> <span className='text-[#211D1D]'>and</span> <Link className='text-[#979281] hover:text-[#FFCC29]' href={ApplicationRoutes.ServicePolicy}>Privacy Policy.</Link>
+                </p>
             </form>
         </section>
     )
