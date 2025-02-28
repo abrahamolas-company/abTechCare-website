@@ -19,6 +19,9 @@ import frame_design from './images/frame_design.png';
 import repair_center from './images/repair_center.png';
 import pickup_delivery_image from './images/pickup_delivery_image.png';
 import insurance_bg_img from './images/insurance_bg_img.png';
+import engineer from './images/engineer.png';
+import b2b_img from './images/b2b_img.png';
+import dashboard_hero from './images/dashboard_hero.png';
 import track_your_repair from './images/Track Repair Hero.png';
 import quote_hero from './images/Quote Hero Page.png';
 
@@ -47,5 +50,8 @@ export default {
     frame_design,
     insurance_bg_img,
     track_your_repair,
-    pickup_delivery_image
+    pickup_delivery_image,
+    engineer,
+    b2b_img,
+    dashboard_hero
 }
