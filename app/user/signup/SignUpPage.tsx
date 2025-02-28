@@ -225,7 +225,8 @@ function SignUpPage() {
                     Create your Account
                 </button>
                 <p className='max-w-[290px] text-center mx-auto text-sm'><span className='text-[#211D1D]'>By creating an account you agree to our </span>
-                    <Link href={ApplicationRoutes.TermsAndConditions} className='text-[#979281]'>Terms of Service</Link> <span className='text-[#211D1D]'>and</span> <Link className='text-[#979281]' href={ApplicationRoutes.ServicePolicy}>Privacy Policy.</Link>  </p>
+                    <Link href={ApplicationRoutes.ServicePolicy} className='text-[#979281] hover:text-[#FFCC29]'>Terms of Service</Link> <span className='text-[#211D1D]'>and</span> <Link className='text-[#979281] hover:text-[#FFCC29]' href={ApplicationRoutes.ServicePolicy}>Privacy Policy.</Link>
+                </p>
             </form>
         </section>
     )
