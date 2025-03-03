@@ -24,7 +24,9 @@ import pickup_delivery_image from './images/pickup_delivery_image.png';
 import insurance_bg_img from './images/insurance_bg_img.png';
 import engineer from './images/engineer.png';
 import b2b_img from './images/b2b_img.png';
+import payment_modal from './images/payment_modal.png';
 import dashboard_hero from './images/dashboard_hero.png';
+import withdraw_modal from './images/withdraw_modal.png';
 import track_your_repair from './images/Track Repair Hero.png';
 import quote_hero from './images/Quote Hero Page.png';
 
@@ -59,5 +61,7 @@ export default {
     dashboard_hero,
     movies,
     office,
-    family
+    family,
+    payment_modal,
+    withdraw_modal
 }

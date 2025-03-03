@@ -1,11 +1,14 @@
+'use client'
 import { sectionPadding } from '@/app/styles/styles'
 import images from '@/public/images'
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef } from 'react'
 
 function ContactUsSection() {
+
+    const contactRef = useRef<HTMLDivElement>(null);
     return (
-        <section className='bg-[#fff] md:pt-5'>
+        <section ref={contactRef} id="contact" className='bg-[#fff] md:pt-5'>
             <div className={`${sectionPadding} flex flex-col md:flex-row items-center justify-center gap-5 md:gap-28 pt-8 pb-16 md:pt-0`}>
 
                 <div className="mt-3">

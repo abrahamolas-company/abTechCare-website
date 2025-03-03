@@ -2,14 +2,16 @@
 import { sectionPadding } from '@/app/styles/styles'
 import images from '@/public/images'
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { easeOutExpo } from '../constants/easings'
 
 function AboutUsSection() {
+
+  const aboutRef = useRef<HTMLDivElement>(null);
   return (
 
-    <section className="relative min-h-[70vh] flex items-center justify-center">
+    <section ref={aboutRef} id="about" className="relative min-h-[70vh] flex items-center justify-center">
       {/* Background Image */}
       <div
         className="absolute inset-0 w-full h-full">

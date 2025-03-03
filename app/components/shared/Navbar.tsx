@@ -1,5 +1,5 @@
-import { usePathname } from 'next/navigation';
-import React, { useRef, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react'
 import useOuterClick from '../hooks/useOuterClick';
 import { sectionPadding } from '@/app/styles/styles';
 import Image from 'next/image';
@@ -13,6 +13,7 @@ import SupportDropdownComponent from './SupportDropdownComponent';
 
 function Navbar() {
     const pathname = usePathname();
+    const router = useRouter()
 
     const [mobileNavIsVisible, setMobileNavIsvisible] = useState(false);
     const [isServiceDropDownOpen, setIsServiceDropDownOpen] = useState(false);
@@ -27,6 +28,34 @@ function Navbar() {
     useOuterClick(supportDropdownRef, setIsSupportDropDownOpen);
     useOuterClick(profileDropdownRef, setIsProfileDropDownOpen);
 
+   // Generic function to handle navigation and scrolling
+   const handleScrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    event.preventDefault();
+
+    if (pathname === ApplicationRoutes.Home) {
+        // If already on the home page, scroll to the section
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    } else {
+        // Navigate to the home page and append the section ID to the URL
+        router.push(`${ApplicationRoutes.Home}#${sectionId}`);
+    }
+};
+
+useEffect(() => {
+    // Check if URL contains #contact or #about after navigation
+    if (window.location.hash) {
+        const sectionId = window.location.hash.substring(1); // Remove the '#' to get the ID
+        const section = document.getElementById(sectionId);
+        if (section) {
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: "smooth" });
+            }, 500); // Delay to ensure the page has loaded
+        }
+    }
+}, [pathname]);
     return (
         <nav className={`${sectionPadding} absolute top-0 left-0 w-full z-50 p-5 bg-transparent`}>
 
@@ -63,10 +92,10 @@ function Navbar() {
                                 />
                             )}
                         </div>
-                        <Link href={ApplicationRoutes.About} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.About ? "text-[#FFCC29]" : "text-white"}`}>
+                        <Link href="#about" onClick={(e) => handleScrollToSection(e, "about")} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.About ? "text-[#FFCC29]" : "text-white"}`}>
                             <li>About Us</li>
                         </Link>
-                        <Link href={ApplicationRoutes.Contact} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.Contact ? "text-[#FFCC29]" : "text-white"}`}>
+                        <Link href="#contact" onClick={(e) => handleScrollToSection(e, "contact")} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.Contact ? "text-[#FFCC29]" : "text-white"}`}>
                             <li>Contact Us</li>
                         </Link>
                     </ul>
