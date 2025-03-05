@@ -11,8 +11,8 @@ function ContactUsSection() {
         <section ref={contactRef} id="contact" className='bg-[#fff] md:pt-5'>
             <div className={`${sectionPadding} flex flex-col md:flex-row items-center justify-center gap-5 md:gap-28 pt-8 pb-16 md:pt-0`}>
 
-                <div className="mt-3">
-                    <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>Contact Us </h2>
+                <div className="mt-3 order-2 md:order-1">
+                    <h2 className='text-[#211D1D] font-medium text-[30px] text-center md:text-start md:text-[35px] leading-10 mb-3'>Contact Us </h2>
                     <p className='max-w-[500px] leading-6 mb-2 text-sm font-normal flex flex-col text-[#211D1D] '>
                         <span className='text-[#FFCC29]'>Nigeria Contact</span>
                         21 Kodesho Street, Computer Village, Lagos State <br />
@@ -27,7 +27,7 @@ function ContactUsSection() {
                         +86 159 2016 5954 
                     </p>
                 </div>
-                <div className="relative flex justify-center">
+                <div className="relative flex justify-center order-1 md:order-2">
                     <div className="w-[350px] h-[350px]">
                         <Image
                             src={images.globe}

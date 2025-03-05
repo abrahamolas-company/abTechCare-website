@@ -36,9 +36,9 @@ function AboutUsSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: easeOutExpo }}
-          className="mt-3">
-          <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>About Us</h2>
-          <p className='max-w-[500px] leading-[32px] mb-2 text-base font-normal'>At Abtechcare, we redefine gadget repair with convenience, efficiency, and flexibility. Our mission is to provide seamless repair services by offering easy pickup and delivery, expert technical support, and flexible payment options tailored to your needs.</p>
+          className="mt-3 text-center md:text-start">
+          <h2 className='text-[#211D1D] font-medium text-[30px] md:text-[35px] leading-10 mb-3'>About Us</h2>
+          <p className='md:max-w-[500px] leading-7 md:leading-[32px] mb-2 text-sm md:text-base font-normal'>At Abtechcare, we redefine gadget repair with convenience, efficiency, and flexibility. Our mission is to provide seamless repair services by offering easy pickup and delivery, expert technical support, and flexible payment options tailored to your needs.</p>
         </motion.div>
       </div>
     </section>

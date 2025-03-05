@@ -10,7 +10,7 @@ import BecomeAnEngineerFormSection from './BecomeAnEngineerFormSection'
 
 function BecomeAnEngineerPage() {
     return (
-        <section className=' pb-14'>
+        <section className='pb-14'>
             <B2bHerosection />
             <div className={`${sectionPadding} flex flex-col md:flex-row items-start justify-between gap-5 md:gap-14 pt-8 pb-0 md:pt-0`}>
 
@@ -19,9 +19,9 @@ function BecomeAnEngineerPage() {
                     whileInView={{ opacity: 1, x: -0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: easeOutExpo }}
-                    className="mt-3 w-full">
-                    <h2 className='text-[#211D1D] font-extrabold text-[40px] leading-snug mb-3'>Become  one  of our service Engineers</h2>
-                    <p className='max-w-[500px] leading-6 mb-2 text-base font-light'>
+                    className="mt-3 w-full text-center md:text-start">
+                    <h2 className='text-[#211D1D] font-extrabold text-3xl md:text-[40px] leading-snug mb-3'>Become  one  of our service Engineers</h2>
+                    <p className='max-w-[500px] leading-6 mb-2 text-sm md:text-base font-light'>
                         Join Abtechcare as a Service Center Engineer and be part of a growing network of top-tier technicians dedicated to providing premium repair solutions.
                     </p>
                 </motion.div>
@@ -46,10 +46,10 @@ function BecomeAnEngineerPage() {
 
             </div>
 
-            <div className="bg-[#FFCC2933] text-[#211D1D] py-5 mb-7">
+            <div className="bg-[#FFCC2933] text-[#211D1D] py-5 mt-10 md:mt-0 mb-10 md:mb-7">
                 <div className={`${sectionPadding}`}>
-                <h3 className='font-bold text-lg'>Requirements</h3>
-                 <ul className='list-disc ml-5 leading-7 font-light'>
+                <h3 className='font-bold text-base md:text-lg'>Requirements</h3>
+                 <ul className='list-disc ml-5 leading-7 font-light text-sm md:text-base'>
                  <li>
                         Minimum of 2 years experience in gadget repairs (mobile phones, tablets, laptops, etc.)
                     </li>

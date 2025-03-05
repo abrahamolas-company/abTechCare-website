@@ -17,7 +17,7 @@ function B2BSection() {
                     whileInView={{ opacity: 1, x: -0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: easeOutExpo }}
-                    className="mt-3 w-full">
+                    className="mt-3 w-full order-2 md:order-1 text-center md:text-start">
                     <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>B2B Services </h2>
                     <p className='max-w-[500px] leading-6 mb-2 text-sm font-light'> At Abtechcare, we offer businesses, organizations, and service providers a dedicated B2B platform for efficient and scalable gadget repair solutions. </p>
                     <p className='max-w-[500px] leading-6 text-sm font-light !pb-6'>
@@ -29,7 +29,7 @@ function B2BSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: easeOutExpo }}
-                    className="relative w-full flex justify-center">
+                    className="relative w-full flex justify-center order-1 md:order-2">
                     <div className="relative lg:w-[90vw] max-w-[450px]">
                         <Image
                             src={images.b2b_section}

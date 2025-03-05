@@ -9,7 +9,7 @@ function PartnerSection() {
       <h2 className='text-[#211D1D] font-medium text-2xl mb1'>Our Partners</h2>
       <p className='text-[#211D1D] max-w-[1000px] leading-6 mb-[30px] text-base mx-auto'>We partner with a wide range of skilled engineers and technicians in the repair industry. This extensive network ensures that no matter the issue, we have the right specialist to handle your gadget with precision and expertise.</p>
 
-      <div className="grid grid-cols-7 gap-5 mb-16">
+      <div className="grid grid-cols-3 md:grid-cols-7 gap-5 mb-16">
 
         {Array.from({ length: 14 }).map((_, index) => (
           <motion.div

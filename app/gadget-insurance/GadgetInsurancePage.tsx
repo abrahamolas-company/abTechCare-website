@@ -63,15 +63,17 @@ function GadgetInsurancePage() {
           })}
         </div>
 
-        <div className="flex items-center gap-10 ">
+        <div className="flex flex-col md:flex-row items-center gap-10 ">
           {/* Image Upload */}
           <div className="text-center">
             <input type="file" accept="image/*" className="hidden" id="image2" onChange={handleImageUpload} />
-            <label htmlFor="image2" className="flex items-center justify-center w-[100px] md:w-[200px] h-[100px] md:h-[200px] bg-[#F5F5F5] rounded-lg cursor-pointer ">
+            <label htmlFor="image2" className="flex items-center justify-center w-[160px] md:w-[200px] h-[160px] md:h-[200px] bg-[#F5F5F5] rounded-lg cursor-pointer ">
               {image ? (
                 <Image src={image} alt="Uploaded Image 2" width={180} height={180} className="rounded-lg object-cover w-[100px] md:w-[200px] h-[100px] md:h-[200px]" />
               ) : (
-                <Icons.Camera />
+                <p className='flex flex-col items-center text-xs -mt-3 gap-5'>Upload image of damaged Gadget
+                <span><Icons.Camera /></span>
+              </p>
               )}
             </label>
           </div>

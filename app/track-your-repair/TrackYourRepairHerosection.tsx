@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 export default function TrackYourRepairHerosection() {
     return (
         <section className={`${sectionPadding} pt-40 md:pt-56 relative after:absolute after:blur-[100px] after:rounded-full after:w-80 after:h-60  after:contents after:top-0 after:left-0 after:z-10`}>
-            <div className='absolute top-0 left-0 h-[70vh] w-full md:h-[60vh]'>
+  <div className='absolute top-0 left-0 h-[410px] w-full md:h-[460px] lg:h-[60vh]'>          
                 <Image src={images.track_your_repair} alt="Hero background" className='w-full h-full object-cover transition-opacity duration-1000 ease-in-out' />
                 <div className='absolute top-0 left-0 w-full h-full bg-black opacity-30'></div>
             </div>

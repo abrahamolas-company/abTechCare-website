@@ -39,10 +39,10 @@ function TrackYourRepairPage() {
       <form className="max-w-2xl pt-40 mx-auto p-4">
           <div className="flex flex-col gap-2">
             <Label className="block text-sm font-medium">Input your Order Number</Label>
-            <div className="flex items-center gap-3">
-              <Input placeholder='' className='placeholder:text-[#211D1D] !px-3 !mb-5 font-medium' />
+            <div className="flex items-center flex-col md:flex-row md:gap-3">
+              <Input placeholder='' className='placeholder:text-[#211D1D] !px-3 mb-3 md:!mb-5 font-medium' />
               <button type='button' className="bg-[#FFCC29] font-medium  mb-4 flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]">
-                Submit
+              Track Your Repair
               </button>
             </div>
           </div>
@@ -51,8 +51,8 @@ function TrackYourRepairPage() {
             <h2 className='font-medium text-lg'>Repair in Progres</h2>
           </div>
           {/* Date Picker */}
-          <div className="">
-            <Label className="block text-sm font-medium mb-2 text-[#211D1D]">
+          <div className="mt-5 md:mt-0">
+            <Label className="flex flex-col md:flex-row text-center md:text-start text-sm font-medium mb-2 text-[#211D1D]">
             Choose Delivery time  <span className='text-xs font-extralight'>(Pick a suitable delivery time when your repair progress is successful)</span>
             </Label>
             <div className='border px-3 border-[#211D1D] rounded-[10px] flex items-center justify-between'>
@@ -65,7 +65,7 @@ function TrackYourRepairPage() {
               />
               <Icons.Calender />
             </div>
-            <span className='text-[13px] text-[#979281] mt-1'>Our Working Days cover Monday - Saturday</span>
+            <span className='text-[10px] md:text-[13px] text-[#979281] mt-1'>Our Working Days cover Monday - Saturday</span>
           </div>
 
           {/* Time Dropdown */}
@@ -100,7 +100,7 @@ function TrackYourRepairPage() {
                 ))}
               </div>
             )}
-            <span className='text-[13px] flex items-center text-[#979281] mt-1'><Icons.Bike />Delivery fees would be charged irrespective of your location.</span>
+            <span className='text-[10px] md:text-[13px] flex items-center text-[#979281] mt-1'><Icons.Bike />Delivery fees would be charged irrespective of your location.</span>
 
           </div>
 

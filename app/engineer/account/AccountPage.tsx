@@ -16,7 +16,7 @@ function AccountPage() {
           {/* My Invoice Section */}
           <section className="bg-[#D9D9D929] p-4 rounded-lg shadow-md mb-20 overflow-x-auto">
             <h2 className="text-base font-light mb-4">Account Information</h2>
-            <table className="w-full text-black border-collapse border border-[#211D1D]">
+            <table className="w-full text-black border-collapse whitespace-nowrap border border-[#211D1D]">
            
               <tbody className="text-sm text-[#211D1D]">
               <tr className="text-sm">
@@ -57,14 +57,14 @@ function AccountPage() {
           </section>
 
           <form className="bg-[#D9D9D929] flex flex-col gap-4 w-full p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
-          <div className="w-1/2">
-            <Label>
+          <div className="w-full md:w-1/2 flex flex-col gap-2">
+            <Label className=''>
             Create a new Password
             </Label>
             <Input placeholder='Enter a strong password '/>
           </div>
-          <div className="w-1/2">
-            <Label>
+          <div className="w-full md:w-1/2 flex flex-col gap-2">
+            <Label className=''>
             Confirm Password
             </Label>
             <Input placeholder='Confirm your password again'/>

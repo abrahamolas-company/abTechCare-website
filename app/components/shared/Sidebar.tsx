@@ -10,7 +10,7 @@ const Sidebar = () => {
 
     return (
         <aside
-            className={`h-[90vh] relative py-10 bg-[#211D1D] text-white overflow-y-auto transition-all duration-300 ${isOpen ? "w-64 px-4" : "w-20 px-2"}`}
+            className={`hidden md:block h-[90vh] relative py-10 bg-[#211D1D] text-white overflow-y-auto transition-all duration-300 ${isOpen ? "w-64 px-4" : "w-20 px-2"}`}
         >
             <button
                 className=" flex items-end ml-auto -mt-3 mb-5 justify-end cursor-pointer"

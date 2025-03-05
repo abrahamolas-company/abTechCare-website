@@ -55,7 +55,7 @@ function PickupAndDeliveryPage() {
               />
               <Icons.Calender />
             </div>
-            <span className='text-[13px] text-[#979281] mt-1'>Our Working Days cover Monday - Saturday</span>
+            <span className='text-[10px] md:text-[13px] text-[#979281] mt-1'>Our Working Days cover Monday - Saturday</span>
           </div>
 
           {/* Time Dropdown */}
@@ -90,12 +90,12 @@ function PickupAndDeliveryPage() {
                 ))}
               </div>
             )}
-            <span className='text-[13px] flex items-center text-[#979281] mt-1'><Icons.Bike />Delivery fees would be charged irrespective of your location.</span>
+            <span className='text-[10px] md:text-[13px] flex items-center text-[#979281] mt-1'><Icons.Bike />Delivery fees would be charged irrespective of your location.</span>
 
           </div>
 
-          <div className="flex flex-col gap-2 w-1/2">
-            <Label>Choose a Payment Option</Label>
+          <div className="flex flex-col gap-2 w-full md:w-1/2">
+            <Label className='text-sm md:text-base'>Choose a Payment Option</Label>
             <Dropdown label="Payment Option" options={["Flexible Payment", "Flexible Payment", "Flexible Payment"]} />
 
           </div>

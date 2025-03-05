@@ -27,3 +27,24 @@
 .react-datepicker__day--selected {
   background-color: #FFCC29 !important;
 }
+
+// /* Scrollbar for horizontal scrolling */
+// ::-webkit-scrollbar:ver {
+//   height: 8px; /* Adjust height */
+// }
+
+// /* Scrollbar thumb (draggable part) */
+// ::-webkit-scrollbar-thumb:ver {
+//   background: #ffcc29; /* Change to your preferred color */
+//   border-radius: 10px;
+// }
+
+// /* Scrollbar track (background) */
+// ::-webkit-scrollbar-track:ver {
+//   background: #f1f1f1;
+// }
+
+// * {
+//   scrollbar-width: thin;
+//   scrollbar-color: #ffcc29 #f1f1f1;
+// }

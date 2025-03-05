@@ -10,6 +10,7 @@ import Button from '../ui/button';
 import { Icons } from '../ui/icons';
 import ServiceDropdowComponent from './ServiceDropdowComponent';
 import SupportDropdownComponent from './SupportDropdownComponent';
+import MobileNavMenu from './MobileNavMenu';
 
 function Navbar() {
     const pathname = usePathname();
@@ -28,41 +29,46 @@ function Navbar() {
     useOuterClick(supportDropdownRef, setIsSupportDropDownOpen);
     useOuterClick(profileDropdownRef, setIsProfileDropDownOpen);
 
-   // Generic function to handle navigation and scrolling
-   const handleScrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    event.preventDefault();
+    // Generic function to handle navigation and scrolling
+    const handleScrollToSection = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+        event.preventDefault();
 
-    if (pathname === ApplicationRoutes.Home) {
-        // If already on the home page, scroll to the section
-        const section = document.getElementById(sectionId);
-        if (section) {
-            section.scrollIntoView({ behavior: "smooth" });
-        }
-    } else {
-        // Navigate to the home page and append the section ID to the URL
-        router.push(`${ApplicationRoutes.Home}#${sectionId}`);
-    }
-};
-
-useEffect(() => {
-    // Check if URL contains #contact or #about after navigation
-    if (window.location.hash) {
-        const sectionId = window.location.hash.substring(1); // Remove the '#' to get the ID
-        const section = document.getElementById(sectionId);
-        if (section) {
-            setTimeout(() => {
+        if (pathname === ApplicationRoutes.Home) {
+            // If already on the home page, scroll to the section
+            const section = document.getElementById(sectionId);
+            if (section) {
                 section.scrollIntoView({ behavior: "smooth" });
-            }, 500); // Delay to ensure the page has loaded
+            }
+        } else {
+            // Navigate to the home page and append the section ID to the URL
+            router.push(`${ApplicationRoutes.Home}#${sectionId}`);
         }
-    }
-}, [pathname]);
+    };
+
+    useEffect(() => {
+        // Check if URL contains #contact or #about after navigation
+        if (window.location.hash) {
+            const sectionId = window.location.hash.substring(1); // Remove the '#' to get the ID
+            const section = document.getElementById(sectionId);
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }, 500); // Delay to ensure the page has loaded
+            }
+        }
+    }, [pathname]);
     return (
         <nav className={`${sectionPadding} absolute top-0 left-0 w-full z-50 p-5 bg-transparent`}>
 
             <div className="p-5 flex flex-row justify-between items-center">
-                <Link href={"/"} className="w-8 h-8 lg:hidden">
+              <div className="flex items-center gap-6">
+              <button className="p-1 rounded lg:hidden" onClick={() => setMobileNavIsvisible(true)}>
+                    <Icons.Hamburger />
+                </button>
+              <Link href={"/"} className="w-[76px] h-[34px] lg:hidden">
                     <Image src={images.logo} alt="Logo" className="w-full h-full object-contain" />
                 </Link>
+              </div>
                 <div className='hidden lg:flex lg:flex-row lg:gap-7 lg:items-center lg:justify-between lg:px-3 lg:w-full lg:text-sm'>
                     <Link href={"/"}>
                         <div className='lg:w-[153px] lg:h-[69px] relative'>
@@ -101,7 +107,7 @@ useEffect(() => {
                     </ul>
 
                     <div ref={profileDropdownRef} className="relative">
-                        <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-mediu flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
+                        <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-medium flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
                             Login
                         </button>
                         {isProfileDropDownOpen && (
@@ -171,11 +177,43 @@ useEffect(() => {
 
                 </div>
 
-                <button className="p-1 rounded lg:hidden" onClick={() => setMobileNavIsvisible(true)}>
-                    <Icons.Hamburger />
-                </button>
+                <div ref={profileDropdownRef} className="relative lg:hidden">
+                        <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-medium flex items-center justify-center mx-auto text-sm rounded-[5px] text-[#211D1D] w-[72px] h-[27px] transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
+                            Login
+                        </button>
+                        {isProfileDropDownOpen && (
+                            <ul className="absolute flex flex-col w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-[40px] -left-20 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+                                <Link
+                                    href={ApplicationRoutes.SignIn}
+                                    onClick={() => {
+                                        setIsProfileDropDownOpen(false)
+                                        setMobileNavIsvisible(false)
+                                    }}
+                                    className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                >
+                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                        Sign in (User)
+                                    </li>
+                                </Link>
+                                <Link
+                                    href={ApplicationRoutes.EngineerSignIn}
+                                    onClick={() => {
+                                        setIsProfileDropDownOpen(false)
+                                        setMobileNavIsvisible(false)
+                                    }}
 
-                {/* {mobileNavIsVisible && <MobileNavMenu setMobileNavIsvisible={setMobileNavIsvisible} companyDropdownRef={companyDropdownRef} mobileNavIsVisible={mobileNavIsVisible} isCompanyDropDownOpen={isCompanyDropDownOpen} setIsCompanyDropDownOpen={setIsCompanyDropDownOpen} />} */}
+                                    className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                >
+                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                        Sign in (Engineer)
+                                    </li>
+                                </Link>
+                            </ul>
+                        )}
+                    </div>
+
+                {mobileNavIsVisible && <MobileNavMenu setMobileNavIsvisible={setMobileNavIsvisible} mobileNavIsVisible={mobileNavIsVisible} isServiceDropDownOpen={isServiceDropDownOpen} setIsServiceDropDownOpen={setIsServiceDropDownOpen} isSupportDropDownOpen={isSupportDropDownOpen} setIsSupportDropDownOpen={setIsSupportDropDownOpen} servicesDropdownRef={servicesDropdownRef}
+                    supportDropdownRef={supportDropdownRef} />}
             </div>
         </nav>
     )

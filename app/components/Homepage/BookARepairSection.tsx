@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 function BookARepairSection() {
     return (
-        <section className='bg-[#FFCC2914] pt-44 grid place-items-center'>
+        <section className='bg-[#FFCC2914] pt-20 md:pt-52 lg:pt-44 grid place-items-center'>
             <div className={`${sectionPadding} flex flex-col md:flex-row justify-center gap-5 md:gap-14 pt-8 pb-16 md:pt-0`}>
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
@@ -24,7 +24,7 @@ function BookARepairSection() {
                  whileInView={{ opacity: 1, x: 0 }}
                  viewport={{ once: true }}
                  transition={{ duration: 0.6, ease: easeOutExpo }}
-                className="mt-3">
+                className="mt-3 text-center md:text-start">
                     <h2 className='text-[#211D1D] font-medium text-[35px] leading-10 mb-3'>Book a <br /> Repair Service</h2>
                     <p className='max-w-[500px] leading-6 mb-2 text-sm font-light'>Experience a seamless solution to your gadget woes with our professional repair services. </p>
                     <p className='max-w-[500px] leading-6 text-sm font-light !pb-6'>

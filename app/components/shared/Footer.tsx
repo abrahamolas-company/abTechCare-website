@@ -51,7 +51,9 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className='flex flex-col gap-2 lg:whitespace-nowrap'>
+                <div className="flex flex-row gap-5 justify-between">
+
+                      <div className='flex flex-col gap-2 lg:whitespace-nowrap'>
                     <h4 className='text-white text-base font-bold'>Find Us</h4>
                     <div className='font-light'>
                     <div className='flex items-start gap-3 text-sm mb-5 w-fit'>
@@ -82,7 +84,9 @@ const Footer = () => {
                         />
                         <button className='bg-white rounded-[10px] w-full xl:w-1/2 p-3 font-medium text-[#211D1D] flex items-center justify-between gap-3'>Subscribe <Icons.Bell /></button>
                     </div>
+                </div> 
                 </div>
+             
             </div>
             <div className="w-full lg:w-[600px] border-t border-t-[#D9D9D9] font-medium mt-5 pt-3 pb-5 text-base text-[#fff] text-center mx-auto">
                 <p>

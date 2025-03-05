@@ -46,7 +46,7 @@ function SignUpPage() {
             <p className='text-sm text-[#717170] text-center mb-10'>Enter your details to create an account with AbTechcare </p>
 
             <form className='w-full '>
-                <div className=" flex flex-col md:flex-row gap-10 mb-10">
+                <div className=" flex flex-col md:flex-row gap-5 md:gap-10 mb-10">
                     <div className="md:w-1/2">
                         <div className="mb-7">
                             <Label>E-mail Address </Label>
@@ -65,8 +65,8 @@ function SignUpPage() {
                             <Input className='!mt-1' placeholder='Enter your contact  number' />
                         </div>
                     </div>
-                    <div className="md:w-1/2">
-                        <div className="flex gap-14 mb-7">
+                    <div className="w-full md:w-1/2">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-14 mb-7">
                             <label className="text-gray-700 font-medium ">State your Gender</label>
                             <div className="flex space-x-5">
                                 <label className="flex items-center space-x-1 cursor-pointer">
@@ -106,7 +106,7 @@ function SignUpPage() {
                                 </label>
                             </div>
                         </div>
-                        <div className="flex gap-14 mb-7">
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-14 mb-7">
                             <label className="text-gray-700 font-medium ">Are you over 18 years?</label>
                             <div className="flex space-x-5">
                                 <label className="flex items-center space-x-1 cursor-pointer">
@@ -150,7 +150,7 @@ function SignUpPage() {
                             <label className="text-gray-700 font-medium">Date of Birth</label>
                             <div className="flex space-x-6">
                                 {/* Day Dropdown */}
-                                <div className="relative w-32" ref={dayDropdownRef}>
+                                <div className="relative w-full md:w-32" ref={dayDropdownRef}>
                                     <button
                                         type='button'
                                         onClick={() => setIsDayOpen(!isDayOpen)}
@@ -180,7 +180,7 @@ function SignUpPage() {
                                 </div>
 
                                 {/* Year Dropdown */}
-                                <div className="relative w-32" ref={yearDropdownRef}>
+                                <div className="relative w-full md:w-32" ref={yearDropdownRef}>
                                     <button
                                         type='button'
                                         onClick={() => setIsYearOpen(!isYearOpen)}

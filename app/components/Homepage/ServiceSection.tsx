@@ -57,9 +57,9 @@ function ServiceSection() {
         </div>
 
         <div className={`${sectionPadding} relative z-10`}>
-          <div className="text-[#211D1D] !text-start">
-            <h1 className='font-medium text-[35px]'>Explore more Services</h1>
-            <p className='mb-6 text-lg font-light'>Best Leading Services</p>
+          <div className="text-[#211D1D] text-center md:!text-start">
+            <h1 className='font-medium text-2xl md:text-[35px]'>Explore more Services</h1>
+            <p className='mb-6 text-sm md:text-lg font-light'>Best Leading Services</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
@@ -75,8 +75,8 @@ function ServiceSection() {
                 <span className='w-[40px] h-[40px] mb-[6px] rounded-full bg-[#FFCC29] flex items-center justify-center'>
                   <service.icon />
                 </span>
-                <h2 className="font-normal text-xl ">{service.title}</h2>
-                <p className='text-sm mb-4 font-light max-w-[200px]'>{service.text}</p>
+                <h2 className="font-normal text-lg md:text-xl ">{service.title}</h2>
+                <p className='text-sm mb-4 font-light md:max-w-[200px]'>{service.text}</p>
                 <Image
                   src={service.image}
                   alt={service.title}

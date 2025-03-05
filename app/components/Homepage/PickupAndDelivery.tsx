@@ -7,8 +7,7 @@ import PickupAndDeliveryModal from '../modal/PickupAndDeliveryModal';
 function PickupAndDelivery() {
   const leftImages = [images.home, images.office, images.movies, images.family];
 
-  const [isPickupAndDeliveryModalOpen, setIsPickupAndDeliveryModalOpen] = useState(false)
-
+  const [isPickupAndDeliveryModalOpen, setIsPickupAndDeliveryModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -23,11 +22,10 @@ function PickupAndDelivery() {
     <>
       {isPickupAndDeliveryModalOpen && <PickupAndDeliveryModal isPickupAndDeliveryModalOpen={isPickupAndDeliveryModalOpen} setIsPickupAndDeliveryModalOpen={setIsPickupAndDeliveryModalOpen} />}
 
-      <section className="relative flex gap-2 w-full min-h-[500px] lg:min-h-[600px]">
+      <section className="relative flex flex-col md:flex-row gap-2 w-full min-h-[500px] lg:min-h-[600px]">
 
         {/* Left Side - At Home */}
-        <div className="relative w-1/2 overflow-hidden"
-        >
+        <div className="relative w-full md:w-1/2 h-[300px] md:h-auto overflow-hidden">
           <Image
             src={leftImages[currentImageIndex]}
             alt="Home"
@@ -41,12 +39,11 @@ function PickupAndDelivery() {
 
         {/* Center Text Overlay */}
         <div className="absolute top-8 left-1/2 transform z-10 -translate-x-1/2 bg-[#FFFFFFD1] px-6 py-3 rounded-md shadow-md">
-          <p className="text-lg font-medium text-black">Where would you rather be?</p>
+          <p className="text-xs whitespace-nowrap md:text-base lg:text-lg font-medium text-black">Where would you rather be?</p>
         </div>
 
         {/* Right Side - At Repair Center */}
-        <div className="relative w-1/2 overflow-hidden"
-        >
+        <div className="relative w-full md:w-1/2 h-[300px] md:h-auto overflow-hidden">
           <Image
             src={images.repair_center}
             alt="Repair Center"
@@ -59,8 +56,8 @@ function PickupAndDelivery() {
         </div>
 
         {/* Call-to-Action Button */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <button onClick={() => setIsPickupAndDeliveryModalOpen(true)} className="px-6 py-3 bg-[#FFCC29] text-black font-light rounded-md shadow-md">
+        <div className="absolute top-[300px] md:bottom-8 left-1/2 transform -translate-x-1/2">
+          <button onClick={() => setIsPickupAndDeliveryModalOpen(true)} className="px-6 py-3 bg-[#FFCC29] text-xs whitespace-nowrap md:text-base lg:text-lg text-black font-light rounded-md shadow-md">
             Order Pickup & Delivery
           </button>
         </div>
