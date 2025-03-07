@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useRef } from 'react'
 import { ApplicationRoutes } from '../constants/applicationRoutes'
+import useOuterClick from '../hooks/useOuterClick'
 
 type Props = {
     setIsSupportDropDownOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -10,8 +11,11 @@ type Props = {
 
 const SupportDropdownComponent = ({ setIsSupportDropDownOpen, setMobileNavIsvisible }: Props) => {
   const pathname = usePathname();
+  const supportDropdownRef = useRef<HTMLUListElement>(null);
+
+    useOuterClick(supportDropdownRef, setIsSupportDropDownOpen);
     return (
-        <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+        <ul ref={supportDropdownRef} className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
             <Link
                 href={ApplicationRoutes.ServiceEngineer}
                 onClick={() => {

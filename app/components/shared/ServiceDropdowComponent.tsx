@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useRef } from 'react'
 import { ApplicationRoutes } from '../constants/applicationRoutes'
+import useOuterClick from '../hooks/useOuterClick'
 
 type Props = {
     setIsServiceDropDownOpen: Dispatch<SetStateAction<boolean>>
@@ -10,8 +11,12 @@ type Props = {
 
 const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisible }: Props) => {
     const pathname = usePathname();
+
+    const serviceDropdownRef = useRef<HTMLUListElement>(null);
+
+    useOuterClick(serviceDropdownRef, setIsServiceDropDownOpen);
     return (
-        <ul className="z-50 absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl animate-slideDown">
+        <ul ref={serviceDropdownRef} className="z-50 absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 left-0 px-4 py-5 rounded-lg lg:rounded-2xl animate-slideDown">
             <Link
                 href={ApplicationRoutes.GadgetRepair}
                 onClick={() => {
