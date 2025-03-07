@@ -46,7 +46,7 @@ function BecomeAnEngineerPage() {
 
             </div>
 
-            <div className="bg-[#FFCC2933] text-[#211D1D] py-5 mt-10 md:mt-0 mb-10 md:mb-7">
+            <div className="bg-[#FFCC2933] text-[#211D1D] py-5 mt-10 md:mt-5 lg:mt-0 mb-10 md:mb-7">
                 <div className={`${sectionPadding}`}>
                 <h3 className='font-bold text-base md:text-lg'>Requirements</h3>
                  <ul className='list-disc ml-5 leading-7 font-light text-sm md:text-base'>
