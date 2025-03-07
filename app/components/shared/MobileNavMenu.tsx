@@ -1,8 +1,8 @@
 
 import { sectionPadding } from '@/app/styles/styles';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { Dispatch, RefObject, SetStateAction } from 'react'
+import { usePathname, useRouter } from 'next/navigation';
+import React, { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
 import { Icons } from '../ui/icons';
 import Button from '../ui/button';
 import CustomImage from '../ui/image';
@@ -24,6 +24,37 @@ type Props = {
 
 const MobileNavMenu = ({ setMobileNavIsvisible, mobileNavIsVisible, setIsServiceDropDownOpen, servicesDropdownRef, isServiceDropDownOpen, setIsSupportDropDownOpen, supportDropdownRef, isSupportDropDownOpen }: Props) => {
     const pathname = usePathname();
+
+    const router = useRouter();
+
+    // Function to handle scrolling and navigation
+    const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+        event.preventDefault();
+        setMobileNavIsvisible(false); // Close mobile nav
+
+        if (pathname === ApplicationRoutes.Home) {
+            // If already on home page, scroll directly
+            setTimeout(() => {
+                document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+            }, 300);
+        } else {
+            // Navigate to home and scroll to section after loading
+            router.push(`${ApplicationRoutes.Home}#${sectionId}`);
+        }
+    };
+
+    // Ensure scrolling happens after navigation
+    useEffect(() => {
+        if (window.location.hash) {
+            const sectionId = window.location.hash.substring(1);
+            const section = document.getElementById(sectionId);
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }, 500);
+            }
+        }
+    }, [pathname]);
     return (
         <div className={`fixed w-full h-full bg-[#0D1215E5] top-0 left-0 lg:hidden ${sectionPadding} ${mobileNavIsVisible ? 'animate-slideInFromLeft' : 'animate-slideOutToLeft'}`}>
             <div className={`flex flex-row justify-between items-center p-5 relative`}>
@@ -69,11 +100,11 @@ const MobileNavMenu = ({ setMobileNavIsvisible, mobileNavIsVisible, setIsService
                     )}
                 </div>
 
-                <Link href={ApplicationRoutes.About} onClick={() => setMobileNavIsvisible(false)} className={`cursor-pointer hover:text-[#FFCC29] ${pathname == ApplicationRoutes.About ? "hover:text-[#FFCC29]" : "text-white"}`}>
+                <Link href="#about" onClick={(e) => handleNavigation(e, "about")}  className={`cursor-pointer hover:text-[#FFCC29] ${pathname == ApplicationRoutes.About ? "hover:text-[#FFCC29]" : "text-white"}`}>
                     <li>About Us</li>
                 </Link>
 
-                <Link href={ApplicationRoutes.Contact} onClick={() => setMobileNavIsvisible(false)} className={`cursor-pointer hover:text-[#FFCC29] ${pathname == ApplicationRoutes.Contact ? "text-[#FFCC29]" : "text-white"}`}>
+                <Link href="#contact" onClick={(e) => handleNavigation(e, "contact")}  className={`cursor-pointer hover:text-[#FFCC29] ${pathname == ApplicationRoutes.Contact ? "text-[#FFCC29]" : "text-white"}`}>
                     <li>Contact Us</li>
                 </Link>
             </ul>

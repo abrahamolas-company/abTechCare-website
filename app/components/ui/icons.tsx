@@ -122,8 +122,8 @@ export const Icons = {
     Download: (props: IconProps) => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 4H14V10H16.5L12 14.5M12 4H10V10H7.5L12 14.5" fill="#211D1D" />
-            <path d="M12 4H14V10H16.5L12 14.5L7.5 10H10V4H12Z" stroke="#211D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M6 19H18" stroke="#211D1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12 4H14V10H16.5L12 14.5L7.5 10H10V4H12Z" stroke="#211D1D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M6 19H18" stroke="#211D1D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     ),
     WhiteUser: (props: IconProps) => (

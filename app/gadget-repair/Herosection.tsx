@@ -19,18 +19,18 @@ export default function GadgetRepairHerosection() {
             <div className='absolute inset-0 bg-[#0D1215]'></div>
 
             {/* Content */}
-            <div className='relative text-white text-center'>
+            <div className={`${sectionPadding} relative text-white text-center`}>
                 <h1 className='text-[28px] font-bold mb-5'>
                     "Hassle-Free Gadget Repair"
                 </h1>
 
                 {/* Electronics List */}
-                <div className="flex justify-center gap-4 items-center">
-                    <span className='h-[260px] overflow-hidden w-[14px]'><Image src={images.frame_design} alt='frame design' /></span>
+                <div className="flex justify-center gap-4 items-center w-full overflow-x-auto">
+                    <span className='h-[260px] overflow-hidden w-[14px] hidden md:block'><Image src={images.frame_design} alt='frame design' /></span>
 
                     {electronics.map((electronic, index) => (
-                        <div key={index} className="flex flex-col items-center mb-5">
-                            <div className="">
+                        <div key={index} className="flex flex-col items-center mb-5 ">
+                            <div className="w-[193px] md:w-full">
                                 <Image
                                     src={electronic.image}
                                     alt={electronic.text}
@@ -44,7 +44,7 @@ export default function GadgetRepairHerosection() {
                         </div>
                     ))}
 
-                    <span className='h-[260px] overflow-hidden w-[14px]'><Image src={images.frame_design} alt='frame design' /></span>
+                    <span className='h-[260px] overflow-hidden w-[14px] hidden md:block'><Image src={images.frame_design} alt='frame design' /></span>
                 </div>
             </div>
         </section>

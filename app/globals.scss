@@ -48,3 +48,26 @@
 //   scrollbar-width: thin;
 //   scrollbar-color: #ffcc29 #f1f1f1;
 // }
+
+
+/* Make horizontal scrollbar thinner */
+::-webkit-scrollbar:horizontal {
+  height: 4px; /* Adjust the height to make it thin */
+}
+
+/* Scrollbar thumb (draggable part) */
+::-webkit-scrollbar-thumb:horizontal {
+  background: #f1f1f1; /* Change to your preferred color */
+  border-radius: 10px;
+}
+
+/* Scrollbar track (background) */
+::-webkit-scrollbar-track:horizontal {
+  background: #f1f1f1;
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f1f1f1 #f1f1f1;
+}
