@@ -108,16 +108,6 @@ const MobileNavMenu = ({ setMobileNavIsvisible, mobileNavIsVisible, setIsService
                     <li>Contact Us</li>
                 </Link>
             </ul>
-            {/* <Link href={ApplicationRoutes.Contact}>
-                <Button
-                    className="text-sm w-full mt-4"
-                    style={{
-                        background: 'linear-gradient(65.65deg, #0C5508 -30.83%, #1ABB12 148.27%)'
-                    }}
-                >
-                    Book a Call
-                </Button>
-            </Link> */}
         </div>
     )
 }

@@ -1,12 +1,32 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Icons } from "../ui/icons";
 import Link from "next/link";
 import { useState } from "react";
+import { useLogout } from "@/app/api/apiClient";
+import { toast } from "sonner";
+import { catchError } from "../constants/catchError";
 
 const Sidebar = () => {
     const pathname = usePathname();
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(true);
+    const logout = useLogout()
+
+    async function Logout() {
+
+        await logout()
+            .then((response) => {
+                console.log("Response: ", response);
+                if (response.data) {
+                    router.push('/')
+                }
+                toast.success('Logout successful');
+            })
+            .catch((error) => {
+               catchError(error)
+            });
+    }
 
     return (
         <aside
@@ -71,7 +91,7 @@ const Sidebar = () => {
                         </>
                     </>
                   )}
-                    <div className="mb-3 p-2 flex items-center gap-3 text-sm rounded cursor-pointer">
+                    <div onClick={() => Logout()} className="mb-3 p-2 flex items-center gap-3 text-sm rounded cursor-pointer">
                         <Icons.Logout />
                         {isOpen && 'Logout'}
                     </div>

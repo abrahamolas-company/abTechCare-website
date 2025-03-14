@@ -11,6 +11,7 @@ import { Icons } from '../ui/icons';
 import ServiceDropdowComponent from './ServiceDropdowComponent';
 import SupportDropdownComponent from './SupportDropdownComponent';
 import MobileNavMenu from './MobileNavMenu';
+import { Roles } from '../models/IRegisterUser';
 
 function Navbar() {
     const pathname = usePathname();
@@ -20,6 +21,8 @@ function Navbar() {
     const [isServiceDropDownOpen, setIsServiceDropDownOpen] = useState(false);
     const [isSupportDropDownOpen, setIsSupportDropDownOpen] = useState(false);
     const [isProfileDropDownOpen, setIsProfileDropDownOpen] = useState(false);
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [isEngineerLoggedIn, setIsEngineerLoggedIn] = useState(false);
 
     const servicesDropdownRef = useRef<HTMLDivElement>(null);
     const supportDropdownRef = useRef<HTMLDivElement>(null);
@@ -57,18 +60,44 @@ function Navbar() {
             }
         }
     }, [pathname]);
+
+    useEffect(() => {
+        const token = sessionStorage.getItem("token");
+        const rolesString = sessionStorage.getItem("roles");
+
+        if (token && rolesString) {
+            try {
+                const roles = JSON.parse(rolesString); // Deserialize the roles array
+                console.log("Roles from sessionStorage:", roles); // Debugging: Log roles
+
+                const userRole = roles.find((role: any) => role.roleType === "ROLE_USER");
+                const engineerRole = roles.find((role: any) => role.roleType === "ROLE_ENGINEER");
+
+                if (userRole) {
+                    setIsUserLoggedIn(true);
+                    setIsEngineerLoggedIn(false);
+                } else if (engineerRole) {
+                    setIsEngineerLoggedIn(true);
+                    setIsUserLoggedIn(false);
+                }
+            } catch (error) {
+                console.error("Error parsing roles from sessionStorage:", error);
+            }
+        }
+    }, []);
+
     return (
         <nav className={`${sectionPadding} absolute top-0 left-0 w-full z-50 p-5 bg-transparent`}>
 
             <div className="p-5 flex flex-row justify-between items-center">
-              <div className="flex items-center gap-6">
-              <button className="p-1 rounded lg:hidden" onClick={() => setMobileNavIsvisible(true)}>
-                    <Icons.Hamburger />
-                </button>
-              <Link href={"/"} className="w-[76px] h-[34px] lg:hidden">
-                    <Image src={images.logo} alt="Logo" className="w-full h-full object-contain" />
-                </Link>
-              </div>
+                <div className="flex items-center gap-6">
+                    <button className="p-1 rounded lg:hidden" onClick={() => setMobileNavIsvisible(true)}>
+                        <Icons.Hamburger />
+                    </button>
+                    <Link href={"/"} className="w-[76px] h-[34px] lg:hidden">
+                        <Image src={images.logo} alt="Logo" className="w-full h-full object-contain" />
+                    </Link>
+                </div>
                 <div className='hidden lg:flex lg:flex-row lg:gap-7 lg:items-center lg:justify-between lg:px-3 lg:w-full lg:text-sm'>
                     <Link href={"/"}>
                         <div className='lg:w-[153px] lg:h-[69px] relative'>
@@ -105,79 +134,60 @@ function Navbar() {
                             <li>Contact Us</li>
                         </Link>
                     </ul>
+                    {!isUserLoggedIn && !isEngineerLoggedIn && (
+                        <div ref={profileDropdownRef} className="relative">
+                            <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-medium flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
+                                Login
+                            </button>
+                            {isProfileDropDownOpen && (
+                                <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-[60px] -left-9 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
+                                    <Link
+                                        href={ApplicationRoutes.SignIn}
+                                        onClick={() => {
+                                            setIsProfileDropDownOpen(false)
+                                            setMobileNavIsvisible(false)
+                                        }}
+                                        className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                    >
+                                        <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                            Sign in (User)
+                                        </li>
+                                    </Link>
+                                    <Link
+                                        href={ApplicationRoutes.EngineerSignIn}
+                                        onClick={() => {
+                                            setIsProfileDropDownOpen(false)
+                                            setMobileNavIsvisible(false)
+                                        }}
 
-                    <div ref={profileDropdownRef} className="relative">
-                        <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-medium flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
-                            Login
-                        </button>
-                        {isProfileDropDownOpen && (
-                            <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-[60px] -left-9 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
-                                <Link
-                                    href={ApplicationRoutes.SignIn}
-                                    onClick={() => {
-                                        setIsProfileDropDownOpen(false)
-                                        setMobileNavIsvisible(false)
-                                    }}
-                                    className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
-                                >
-                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
-                                        Sign in (User)
-                                    </li>
-                                </Link>
-                                <Link
-                                    href={ApplicationRoutes.EngineerSignIn}
-                                    onClick={() => {
-                                        setIsProfileDropDownOpen(false)
-                                        setMobileNavIsvisible(false)
-                                    }}
+                                        className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
+                                    >
+                                        <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
+                                            Sign in (Engineer)
+                                        </li>
+                                    </Link>
+                                </ul>
+                            )}
+                        </div>
+                    )}
 
-                                    className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
-                                >
-                                    <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
-                                        Sign in (Engineer)
-                                    </li>
-                                </Link>
-                            </ul>
-                        )}
-                    </div>
-                    {/* <div ref={profileDropdownRef} className="relative">
-                        <li onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)}>
-                            <Icons.User />
-                        </li>
-                      {isProfileDropDownOpen && (
-                          <ul className="absolute flex flex-col w-full lg:w-fit gap-4 bg-[#FFF] text-[#211D1D] shadow-lg top-8 -left-12 px-4 py-5 rounded-lg lg:rounded-2xl z-50 animate-slideDown">
-                          <Link
-                              href={ApplicationRoutes.SignIn}
-                              onClick={() => {
-                                  setIsProfileDropDownOpen(false)
-                                  setMobileNavIsvisible(false)
-                              }}
-                              className={`w-fit ${pathname == ApplicationRoutes.SignIn ? "text-[#FFCC29] font-semibold" : ""}`}
-                          >
-                              <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
-                              Sign in (User)
-                              </li>
-                          </Link>
-                          <Link
-                              href={ApplicationRoutes.EngineerSignIn}
-                              onClick={() => {
-                                  setIsProfileDropDownOpen(false)
-                                  setMobileNavIsvisible(false)
-                              }}
-                            
-                              className={`w-fit ${pathname == ApplicationRoutes.EngineerSignIn ? "text-[#FFCC29] font-semibold" : ""}`}
-                          >
-                              <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
-                              Sign in (Engineer)
-                              </li>
-                          </Link>
-                      </ul>
-                      )}
-                    </div> */}
+                    {isUserLoggedIn && !isEngineerLoggedIn &&
+                        <Link href={'/user/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                            Dashboard
+                        </Link>
+                    }
+
+                    {!isUserLoggedIn && isEngineerLoggedIn &&
+                        <Link href={'/engineer/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                            Dashboard
+                        </Link>
+                    }
+
 
                 </div>
 
-                <div ref={profileDropdownRef} className="relative lg:hidden">
+                {!isUserLoggedIn && !isEngineerLoggedIn &&
+                    <div className="relative lg:hidden">
                         <button type='button' onClick={() => setIsProfileDropDownOpen(!isProfileDropDownOpen)} className="bg-[#FFCC29] font-medium flex items-center justify-center mx-auto text-sm rounded-[5px] text-[#211D1D] w-[72px] h-[27px] transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#ffffff]">
                             Login
                         </button>
@@ -211,6 +221,19 @@ function Navbar() {
                             </ul>
                         )}
                     </div>
+                }
+
+                {isUserLoggedIn && !isEngineerLoggedIn &&
+                    <Link href={'/user/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                        Dashboard
+                    </Link>
+                }
+
+                {!isUserLoggedIn && isEngineerLoggedIn &&
+                    <Link href={'/engineer/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                        Dashboard
+                    </Link>
+                }
 
                 {mobileNavIsVisible && <MobileNavMenu setMobileNavIsvisible={setMobileNavIsvisible} mobileNavIsVisible={mobileNavIsVisible} isServiceDropDownOpen={isServiceDropDownOpen} setIsServiceDropDownOpen={setIsServiceDropDownOpen} isSupportDropDownOpen={isSupportDropDownOpen} setIsSupportDropDownOpen={setIsSupportDropDownOpen} servicesDropdownRef={servicesDropdownRef}
                     supportDropdownRef={supportDropdownRef} />}

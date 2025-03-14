@@ -56,11 +56,15 @@ function PickupAndDelivery() {
         </div>
 
         {/* Call-to-Action Button */}
-        <div className="absolute top-[300px] md:top-0 md:bottom-8 left-1/2 transform -translate-x-1/2">
-          <button onClick={() => setIsPickupAndDeliveryModalOpen(true)} className="px-6 py-3 bg-[#FFCC29] text-xs whitespace-nowrap md:text-base lg:text-lg text-black font-light rounded-md shadow-md">
-            Order Pickup & Delivery
-          </button>
-        </div>
+        <div className="absolute top-[300px] md:top-auto md:bottom-8 left-1/2 transform -translate-x-1/2">
+  <button 
+    onClick={() => setIsPickupAndDeliveryModalOpen(true)} 
+    className="px-6 py-3 bg-[#FFCC29] text-xs whitespace-nowrap md:text-base lg:text-lg text-black font-light rounded-md shadow-md"
+  >
+    Order Pickup & Delivery
+  </button>
+</div>
+
 
       </section>
     </>
