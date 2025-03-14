@@ -1,7 +1,6 @@
 'use client'
 import { useLoginUser } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
-import { emailRegex } from '@/app/components/constants/emailRegex'
 import { LoginUser } from '@/app/components/models/IRegisterUser'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'

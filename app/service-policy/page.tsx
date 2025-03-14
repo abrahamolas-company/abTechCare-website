@@ -1,7 +1,6 @@
 import React from 'react'
 import B2bHerosection from '../b2b-services/B2bHerosection'
 import { sectionPadding } from '../styles/styles'
-import { Icons } from '../components/ui/icons'
 import Link from 'next/link'
 
 function ServicePolicy() {

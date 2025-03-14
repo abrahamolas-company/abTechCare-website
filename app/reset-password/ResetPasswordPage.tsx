@@ -5,7 +5,7 @@ import { sectionPadding } from '@/app/styles/styles'
 import images from '@/public/images'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React  from 'react'
 
 function ResetPasswordPage() {
 

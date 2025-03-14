@@ -1,25 +1,25 @@
-export interface RegisterUserRequest{
-  email : string;
-  password : string;
-  confirmPassword : string;
-  firstName : string;
-  lastName : string;
+export interface RegisterUserRequest {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
-  dateOfBirth : string;
-  over18:boolean,
-  gender:string
+  dateOfBirth: string;
+  over18: boolean,
+  gender: string
 }
 
-export interface Permissions{
-        id: number;
-        name: string;
-        canWrite: boolean
+export interface Permissions {
+  id: number;
+  name: string;
+  canWrite: boolean
 }
 
 export interface Roles {
-        id: number;
-        roleType: string;
-        "permissions": Permissions[]
+  id: number;
+  roleType: string;
+  permissions: Permissions[]
 }
 
 export interface RegisterUserResponse {
@@ -28,7 +28,7 @@ export interface RegisterUserResponse {
   id: number,
   email: string,
   token: {
-      access_token: string
+    access_token: string
   }
 }
 

@@ -4,7 +4,6 @@ import { sectionPadding } from '../styles/styles'
 import Image from 'next/image'
 import images from '@/public/images'
 import { motion } from 'framer-motion'
-import { easeOutExpo } from '../components/constants/easings'
 
 function QuoteHeroBanner() {
   return (

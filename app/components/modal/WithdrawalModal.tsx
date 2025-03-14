@@ -1,7 +1,5 @@
-import { sectionPadding } from '@/app/styles/styles'
 import images from '@/public/images'
 import Image from 'next/image'
-import Link from 'next/link';
 import React from 'react'
 import { motion, AnimatePresence } from "framer-motion";
 import Input from '../ui/input';

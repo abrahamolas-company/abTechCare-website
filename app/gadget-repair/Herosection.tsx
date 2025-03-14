@@ -21,7 +21,7 @@ export default function GadgetRepairHerosection() {
             {/* Content */}
             <div className={`${sectionPadding} relative text-white text-center`}>
                 <h1 className='text-[28px] font-bold mb-5'>
-                    "Hassle-Free Gadget Repair"
+                    &quot;Hassle-Free Gadget Repair&quot;
                 </h1>
 
                 {/* Electronics List */}

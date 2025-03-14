@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Dispatch, SetStateAction, useRef } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { ApplicationRoutes } from '../constants/applicationRoutes'
-import useOuterClick from '../hooks/useOuterClick'
 
 type Props = {
     setIsServiceDropDownOpen: Dispatch<SetStateAction<boolean>>

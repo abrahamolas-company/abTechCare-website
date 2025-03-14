@@ -1,7 +1,6 @@
 'use client'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
-import { Icons } from '@/app/components/ui/icons'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'
 import React from 'react'

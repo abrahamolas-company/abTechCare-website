@@ -2,9 +2,8 @@
 import { sectionPadding } from '@/app/styles/styles';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { Icons } from '../ui/icons';
-import Button from '../ui/button';
 import CustomImage from '../ui/image';
 import images from '@/public/images';
 import { ApplicationRoutes } from '../constants/applicationRoutes';

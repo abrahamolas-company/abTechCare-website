@@ -31,9 +31,9 @@ function SignUpPage() {
     const [phoneErrorMsg, setPhoneErrorMsg] = useState<string | boolean>(false);
     const [passwordErrorMsg, setPasswordErrorMsg] = useState<string | boolean>(false);
     const [cofirmPasswordErrorMsg, setCofirmPasswordErrorMsg] = useState<string | boolean>(false);
-    const [dateOfBirthError, setDateOfBirthError] = useState(false);
-    const [genderError, setGenderError] = useState(false);
-    const [over18Error, setOver18Error] = useState(false);
+    // const [dateOfBirthError, setDateOfBirthError] = useState(false);
+    // const [genderError, setGenderError] = useState(false);
+    // const [over18Error, setOver18Error] = useState(false);
 
     const [isDayOpen, setIsDayOpen] = useState(false);
     const [isMonthOpen, setIsMonthOpen] = useState(false);
@@ -112,26 +112,26 @@ function SignUpPage() {
         setCofirmPasswordErrorMsg(false);
     }
 
-    if (!formValues?.dateOfBirth) {
-        setDateOfBirthError(true);
-        isValid = false;
-    } else {
-        setDateOfBirthError(false);
-    }
+    // if (!formValues?.dateOfBirth) {
+    //     setDateOfBirthError(true);
+    //     isValid = false;
+    // } else {
+    //     setDateOfBirthError(false);
+    // }
 
-    if (!formValues?.gender) {
-        setGenderError(true);
-        isValid = false;
-    } else {
-        setGenderError(false);
-    }
+    // if (!formValues?.gender) {
+    //     setGenderError(true);
+    //     isValid = false;
+    // } else {
+    //     setGenderError(false);
+    // }
 
-    if (!formValues?.over18) {
-        setOver18Error(true);
-        isValid = false;
-    } else {
-        setOver18Error(false);
-    }
+    // if (!formValues?.over18) {
+    //     setOver18Error(true);
+    //     isValid = false;
+    // } else {
+    //     setOver18Error(false);
+    // }
 
     return isValid;
 }
@@ -335,7 +335,7 @@ function SignUpPage() {
                                         name="over18"
                                         value="true"
                                         checked={formValues?.over18 === true}
-                                        onChange={(e) => setFormValues({ ...formValues, over18: true } as RegisterUserRequest)}
+                                        onChange={() => setFormValues({ ...formValues, over18: true } as RegisterUserRequest)}
                                         className="hidden"
                                     />
                                     <div
@@ -353,7 +353,7 @@ function SignUpPage() {
                                         name="age"
                                         value="false"
                                         checked={formValues && formValues?.over18 === false}
-                                        onChange={(e) => setFormValues({ ...formValues, over18: false } as RegisterUserRequest)}
+                                        onChange={() => setFormValues({ ...formValues, over18: false } as RegisterUserRequest)}
                                         className="hidden"
                                     />
                                     <div

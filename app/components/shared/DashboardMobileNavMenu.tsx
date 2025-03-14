@@ -2,7 +2,7 @@
 import { sectionPadding } from '@/app/styles/styles';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { Dispatch, RefObject, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { Icons } from '../ui/icons';
 import CustomImage from '../ui/image';
 import images from '@/public/images';

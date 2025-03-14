@@ -53,8 +53,6 @@ export function useLogout() {
         // Retrieve the token from sessionStorage
         const token = sessionStorage.getItem('token');
 
-        const rolesString = sessionStorage.getItem("roles");
-
         if (!token) {
             throw new Error('No authorization token found');
         }

@@ -2,9 +2,6 @@
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
 import { Icons } from '@/app/components/ui/icons'
-import { sectionPadding } from '@/app/styles/styles'
-import images from '@/public/images'
-import Image from 'next/image'
 import React from 'react'
 
 function DashboardPage() {

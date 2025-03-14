@@ -4,15 +4,15 @@ import TextArea from '../components/ui/textarea';
 function RateRepairService() {
 
     const [rating, setRating] = useState<number>(0); // Initial rating is 0
-    const [review, setReview] = useState<string>(''); // Initial review is empty
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    // const [review, setReview] = useState<string>(''); // Initial review is empty
+    // const [isLoading, setIsLoading] = useState<boolean>(false);
     const handleRatingClick = (value: number): void => {
         setRating(value); // Set the rating when a star is clicked
     };
 
-    const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-        setReview(e.target.value); // Update review as the user types
-    };
+    // const handleReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    //     setReview(e.target.value); // Update review as the user types
+    // };
     return (
         <form className='mt-16 mb-14'>
             <div className='bg-white shadow-md rounded-[10px] w-full py-6 px-5'>

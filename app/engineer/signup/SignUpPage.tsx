@@ -2,9 +2,7 @@
 import { useUpdateEngineer } from '@/app/api/apiClient'
 import { ApplicationRoutes } from '@/app/components/constants/applicationRoutes'
 import { catchError } from '@/app/components/constants/catchError'
-import useOuterClick from '@/app/components/hooks/useOuterClick'
 import { RegisterEngineerRequest } from '@/app/components/models/IRegisterEngineer'
-import { Icons } from '@/app/components/ui/icons'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'
 import { sectionPadding } from '@/app/styles/styles'
@@ -12,7 +10,7 @@ import images from '@/public/images'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 function SignUpPage() {

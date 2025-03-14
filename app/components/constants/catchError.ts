@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function catchError(error: any) {
   // If we have a response error
   if (error.response) {

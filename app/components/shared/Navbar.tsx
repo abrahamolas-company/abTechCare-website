@@ -6,7 +6,6 @@ import Image from 'next/image';
 import images from '@/public/images';
 import Link from 'next/link';
 import { ApplicationRoutes } from '../constants/applicationRoutes';
-import Button from '../ui/button';
 import { Icons } from '../ui/icons';
 import ServiceDropdowComponent from './ServiceDropdowComponent';
 import SupportDropdownComponent from './SupportDropdownComponent';
@@ -70,8 +69,8 @@ function Navbar() {
                 const roles = JSON.parse(rolesString); // Deserialize the roles array
                 console.log("Roles from sessionStorage:", roles); // Debugging: Log roles
 
-                const userRole = roles.find((role: any) => role.roleType === "ROLE_USER");
-                const engineerRole = roles.find((role: any) => role.roleType === "ROLE_ENGINEER");
+                const userRole = roles.find((role: Roles) => role.roleType === "ROLE_USER");
+                const engineerRole = roles.find((role: Roles) => role.roleType === "ROLE_ENGINEER");
 
                 if (userRole) {
                     setIsUserLoggedIn(true);
