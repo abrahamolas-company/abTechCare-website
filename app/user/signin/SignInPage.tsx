@@ -192,7 +192,7 @@ function SignInPage() {
                 <button type='submit' disabled={loading} className={`bg-[#FFCC29] font-medium mb-5 flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 min-w-[200px] transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D] ${loading && 'pointer-events-none opacity-50'}`}>
                     {loading ? "Loading" : "Sign In"}
                 </button>
-                <Link href={'/user/forgot-password'} className='mb-5 text-center text-sm text-[#717170]'>Forgot Password?</Link>
+                <Link href={'/forgot-password'} className='mb-5 text-center text-sm text-[#717170] hover:text-[#FFCC29]'>Forgot Password?</Link>
                 <p className=' text-sm text-[#717170] text-center'>Don&apos;t have an account yet? <Link href={'/user/signup'} className='text-[#FFCC29]'>create an account</Link></p>
             </form>
         </section>
