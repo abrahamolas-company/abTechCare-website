@@ -103,9 +103,11 @@ function BecomeAnEngineerFormSection() {
                         toast.error(`Engineer exists with email: ${formData.email}`);
                     } else {
                         catchError(error);
+                        toast.error('An error occurred. Please try again.');
                     }
                 } else {
                     catchError(error);
+                    toast.error('An error occurred. Please try again.');
                 }
             })
             .finally(() => {

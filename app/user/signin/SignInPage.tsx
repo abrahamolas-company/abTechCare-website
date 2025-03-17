@@ -102,13 +102,14 @@ function SignInPage() {
                     }
 
                     // Store user token in sessionStorage
-                        sessionStorage.setItem("token", response.data.data.body.token.access_token);
-                        sessionStorage.setItem("roles", JSON.stringify(response.data.data.body.roles)); // Ensure roles are serialized
-              
+                    sessionStorage.setItem("token", response.data.data.body.token.access_token);
+                    sessionStorage.setItem("roles", JSON.stringify(response.data.data.body.roles)); // Ensure roles are serialized
+
                     router.push('/')
                 })
                 .catch((error) => {
                     catchError(error);
+                    toast.error('An error occurred. Please try again.');
                 })
                 .finally(() => {
                     setLoading(false);

@@ -1,5 +1,5 @@
 export default class ApiRoutes {
-  static BASE_URL_DEV: string = "https://4a38-169-255-124-3.ngrok-free.app";
+  static BASE_URL_DEV: string = "https://ad34-129-18-228-254.ngrok-free.app";
 
   /**
     * Api routes to register new user
@@ -31,5 +31,11 @@ export default class ApiRoutes {
      * Api routes to update engineer
      */
     static UpdateEngineer: string = "api/v1/engineers/update-engineer";
+    
+    // Api route for forgot password
+    static ForgotPassword: string = "api/v1/auth/admins/reset-password/initiate";
+
+    // Api route to reset password
+    static ResetPassword: string = "api/v1/auth/admins/reset-password";
 
 }

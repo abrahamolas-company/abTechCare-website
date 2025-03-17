@@ -2,6 +2,7 @@ import axios from "axios";
 import ApiRoutes from "./apiRoutes";
 import { LoginUser, RegisterUserRequest } from "../components/models/IRegisterUser";
 import { LoginEngineer, RegisterEngineerRequest } from "../components/models/IRegisterEngineer";
+import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
 
 export const API = axios.create({
     baseURL: ApiRoutes.BASE_URL_DEV,
@@ -107,4 +108,36 @@ export function useUpdateEngineer() {
     }
     //return function to fetch new message
     return updateEngineer;
+}
+
+// Function that runs forgot password
+export function useForgotPassword() {
+    async function forgotPassword(data: ForgotPasswordRequest) {
+
+        // Fire the request
+        const response = await API.post(ApiRoutes.ForgotPassword, data);
+
+        // Return the response
+        return response;
+    }
+
+    return forgotPassword;
+}
+
+// Function to reset password
+export function useResetPassword() {
+    async function resetPassword(data: ResetPasswordRequest) {
+
+        // Fire the request
+        const response = await API.post(ApiRoutes.ResetPassword, data, {
+            headers: {
+                "X-API-KEY": process.env.NEXT_PUBLIC_API_KEY,
+            }
+        });
+
+        // Return the response
+        return response;
+    }
+
+    return resetPassword;
 }

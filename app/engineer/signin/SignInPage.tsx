@@ -109,6 +109,7 @@ function SignInPage() {
                 })
                 .catch((error) => {
                     catchError(error);
+                toast.error('An error occurred. Please try again.');
                 })
                 .finally(() => {
                     setLoading(false);

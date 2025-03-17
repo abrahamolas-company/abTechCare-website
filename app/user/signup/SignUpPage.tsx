@@ -47,7 +47,7 @@ function SignUpPage() {
         setState?: Dispatch<SetStateAction<string | boolean>>
     ) {
         const { name, value, type } = e.target;
-    
+
         setFormValues(prevValues => ({
             ...prevValues,
             [name]: type === "checkbox" && e.target instanceof HTMLInputElement ? e.target.checked : value,
@@ -57,7 +57,7 @@ function SignUpPage() {
             setState(false);
         }
     }
-    
+
 
     /**
      * Function to validate form fields
@@ -65,76 +65,76 @@ function SignUpPage() {
      */
 
     function validateFields() {
-    let isValid = true;
+        let isValid = true;
 
-    if (!formValues?.firstName) {
-        setFirstNameErrorMsg(true);
-        isValid = false;
-    } else {
-        setFirstNameErrorMsg(false);
+        if (!formValues?.firstName) {
+            setFirstNameErrorMsg(true);
+            isValid = false;
+        } else {
+            setFirstNameErrorMsg(false);
+        }
+
+        if (!formValues?.lastName) {
+            setLastNameErrorMsg(true);
+            isValid = false;
+        } else {
+            setLastNameErrorMsg(false);
+        }
+
+        if (!formValues?.email || !emailRegex.test(formValues.email.trim())) {
+            setEmailAddressErrorMsg(true);
+            isValid = false;
+        } else {
+            setEmailAddressErrorMsg(false);
+        }
+
+        if (!formValues?.phoneNumber) {
+            setPhoneErrorMsg(true);
+            isValid = false;
+        } else {
+            setPhoneErrorMsg(false);
+        }
+
+        if (!formValues?.password) {
+            setPasswordErrorMsg(true);
+            isValid = false;
+        } else {
+            setPasswordErrorMsg(false);
+        }
+
+        if (!formValues?.confirmPassword) {
+            setCofirmPasswordErrorMsg("Please confirm your password");
+            isValid = false;
+        } else if (formValues.password !== formValues.confirmPassword) {
+            setCofirmPasswordErrorMsg("Password do not match");
+            isValid = false;
+        } else {
+            setCofirmPasswordErrorMsg(false);
+        }
+
+        // if (!formValues?.dateOfBirth) {
+        //     setDateOfBirthError(true);
+        //     isValid = false;
+        // } else {
+        //     setDateOfBirthError(false);
+        // }
+
+        // if (!formValues?.gender) {
+        //     setGenderError(true);
+        //     isValid = false;
+        // } else {
+        //     setGenderError(false);
+        // }
+
+        // if (!formValues?.over18) {
+        //     setOver18Error(true);
+        //     isValid = false;
+        // } else {
+        //     setOver18Error(false);
+        // }
+
+        return isValid;
     }
-
-    if (!formValues?.lastName) {
-        setLastNameErrorMsg(true);
-        isValid = false;
-    } else {
-        setLastNameErrorMsg(false);
-    }
-
-    if (!formValues?.email || !emailRegex.test(formValues.email.trim())) {
-        setEmailAddressErrorMsg(true);
-        isValid = false;
-    } else {
-        setEmailAddressErrorMsg(false);
-    }
-
-    if (!formValues?.phoneNumber) {
-        setPhoneErrorMsg(true);
-        isValid = false;
-    } else {
-        setPhoneErrorMsg(false);
-    }
-
-    if (!formValues?.password) {
-        setPasswordErrorMsg(true);
-        isValid = false;
-    } else {
-        setPasswordErrorMsg(false);
-    }
-
-    if (!formValues?.confirmPassword) {
-        setCofirmPasswordErrorMsg("Please confirm your password");
-        isValid = false;
-    } else if (formValues.password !== formValues.confirmPassword) {
-        setCofirmPasswordErrorMsg("Password do not match");
-        isValid = false;
-    } else {
-        setCofirmPasswordErrorMsg(false);
-    }
-
-    // if (!formValues?.dateOfBirth) {
-    //     setDateOfBirthError(true);
-    //     isValid = false;
-    // } else {
-    //     setDateOfBirthError(false);
-    // }
-
-    // if (!formValues?.gender) {
-    //     setGenderError(true);
-    //     isValid = false;
-    // } else {
-    //     setGenderError(false);
-    // }
-
-    // if (!formValues?.over18) {
-    //     setOver18Error(true);
-    //     isValid = false;
-    // } else {
-    //     setOver18Error(false);
-    // }
-
-    return isValid;
-}
 
     async function handleFormSubmission(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -155,7 +155,7 @@ function SignUpPage() {
                 })
                 .catch((error) => {
                     catchError(error);
-                    // toast.error(error.response.data.message);
+                    toast.error('An error occurred. Please try again.');
                 })
                 .finally(() => {
                     setLoading(false);
@@ -185,7 +185,7 @@ function SignUpPage() {
         if (selectedDay !== "Day" && selectedMonth !== "Month") {
             const formattedDay = String(selectedDay).padStart(2, "0"); // Ensure two-digit format for day
             const formattedMonth = getMonthNumber(selectedMonth); // Convert month to two-digit format
-    
+
             setFormValues(prevValues => ({
                 ...prevValues,
                 dateOfBirth: `${formattedDay}-${formattedMonth}`,
@@ -234,7 +234,7 @@ function SignUpPage() {
                                 placeholder='Enter your E-mail Address' />
                             {emailAddressErrorMsg && (
                                 <span className='text-sm text-red-500'>
-                                   Please enter a valid email address
+                                    Please enter a valid email address
                                 </span>
                             )}
                         </div>
@@ -327,53 +327,53 @@ function SignUpPage() {
                         </div>
                         <div className="flex flex-col md:flex-row gap-4 md:gap-14 mb-7">
                             <label className="text-gray-700 font-medium ">Are you over 18 years?</label>
-                           <div className="flex flex-col gap-2">
-                           <div className="flex space-x-5">
-                                <label className="flex items-center space-x-1 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="over18"
-                                        value="true"
-                                        checked={formValues?.over18 === true}
-                                        onChange={() => setFormValues({ ...formValues, over18: true } as RegisterUserRequest)}
-                                        className="hidden"
-                                    />
-                                    <div
-                                        className={`w-5 h-5 flex items-center justify-center border-2 rounded-full ${formValues?.over18 === true ? "border-black" : "border-gray-400"
-                                            }`}
-                                    >
-                                        {formValues?.over18 === true && <div className="w-3 h-3 bg-black rounded-full"></div>}
-                                    </div>
-                                    <span>Yes</span>
-                                </label>
+                            <div className="flex flex-col gap-2">
+                                <div className="flex space-x-5">
+                                    <label className="flex items-center space-x-1 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="over18"
+                                            value="true"
+                                            checked={formValues?.over18 === true}
+                                            onChange={() => setFormValues({ ...formValues, over18: true } as RegisterUserRequest)}
+                                            className="hidden"
+                                        />
+                                        <div
+                                            className={`w-5 h-5 flex items-center justify-center border-2 rounded-full ${formValues?.over18 === true ? "border-black" : "border-gray-400"
+                                                }`}
+                                        >
+                                            {formValues?.over18 === true && <div className="w-3 h-3 bg-black rounded-full"></div>}
+                                        </div>
+                                        <span>Yes</span>
+                                    </label>
 
-                                <label className="flex items-center space-x-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="age"
-                                        value="false"
-                                        checked={formValues && formValues?.over18 === false}
-                                        onChange={() => setFormValues({ ...formValues, over18: false } as RegisterUserRequest)}
-                                        className="hidden"
-                                    />
-                                    <div
-                                        className={`w-5 h-5 flex items-center justify-center border-2 rounded-full ${formValues?.over18 === false ? "border-black" : "border-gray-400"
-                                            }`}
-                                    >
-                                        {formValues?.over18 === false && <div className="w-3 h-3 bg-black rounded-full"></div>}
-                                    </div>
-                                    <span>No</span>
-                                </label>
-                             
-                            </div>
+                                    <label className="flex items-center space-x-2 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="age"
+                                            value="false"
+                                            checked={formValues && formValues?.over18 === false}
+                                            onChange={() => setFormValues({ ...formValues, over18: false } as RegisterUserRequest)}
+                                            className="hidden"
+                                        />
+                                        <div
+                                            className={`w-5 h-5 flex items-center justify-center border-2 rounded-full ${formValues?.over18 === false ? "border-black" : "border-gray-400"
+                                                }`}
+                                        >
+                                            {formValues?.over18 === false && <div className="w-3 h-3 bg-black rounded-full"></div>}
+                                        </div>
+                                        <span>No</span>
+                                    </label>
 
-                         {/* {over18Error && (
+                                </div>
+
+                                {/* {over18Error && (
                                 <span className='text-sm text-red-500'>
                                     Kindly select
                                 </span>
                             )} */}
+                            </div>
                         </div>
-                           </div>
                         <div className="flex flex-col space-y-2 mb-7">
                             <label className="text-gray-700 font-medium">Date of Birth</label>
                             <div className="flex space-x-6">
@@ -468,7 +468,7 @@ function SignUpPage() {
                                 className='!mt-1' placeholder='Confirm your password' />
                             {cofirmPasswordErrorMsg && (
                                 <span className='text-sm text-red-500'>
-                                   {cofirmPasswordErrorMsg}
+                                    {cofirmPasswordErrorMsg}
                                 </span>
                             )}
                         </div>
