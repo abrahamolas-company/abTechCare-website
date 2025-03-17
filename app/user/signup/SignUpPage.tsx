@@ -150,6 +150,8 @@ function SignUpPage() {
                     // Display success
                     toast.success("You have successfully created an account.");
 
+                    localStorage.setItem("userId", JSON.stringify(response.data.data.id));
+
                     // Redirect to login page
                     router.push(`/user/signin`);
                 })

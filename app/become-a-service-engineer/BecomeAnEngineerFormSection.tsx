@@ -89,7 +89,6 @@ function BecomeAnEngineerFormSection() {
             .then((response) => {
                 toast.success("Your request is being processed, our representative would reach out to you shortly");
 
-                // sessionStorage.setItem("engineerId", response.data.data.id);
                 localStorage.setItem("engineerId", JSON.stringify(response.data.data.id));
                 router.push('/');
             })

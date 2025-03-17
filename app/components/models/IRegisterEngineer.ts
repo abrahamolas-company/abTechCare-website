@@ -8,7 +8,12 @@ export interface RegisterEngineerRequest{
   officeAddress: string;
   accountName: string;
   accountNumber: string;
-  bankName: string;}
+  bankName: string;
+}
+export interface UpdateEngineerRequest{
+  password: string;
+  confirmPassword: string;
+}
 
 
 export interface LoginEngineer {

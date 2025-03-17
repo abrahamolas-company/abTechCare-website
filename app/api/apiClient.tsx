@@ -1,7 +1,7 @@
 import axios from "axios";
 import ApiRoutes from "./apiRoutes";
 import { LoginUser, RegisterUserRequest } from "../components/models/IRegisterUser";
-import { LoginEngineer, RegisterEngineerRequest } from "../components/models/IRegisterEngineer";
+import { LoginEngineer, RegisterEngineerRequest, UpdateEngineerRequest } from "../components/models/IRegisterEngineer";
 import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
 
 export const API = axios.create({
@@ -93,7 +93,7 @@ export function useRegisterEngineer() {
     return registerEngineer;
 }
 
-// Api call to update an engineer
+// Api call to update/create an engineer
 export function useUpdateEngineer() {
     /**
      * @returns the response for the api request
@@ -140,4 +140,37 @@ export function useResetPassword() {
     }
 
     return resetPassword;
+}
+// Api call to update an engineer profile
+export function useUpdateEngineerProfile() {
+    /**
+     * @returns the response for the api request
+     */
+    async function updateEngineerProfile({ id, data }: { id: number, data: UpdateEngineerRequest }) {
+
+        //Fetch message
+        const response = await API.put(`${ApiRoutes.UpdateEngineerProfile}/${id}`, data);
+
+        //Return response
+        return response;
+    }
+    //return function to fetch new message
+    return updateEngineerProfile;
+}
+
+// Api call to update an user profile
+export function useUpdateUserProfile() {
+    /**
+     * @returns the response for the api request
+     */
+    async function updateUserProfile({ id, data }: { id: number, data: RegisterUserRequest }) {
+
+        //Fetch message
+        const response = await API.put(`${ApiRoutes.UpdateUserProfile}/${id}`, data);
+
+        //Return response
+        return response;
+    }
+    //return function to fetch new message
+    return updateUserProfile;
 }

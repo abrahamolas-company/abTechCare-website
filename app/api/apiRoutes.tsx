@@ -38,4 +38,10 @@ export default class ApiRoutes {
     // Api route to reset password
     static ResetPassword: string = "api/v1/auth/admins/reset-password";
 
+    // Api route to update engineer profile
+    static UpdateEngineerProfile: string = "api/v1/engineers/update-engineer-password";
+
+    // Api route to update user profile
+    static UpdateUserProfile: string = "api/v1/users";
+
 }

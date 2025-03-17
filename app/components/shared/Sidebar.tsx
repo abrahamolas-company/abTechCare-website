@@ -12,9 +12,10 @@ const Sidebar = () => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(true);
     const logout = useLogout()
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     async function Logout() {
-
+        setIsLoggingOut(true);
         await logout()
             .then((response) => {
                 console.log("Response: ", response);
@@ -25,7 +26,10 @@ const Sidebar = () => {
             })
             .catch((error) => {
                catchError(error)
-            });
+            })
+            .finally(() => {
+                setIsLoggingOut(false);
+            })
     }
 
     return (
@@ -91,10 +95,14 @@ const Sidebar = () => {
                         </>
                     </>
                   )}
-                    <div onClick={() => Logout()} className="mb-3 p-2 flex items-center gap-3 text-sm rounded cursor-pointer">
+                    <button 
+                        onClick={Logout} 
+                        disabled={isLoggingOut}
+                        className={`mb-3 p-2 flex items-center gap-3 text-sm rounded cursor-pointer hover:text-[#FFCC29] ${isLoggingOut ? 'opacity-50 pointer-events-none' : ''}`}
+                    >
                         <Icons.Logout />
-                        {isOpen && 'Logout'}
-                    </div>
+                        {isOpen && (isLoggingOut ? 'Logging out...' : 'Logout')}
+                    </button>
                 </div>
             </nav>
         </aside>

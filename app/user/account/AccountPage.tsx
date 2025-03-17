@@ -1,11 +1,71 @@
 'use client'
+import { useUpdateUserProfile } from '@/app/api/apiClient'
+import { catchError } from '@/app/components/constants/catchError'
+import { RegisterUserRequest } from '@/app/components/models/IRegisterUser'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'
-import React from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function AccountPage() {
+
+  const updateEngineerProfile = useUpdateUserProfile();
+
+  const [engineerId, setEngineerId] = useState<number>();
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const [formValues, setFormValues] = useState<RegisterUserRequest>();
+
+  async function handleUpdateUserProfile(e: FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+
+      // Show loader 
+      setIsUpdating(true);
+
+      // construct the data
+      const data = {
+          id: engineerId as number,
+          data: formValues as RegisterUserRequest
+      }
+
+      await updateEngineerProfile(data)
+          .then((response) => {
+              console.log({ response })
+
+              toast.success('Your password has been updated successfully');
+              // Clear form values
+              setFormValues({
+                password: '',
+                confirmPassword: '',
+              } as RegisterUserRequest);
+
+          })
+          .catch((error) => {
+
+              // If we have a response error
+              catchError(error)
+
+              // Display error
+              toast.error(`An error occurred. Please try again`);
+
+          })
+          .finally(() => {
+
+              // Close loader 
+              setIsUpdating(false);
+          })
+  }
+
+  // Retrieve the ID from local storage when the component mounts
+  useEffect(() => {
+      const storedId = localStorage.getItem('userId');
+      if (storedId) {
+          setEngineerId(JSON.parse(storedId));
+      }
+      console.log({ storedId })
+  }, []);
   return (
     <div>
       <DashboardHero />
@@ -53,21 +113,38 @@ function AccountPage() {
             </table>
           </section>
 
-          <form className="bg-[#D9D9D929] flex flex-col gap-4 w-full p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
+          <form onSubmit={(e) => handleUpdateUserProfile(e)} className="bg-[#D9D9D929] flex flex-col gap-4 w-full p-4 rounded-lg shadow-md mb-6 overflow-x-auto">
           <div className="w-full md:w-1/2">
-            <Label>
+            <Label htmlFor='password'>
             Create a new Password
             </Label>
-            <Input placeholder='Enter a strong password '/>
+            <Input
+             type='password'
+             name='password'
+             id='password'
+             value={formValues?.password}
+             onChange={(e) => {
+                 setFormValues({ ...formValues as RegisterUserRequest, password: e.target.value });
+             }}
+            placeholder='Enter a strong password '/>
           </div>
           <div className="w-full md:w-1/2">
-            <Label>
+            <Label htmlFor='password'>
             Confirm Password
             </Label>
-            <Input placeholder='Confirm your password again'/>
+            <Input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              value={formValues?.confirmPassword}
+              onChange={(e) => {
+                  setFormValues({ ...formValues as RegisterUserRequest, confirmPassword: e.target.value });
+              }}
+               placeholder='Confirm your password again'/>
           </div>
-          <button className="bg-[#FFCC29] font-medium mb-1 flex items-center justify-center ml-auto text-sm rounded-lg text-[#211D1D] py-3 px-8 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]">
-                Save
+          <button type="submit"
+           className={`${isUpdating && 'pointer-events-none opacity-60'} bg-[#FFCC29] relative overflow-hidden font-medium mb-1 flex items-center justify-center ml-auto text-sm rounded-lg text-[#211D1D] py-3 px-8 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]`}>
+                {isUpdating ? "Updating" : "Save"}
               </button>
           </form>
         </main>
