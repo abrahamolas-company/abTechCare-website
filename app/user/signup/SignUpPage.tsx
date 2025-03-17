@@ -24,16 +24,6 @@ function SignUpPage() {
 
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState<RegisterUserRequest>();
-    console.log({ formValues })
-    const [firstNameErrorMsg, setFirstNameErrorMsg] = useState<string | boolean>(false);
-    const [lastNameErrorMsg, setLastNameErrorMsg] = useState<string | boolean>(false);
-    const [emailAddressErrorMsg, setEmailAddressErrorMsg] = useState<string | boolean>(false);
-    const [phoneErrorMsg, setPhoneErrorMsg] = useState<string | boolean>(false);
-    const [passwordErrorMsg, setPasswordErrorMsg] = useState<string | boolean>(false);
-    const [cofirmPasswordErrorMsg, setCofirmPasswordErrorMsg] = useState<string | boolean>(false);
-    // const [dateOfBirthError, setDateOfBirthError] = useState(false);
-    // const [genderError, setGenderError] = useState(false);
-    // const [over18Error, setOver18Error] = useState(false);
 
     const [isDayOpen, setIsDayOpen] = useState(false);
     const [isMonthOpen, setIsMonthOpen] = useState(false);
@@ -43,8 +33,8 @@ function SignUpPage() {
 
 
     function onformValueChange(
-        e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-        setState?: Dispatch<SetStateAction<string | boolean>>
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+        // setState?: Dispatch<SetStateAction<string | boolean>>
     ) {
         const { name, value, type } = e.target;
 
@@ -52,97 +42,35 @@ function SignUpPage() {
             ...prevValues,
             [name]: type === "checkbox" && e.target instanceof HTMLInputElement ? e.target.checked : value,
         } as RegisterUserRequest));
-        if (setState) {
-            // Set the state
-            setState(false);
-        }
+        // if (setState) {
+        //     // Set the state
+        //     setState(false);
+        // }
     }
 
 
-    /**
-     * Function to validate form fields
-     * @returns boolean depicting form validation status
-     */
-
-    function validateFields() {
-        let isValid = true;
-
-        if (!formValues?.firstName) {
-            setFirstNameErrorMsg(true);
-            isValid = false;
-        } else {
-            setFirstNameErrorMsg(false);
+    const validateForm = (): boolean => {
+        const requiredFields = ['email', 'password', 'confirmPassword', 'firstName', 'lastName', 'phoneNumber', 'dateOfBirth', 'over18', 'gender'];
+        for (const field of requiredFields) {
+            if (!formValues?.[field as keyof RegisterUserRequest]) {
+                toast.error('All fields are required');
+                return false;
+            }
         }
-
-        if (!formValues?.lastName) {
-            setLastNameErrorMsg(true);
-            isValid = false;
-        } else {
-            setLastNameErrorMsg(false);
-        }
-
-        if (!formValues?.email || !emailRegex.test(formValues.email.trim())) {
-            setEmailAddressErrorMsg(true);
-            isValid = false;
-        } else {
-            setEmailAddressErrorMsg(false);
-        }
-
-        if (!formValues?.phoneNumber) {
-            setPhoneErrorMsg(true);
-            isValid = false;
-        } else {
-            setPhoneErrorMsg(false);
-        }
-
-        if (!formValues?.password) {
-            setPasswordErrorMsg(true);
-            isValid = false;
-        } else {
-            setPasswordErrorMsg(false);
-        }
-
-        if (!formValues?.confirmPassword) {
-            setCofirmPasswordErrorMsg("Please confirm your password");
-            isValid = false;
-        } else if (formValues.password !== formValues.confirmPassword) {
-            setCofirmPasswordErrorMsg("Password do not match");
-            isValid = false;
-        } else {
-            setCofirmPasswordErrorMsg(false);
-        }
-
-        // if (!formValues?.dateOfBirth) {
-        //     setDateOfBirthError(true);
-        //     isValid = false;
-        // } else {
-        //     setDateOfBirthError(false);
-        // }
-
-        // if (!formValues?.gender) {
-        //     setGenderError(true);
-        //     isValid = false;
-        // } else {
-        //     setGenderError(false);
-        // }
-
-        // if (!formValues?.over18) {
-        //     setOver18Error(true);
-        //     isValid = false;
-        // } else {
-        //     setOver18Error(false);
-        // }
-
-        return isValid;
-    }
+        return true;
+    };
 
     async function handleFormSubmission(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
+         // Validate form fields
+         if (!validateForm()) {
+            return;
+        }
+
         // Show the loader
         setLoading(true);
 
-        if (validateFields()) {
             await registerUser(formValues as RegisterUserRequest)
                 .then((response) => {
                     console.log(response);
@@ -162,9 +90,6 @@ function SignUpPage() {
                 .finally(() => {
                     setLoading(false);
                 });
-        } else {
-            setLoading(false);
-        }
     }
 
 
@@ -231,14 +156,10 @@ function SignUpPage() {
                                 name="email"
                                 id="email"
                                 value={formValues?.email}
-                                onChange={(e) => onformValueChange(e, setEmailAddressErrorMsg)}
+                                onChange={(e) => onformValueChange(e)}
                                 className='!mt-1'
                                 placeholder='Enter your E-mail Address' />
-                            {emailAddressErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    Please enter a valid email address
-                                </span>
-                            )}
+                          
                         </div>
                         <div className="mb-7">
                             <Label htmlFor='firstName'>First Name</Label>
@@ -247,13 +168,8 @@ function SignUpPage() {
                                 name='firstName'
                                 id='firstName'
                                 value={formValues?.firstName}
-                                onChange={(e) => onformValueChange(e, setFirstNameErrorMsg)}
+                                onChange={(e) => onformValueChange(e)}
                                 className='!mt-1' placeholder='Enter your First Name' />
-                            {firstNameErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    Please enter your firstname
-                                </span>
-                            )}
                         </div>
                         <div className="mb-7">
                             <Label htmlFor='lastName'>Last Name</Label>
@@ -262,13 +178,8 @@ function SignUpPage() {
                                 name="lastName"
                                 id="lastName"
                                 value={formValues?.lastName}
-                                onChange={(e) => onformValueChange(e, setLastNameErrorMsg)}
+                                onChange={(e) => onformValueChange(e)}
                                 className='!mt-1' placeholder='Enter your Last Name' />
-                            {lastNameErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    Please enter your lastname
-                                </span>
-                            )}
                         </div>
                         <div className="mb-7">
                             <Label htmlFor='phoneNumber'>Contact Number </Label>
@@ -277,13 +188,8 @@ function SignUpPage() {
                                 name="phoneNumber"
                                 id="phoneNumber"
                                 value={formValues?.phoneNumber}
-                                onChange={(e) => onformValueChange(e, setPhoneErrorMsg)}
+                                onChange={(e) => onformValueChange(e)}
                                 className='!mt-1' placeholder='Enter your contact  number' />
-                            {phoneErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    Please enter your phone number
-                                </span>
-                            )}
                         </div>
                     </div>
                     <div className="w-full md:w-1/2">
@@ -368,12 +274,6 @@ function SignUpPage() {
                                     </label>
 
                                 </div>
-
-                                {/* {over18Error && (
-                                <span className='text-sm text-red-500'>
-                                    Kindly select
-                                </span>
-                            )} */}
                             </div>
                         </div>
                         <div className="flex flex-col space-y-2 mb-7">
@@ -449,13 +349,8 @@ function SignUpPage() {
                                 name='password'
                                 id='password'
                                 value={formValues?.password}
-                                onChange={(e) => onformValueChange(e, setPasswordErrorMsg)}
+                                onChange={(e) => onformValueChange(e)}
                                 className='!mt-1' placeholder='Enter a strong password ' />
-                            {passwordErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    Enter your password
-                                </span>
-                            )}
                         </div>
                         <div className="mb-7">
                             <Label>Confirm Password </Label>
@@ -465,14 +360,9 @@ function SignUpPage() {
                                 id="confirmPassword"
                                 value={formValues?.confirmPassword}
                                 onChange={(e) =>
-                                    onformValueChange(e, setCofirmPasswordErrorMsg)
+                                    onformValueChange(e)
                                 }
                                 className='!mt-1' placeholder='Confirm your password' />
-                            {cofirmPasswordErrorMsg && (
-                                <span className='text-sm text-red-500'>
-                                    {cofirmPasswordErrorMsg}
-                                </span>
-                            )}
                         </div>
                     </div>
                 </div>
