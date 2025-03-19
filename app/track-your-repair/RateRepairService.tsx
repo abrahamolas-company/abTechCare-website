@@ -14,7 +14,7 @@ function RateRepairService() {
     //     setReview(e.target.value); // Update review as the user types
     // };
     return (
-        <form className='mt-16 mb-14'>
+        <div className='mt-16 mb-14'>
             <div className='bg-white shadow-md rounded-[10px] w-full py-6 px-5'>
                 <h3 className='text-center text-base mb-1 text-[#211D1D]'>Rate our Repair Service </h3>
 
@@ -34,7 +34,7 @@ function RateRepairService() {
               <button className="bg-[#FFCC29] font-medium !mt-5 mb-4 flex items-center justify-center ml-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D]">
             Rate
           </button>
-        </form>
+        </div>
 
     )
 }

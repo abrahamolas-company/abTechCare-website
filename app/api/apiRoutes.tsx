@@ -1,5 +1,5 @@
 export default class ApiRoutes {
-  static BASE_URL_DEV: string = "https://ad34-129-18-228-254.ngrok-free.app";
+  static BASE_URL_DEV: string = "https://ca9d-129-18-228-254.ngrok-free.app";
 
   /**
     * Api routes to register new user

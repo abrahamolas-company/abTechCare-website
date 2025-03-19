@@ -72,6 +72,7 @@ export function useLogout() {
         // Clear the token and roles from sessionStorage
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('roles');
+        sessionStorage.removeItem('redirectPath');
 
         // Return the response
         return response.data;

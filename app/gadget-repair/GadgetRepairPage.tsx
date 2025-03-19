@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import GadgetRepairHerosection from './Herosection'
 import { sectionPadding } from '../styles/styles'
 import Label from '../components/ui/label'
@@ -7,10 +7,14 @@ import Input from '../components/ui/input'
 import TextArea from '../components/ui/textarea'
 import { Icons } from '../components/ui/icons'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 function GadgetRepairPage() {
+  const router = useRouter()
   const [images, setImages] = useState<string[]>([]);
   const [video, setVideo] = useState<string | null>(null);
+    const toastShown = useRef(false); // Ref to track if toast has been shown
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, index: number, type: "image" | "video") => {
     const file = event.target.files?.[0];
@@ -26,6 +30,28 @@ function GadgetRepairPage() {
 
     event.target.value = ""; // Reset input
   };
+
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    const token = sessionStorage.getItem('token');
+    if (!token && !toastShown.current) {
+      // Display a toast notification only if it hasn't been shown yet
+      toast.warning('You are not logged in. Redirecting to the login page...', {
+        duration: 2000, // Display the toast for 2 seconds
+      });
+
+      // Mark the toast as shown
+      toastShown.current = true;
+
+      // Store the current path and redirect to login page
+      sessionStorage.setItem('redirectPath', '/gadget-repair');
+      setTimeout(() => {
+        router.push('/user/signin');
+      }, 2000); // Redirect after 2 seconds
+    }
+  }, [router]);
+
 
   return (
     <section className='pb-20'>
