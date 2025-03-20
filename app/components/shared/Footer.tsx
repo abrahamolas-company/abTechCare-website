@@ -49,7 +49,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 justify-between">
+                <div className="flex flex-row gap-5 md:gap-10 justify-between">
 
                       <div className='flex flex-col gap-2 lg:whitespace-nowrap'>
                     <h4 className='text-white text-base font-bold'>Find Us</h4>
