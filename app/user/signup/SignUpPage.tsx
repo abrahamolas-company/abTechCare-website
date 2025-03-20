@@ -2,7 +2,6 @@
 import { useRegisterUser } from '@/app/api/apiClient'
 import { ApplicationRoutes } from '@/app/components/constants/applicationRoutes'
 import { catchError } from '@/app/components/constants/catchError'
-import { emailRegex } from '@/app/components/constants/emailRegex'
 import useOuterClick from '@/app/components/hooks/useOuterClick'
 import { RegisterUserRequest } from '@/app/components/models/IRegisterUser'
 import { Icons } from '@/app/components/ui/icons'
@@ -13,7 +12,7 @@ import images from '@/public/images'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 function SignUpPage() {
