@@ -86,7 +86,7 @@ function SignInPage() {
 
             loginUser(formValues as LoginUser)
                 .then((response) => {
-                    // console.log(response.data.data.body.roles);
+                    console.log({response});
                     // return;
                     toast.success("You have successfully logged in.");
 
@@ -105,6 +105,7 @@ function SignInPage() {
                     sessionStorage.setItem("token", response.data.data.body.token.access_token);
                     sessionStorage.setItem("roles", JSON.stringify(response.data.data.body.roles)); // Ensure roles are serialized
 
+                    localStorage.setItem("userId", JSON.stringify(response.data.data.body.id));
                     // Redirect to the stored path or home page
                     const redirectPath = sessionStorage.getItem('redirectPath') || '/';
                     router.push(redirectPath);

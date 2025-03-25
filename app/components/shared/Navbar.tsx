@@ -99,12 +99,12 @@ function Navbar() {
                 </div>
                 <div className='hidden lg:flex lg:flex-row lg:gap-7 lg:items-center lg:justify-between lg:px-3 lg:w-full lg:text-sm'>
                     <Link href={"/"}>
-                        <div className='lg:w-[153px] lg:h-[69px] relative'>
+                        <div className='lg:w-[133px] lg:h-[69px] relative'>
                             <Image src={images.logo} alt='Logo' className='w-full h-full object-contain' />
                         </div>
                     </Link>
 
-                    <ul className='flex gap-10 text-sm lg:whitespace-nowrap bg-[#20211D4D] px-4 py-1'>
+                    <ul className='flex gap-8 text-sm lg:whitespace-nowrap bg-[#20211D4D] px-4 py-1'>
                         <Link href={ApplicationRoutes.Home} className={`cursor-pointer hover:text-[#FFCC29] transition-all ease-in-out duration-300 ${pathname == ApplicationRoutes.Home ? "text-[#FFCC29]" : "text-white"}`}>
                             <li>Home</li>
                         </Link>
@@ -172,13 +172,13 @@ function Navbar() {
 
                     {isUserLoggedIn && !isEngineerLoggedIn &&
                         <Link href={'/user/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                            Dashboard
+                            My Dashboard
                         </Link>
                     }
 
                     {!isUserLoggedIn && isEngineerLoggedIn &&
                         <Link href={'/engineer/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                            Dashboard
+                            My Dashboard
                         </Link>
                     }
 
@@ -224,13 +224,13 @@ function Navbar() {
 
                 {isUserLoggedIn && !isEngineerLoggedIn &&
                     <Link href={'/user/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                        Dashboard
+                        My Dashboard
                     </Link>
                 }
 
                 {!isUserLoggedIn && isEngineerLoggedIn &&
                     <Link href={'/engineer/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                        Dashboard
+                        My Dashboard
                     </Link>
                 }
 

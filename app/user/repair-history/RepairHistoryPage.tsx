@@ -1,9 +1,49 @@
 'use client'
+import { useGetUserRepairOrders } from '@/app/api/apiClient'
+import { catchError } from '@/app/components/constants/catchError'
+import { RepairOrderResponse, UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function RepairHistoryPage() {
+
+  const getUserRepairOrders = useGetUserRepairOrders()
+
+  const [userId, setUserId] = useState<number>();
+
+  const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
+  const [loading, setLoading] = useState(false)
+
+  async function fetchUserRepairOrders(id: number) {
+    //show the loader
+    setLoading(true);
+
+
+    getUserRepairOrders(id)
+      .then((response) => {
+        console.log({ response });
+
+        // setRepairOrder(data.data)
+        // toast.success('Repair order fetched successfully')
+      })
+      .catch((error) => {
+        catchError(error);
+        toast.error('An error occurred. Please try again.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    const storedId = localStorage.getItem('userId');
+    if (storedId) {
+      const id = JSON.parse(storedId);
+      fetchUserRepairOrders(id);
+    }
+  }, []);
   return (
     <div>
         <DashboardHero/>

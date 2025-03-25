@@ -25,7 +25,7 @@ export default function GadgetRepairHerosection() {
                 </h1>
 
                 {/* Electronics List */}
-                <div className="flex justify-center gap-4 items-center w-full overflow-x-auto">
+                <div className="flex gap-4 items-center w-full overflow-x-auto">
                     <span className='h-[260px] overflow-hidden w-[14px] hidden md:block'><Image src={images.frame_design} alt='frame design' /></span>
 
                     {electronics.map((electronic, index) => (

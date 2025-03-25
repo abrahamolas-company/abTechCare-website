@@ -48,7 +48,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                     Gadget Insurance
                 </li>
             </Link>
-            <Link
+            {/* <Link
                 href={ApplicationRoutes.PickupandDelivery}
                 onClick={() => {
                     setIsServiceDropDownOpen(false)
@@ -59,7 +59,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                     Pickup and Delivery
                 </li>
-            </Link>
+            </Link> */}
             <Link
                 href={ApplicationRoutes.TrackYourRepair}
                 onClick={() => {
@@ -69,7 +69,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 className={`w-fit ${pathname == ApplicationRoutes.TrackYourRepair ? "text-[#FFCC29] font-semibold" : ""}`}
             >
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
-                    Track your Repair Status
+                    Track your Repair
                 </li>
             </Link>
             <Link

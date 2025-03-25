@@ -1,5 +1,5 @@
 export default class ApiRoutes {
-  static BASE_URL_DEV: string = "https://ca9d-129-18-228-254.ngrok-free.app";
+  static BASE_URL_DEV: string = "https://be76-169-255-124-5.ngrok-free.app";
 
   /**
     * Api routes to register new user
@@ -43,5 +43,10 @@ export default class ApiRoutes {
 
     // Api route to update user profile
     static UpdateUserProfile: string = "api/v1/users";
+
+    // Api route to create repair order
+    static CreateRepairOrder: string = "api/v1/repair-order";
+    // Api route to fetch user repair order
+    static fetchUserRepairOrders: string = "api/v1/repair-order/user";
 
 }

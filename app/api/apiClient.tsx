@@ -51,31 +51,43 @@ export function useLoginEngineer() {
 
 export function useLogout() {
     async function logOut() {
-        // Retrieve the token from sessionStorage
-        const token = sessionStorage.getItem('token');
+        try {
+            const token = sessionStorage.getItem('token');
 
-        if (!token) {
-            throw new Error('No authorization token found');
-        }
-
-        // Fire the request with the authorization header
-        const response = await axios.post(
-            `${ApiRoutes.BASE_URL_DEV}/${ApiRoutes.Logout}`,
-            {}, // Empty body since it's a POST request
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
+            if (!token) {
+                throw new Error('No authorization token found');
             }
-        );
 
-        // Clear the token and roles from sessionStorage
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('roles');
-        sessionStorage.removeItem('redirectPath');
+            // Attempt to log out on the server (optional, since token might already be expired)
+            try {
+                await axios.post(
+                    `${ApiRoutes.BASE_URL_DEV}/${ApiRoutes.Logout}`,
+                    {},
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
+                    }
+                );
+            } catch (error) {
+                // If the token is expired, the logout request might fail, but we still clear storage
+                console.warn("Logout request failed (token may be expired)");
+            }
 
-        // Return the response
-        return response.data;
+            // Clear storage regardless of API response
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('roles');
+            sessionStorage.removeItem('redirectPath');
+            sessionStorage.removeItem('orderId');
+            localStorage.removeItem('userId'); // Clear localStorage if used
+            localStorage.removeItem('engineerId'); // Clear localStorage if used
+
+            // Optional: Redirect to login page
+            window.location.href = '/'; // Force full page reload to clear state
+        } catch (error) {
+            console.error('Logout failed:', error);
+            throw error;
+        }
     }
 
     return logOut;
@@ -175,3 +187,53 @@ export function useUpdateUserProfile() {
     //return function to fetch new message
     return updateUserProfile;
 }
+
+// Api call to create repair order
+export function useCreateRepairOrder() {
+    async function createRepairOrder(data: FormData) {
+        // Fire the request
+        const response = await API.post(ApiRoutes.CreateRepairOrder, data);
+
+        // Return the response
+        return response;
+    }
+
+    return createRepairOrder;
+}
+
+
+// Api call to fetch repair order by order number
+export function useGetRepairOrderByOrderId() {
+    async function getRepairOrderByOrderId(orderId: number) {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+  
+        const response = await API.get(`${ApiRoutes.CreateRepairOrder}/${orderId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        return response;
+     
+    }
+    return getRepairOrderByOrderId;
+  }
+  
+
+// Api call to fetch user repair order by order number
+export function useGetUserRepairOrders() {
+    async function getUserRepairOrders(userId: number) {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+  
+        const response = await API.get(`${ApiRoutes.fetchUserRepairOrders}/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        return response;
+     
+    }
+    return getUserRepairOrders;
+  }
+  

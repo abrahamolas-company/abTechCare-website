@@ -19,9 +19,7 @@ const Sidebar = () => {
         await logout()
             .then((response) => {
                 console.log("Response: ", response);
-                if (response.data) {
-                    router.push('/')
-                }
+                router.push('/');
                 toast.success('Logout successful');
             })
             .catch((error) => {

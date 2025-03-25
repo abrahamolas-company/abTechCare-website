@@ -21,11 +21,11 @@ const Footer = () => {
                             <Link href={ApplicationRoutes.GadgetInsurance} className={`cursor-pointer hover:text-[#FFCC29] transitio ease-in-out duration-300`}>
                                 <li>Gadget Insurance</li>
                             </Link>
-                            <Link href={ApplicationRoutes.PickupandDelivery} className={`cursor-pointer hover:text-[#FFCC29] transitio ease-in-out duration-300`}>
+                            {/* <Link href={ApplicationRoutes.PickupandDelivery} className={`cursor-pointer hover:text-[#FFCC29] transitio ease-in-out duration-300`}>
                                 <li>Pickup and Delivery</li>
-                            </Link>
+                            </Link> */}
                             <Link href={ApplicationRoutes.TrackYourRepair} target='_blank' className={`cursor-pointer hover:text-[#FFCC29] transitio ease-in-out duration-300`}>
-                                <li>Track your Repair Status</li>
+                                <li>Track your Repair</li>
                             </Link>
                             <Link href={ApplicationRoutes.Quote} target='_blank' className={`cursor-pointer hover:text-[#FFCC29] transitio ease-in-out duration-300`}>
                                 <li>Get a quote</li>
@@ -49,24 +49,25 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 md:gap-10 lg:gap-20 justify-between">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-10 lg:gap-20 justify-between">
 
                       <div className='flex flex-col gap-2 lg:whitespace-nowrap'>
                     <h4 className='text-white text-base font-bold'>Find Us</h4>
                     <div className='font-light'>
                     <div className='flex items-start gap-3 text-sm mb-5 w-fit'>
-                            <Icons.Location className='5' />
+                            <Icons.Location className='w-5 h-5 md:w-6 md:h-6' />
                             <Link target='_blank' href={"https://www.google.com/maps/place/21+Kodesoh+St,+Ikeja,+Lagos+101233,+Lagos/@6.594753,3.3390226,17z/data=!3m1!4b1!4m6!3m5!1s0x103b9226d907a9ef:0x2540189a836688b1!8m2!3d6.5947477!4d3.3415975!16s%2Fg%2F11f03t278s?entry=ttu&g_ep=EgoyMDI1MDIyNi4xIKXMDSoASAFQAw%3D%3D"} className='hover:text-[#FFCC29] transition-all ease-in-out duration-300'>
                                 21, kodesho street, beside juli <br /> pharmacy, ikeja, lagos.
                             </Link>
                         </div>
                         <div className='flex items-start gap-3 text-sm mb-4 w-fit'>
-                            <Icons.Phone />
+                            <Icons.Phone className='w-5 h-5 md:w-6 md:h-6'/>
                             <Link className='hover:text-[#FFCC29] transition-all ease-in-out duration-300' href={"tel:+2349168701802"}>+234 916 870 1802</Link>
                         </div>
-                        <Link className='flex items-center gap-3 text-sm mb-4 w-fit hover:text-[#FFCC29] transition-all ease-in-out duration-300' href="/"><Icons.Instagram className='w-4 h-4 lg:w-5 lg:h-5' />abtech_care</Link>
+                        <Link className='flex items-center gap-3 text-sm mb-4 w-fit hover:text-[#FFCC29] transition-all ease-in-out duration-300' href="/">
+                            <Icons.Instagram className='w-5 h-5 md:w-6 md:h-6' />abtech_care</Link>
                         <div className='flex items-start gap-3 text-sm mb-4 w-fit'>
-                            <Icons.Email />
+                            <Icons.Email className='w-5 h-5 md:w-6 md:h-6'/>
                             <Link className='hover:text-[#FFCC29] transition-all ease-in-out duration-300' href={"mailto:info@abtechcare.com"}>info@abtechcare.com</Link>
                         </div>
                      
@@ -80,7 +81,7 @@ const Footer = () => {
                             name='email'
                             placeholder='Enter your email address'
                         />
-                        <button className='bg-white rounded-[10px] w-full xl:w-1/2 p-3 font-medium text-[#211D1D] flex items-center justify-between gap-3'>Subscribe <Icons.Bell /></button>
+                        <button className='bg-white rounded-[10px] w-1/2 p-3 font-medium text-[#211D1D] flex items-center justify-between gap-3'>Subscribe <Icons.Bell /></button>
                     </div>
                 </div> 
                 </div>
