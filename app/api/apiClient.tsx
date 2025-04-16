@@ -237,3 +237,20 @@ export function useGetUserRepairOrders() {
     return getUserRepairOrders;
   }
   
+// Api call to fetch user by user id
+export function useGetUsers() {
+    async function getUsers(userId: number) {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+  
+        const response = await API.get(`${ApiRoutes.fetchUsers}/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        return response;
+     
+    }
+    return getUsers;
+  }
+  

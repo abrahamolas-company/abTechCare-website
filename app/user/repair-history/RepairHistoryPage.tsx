@@ -11,8 +11,6 @@ function RepairHistoryPage() {
 
   const getUserRepairOrders = useGetUserRepairOrders()
 
-  const [userId, setUserId] = useState<number>();
-
   const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
   const [loading, setLoading] = useState(false)
 

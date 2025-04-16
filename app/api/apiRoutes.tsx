@@ -1,5 +1,5 @@
 export default class ApiRoutes {
-  static BASE_URL_DEV: string = "https://be76-169-255-124-5.ngrok-free.app";
+  static BASE_URL_DEV: string = "https://abtech-care-1a19c90cbf86.herokuapp.com";
 
   /**
     * Api routes to register new user
@@ -48,5 +48,7 @@ export default class ApiRoutes {
     static CreateRepairOrder: string = "api/v1/repair-order";
     // Api route to fetch user repair order
     static fetchUserRepairOrders: string = "api/v1/repair-order/user";
+    // Api route to fetch user by user id
+    static fetchUsers: string = "api/v1/users";
 
 }

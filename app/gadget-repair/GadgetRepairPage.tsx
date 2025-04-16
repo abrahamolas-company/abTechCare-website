@@ -97,12 +97,10 @@ function GadgetRepairPage() {
         .then((response) => {
           // console.log(response.data.data.orderId);
           sessionStorage.setItem("orderId", response.data.data.orderId);
-
+          console.log(response)
           router.push('/pickup-and-delivery');
 
-          setTimeout(() => {
-            toast.success('Repair order created successfully!');
-          }, 100);
+          toast.success('Repair order created successfully!.You will be redirected to the pickup and delivery page');
 
           // Reset form
           setGadget('');
@@ -166,6 +164,7 @@ function GadgetRepairPage() {
         <div className="flex flex-col gap-[6px]">
           <Label>Describe your gadget fault in details</Label>
           <TextArea
+            className='!font-light'
             placeholder='e.g My phone has a broken Screen'
             value={issueDescription}
             onChange={(e) => setIssueDescription(e.target.value)}

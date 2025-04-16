@@ -33,7 +33,7 @@ export default function Herosection() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, ease: easeOutExpo }}
                             className='mt-3 text-sm md:text-base font-medium leading-6 mb-2 w-full lg:text-base lg:leading-8 md:w-[80%]'>We Pickup, Repair and Deliver <br /> <span className='text-[#FFCC29]'> Flexible Payment!</span></motion.p>
-                        <div className='flex text-[10px] md:text-xs lg:text-base items-center justify-center md:justify-start gap-5 mt-4 md:mt-0'>
+                        <div className='flex text-[10px] md:text-xs lg:text-base items-center justify-center md:justify-start gap-3 md:gap-5 mt-4 md:mt-0 flex-wrap'>
                             <Link href="/quote" className='border border-[#FFFFFF] rounded-[10px] text-white py-2 px-7 md:py-3 md:px-7 text-sm md:whitespace-nowrap hover:bg-[#FFCC29] hover:text-[#211D1D] hover:border hover:border-[#FFCC29] transition-all ease-in-out duration-300'>Get a quote</Link>
                             {/* <button onClick={() => setIsPickupAndDeliveryModalOpen(true)} className='border border-[#FFFFFF] rounded-[10px] text-white py-2 px-7 md:py-3 md:px-7 text-sm md:whitespace-nowrap hover:bg-[#FFCC29] hover:text-[#211D1D] transition-all ease-in-out duration-300'>Pickup and Delivery</button> */}
                             <Link href="/gadget-repair" className='border border-[#FFFFFF] rounded-[10px] text-white py-2 px-7 md:py-3 md:px-7 text-sm md:whitespace-nowrap hover:bg-[#FFCC29] hover:text-[#211D1D] hover:border hover:border-[#FFCC29] transition-all ease-in-out duration-300'>Book a repair</Link>

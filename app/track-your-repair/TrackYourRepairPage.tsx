@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useGetRepairOrderByOrderId } from '../api/apiClient';
 import { OrderStatus, RepairOrderResponse } from '../components/models/IRepairOrder';
 import { catchError } from '../components/constants/catchError';
+import { sectionPadding } from '../styles/styles';
 
 
 function TrackYourRepairPage() {
@@ -40,7 +41,7 @@ function TrackYourRepairPage() {
 
   const [repairOrder, setRepairOrder] = useState<RepairOrderResponse>()
   const [loading, setLoading] = useState(false)
-  let isDelivered = false
+  let isDelivered = true
 
   const getRepairOrderByOrderId = useGetRepairOrderByOrderId()
 
@@ -57,10 +58,11 @@ function TrackYourRepairPage() {
 
     getRepairOrderByOrderId(orderId as number)
       .then((response) => {
-        console.log({ response });
+        console.log(response.data.data);
 
-        // setRepairOrder(data.data)
+        setRepairOrder(response.data.data)
         toast.success('Repair order fetched successfully')
+        setOrderNumber('')
       })
       .catch((error) => {
         catchError(error);
@@ -79,7 +81,7 @@ function TrackYourRepairPage() {
         duration: 2000,
       });
       toastShown.current = true;
-      sessionStorage.setItem('redirectPath', '/gadget-repair');
+      sessionStorage.setItem('redirectPath', '/track-your-repair');
       setTimeout(() => {
         router.push('/user/signin');
       }, 2000);
@@ -110,19 +112,19 @@ function TrackYourRepairPage() {
   return (
     <>
       <TrackYourRepairHerosection />
-      <form className="max-w-2xl pt-40 mx-auto p-4" onSubmit={(e) => fetchRepairOrder(e)}>
+      <form className={` ${sectionPadding} pt-52 mx-auto pb-10`} onSubmit={(e) => fetchRepairOrder(e)}>
         <div className="flex flex-col gap-2">
           <Label className="block text-sm font-medium" htmlFor='orderNumber'>Input your Order Number</Label>
-          <div className="flex items-center flex-col md:flex-row md:gap-3">
+          <div className="flex items-center flex-col w-full md:flex-row md:gap-3">
             <Input
               id='orderNumber'
               name='orderNumber'
               value={orderNumber}
               onChange={(e) => setOrderNumber(e.target.value)}
-              placeholder='' className='placeholder:text-[#211D1D] !px-3 mb-3 md:!mb-5 font-medium' />
+              placeholder='' className='placeholder:text-[#211D1D] w-full !px-3 mb-3 md:!mb-5 font-medium' />
             <button type='submit'
               disabled={loading}
-              className={`bg-[#FFCC29] font-medium  mb-4 flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D] ${loading ? 'opacity-50 pointer-events-none' : ''}`}>
+              className={`bg-[#FFCC29] font-medium  mb-4 flex items-center justify-center mx-auto text-sm rounded-lg text-[#211D1D] whitespace-nowrap py-3 min-w-[200px] transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent hover:text-[#211D1D] ${loading ? 'opacity-50 pointer-events-none' : ''}`}>
               {loading ? 'Tracking...' : 'Track Your Repair'}
             </button>
           </div>
@@ -130,7 +132,7 @@ function TrackYourRepairPage() {
         {repairOrder && (
           <div className="text-[#211D1D] text-center mb-7">
             <p className='font-light text-sm'>Order Number: {repairOrder.orderId}</p>
-            <h2 className='font-medium text-lg'>{getStatusText(repairOrder.orderStatus)}</h2>
+            <h2 className='font-medium text-lg'>Order Status: {getStatusText(repairOrder.orderStatus)}</h2>
           </div>
         )}
         {/* Date Picker */}
@@ -191,7 +193,7 @@ function TrackYourRepairPage() {
             Submit
           </button> */}
 
-        {isDelivered && <RateRepairService />}
+        {repairOrder?.orderStatus == 'COMPLETED' && <RateRepairService />}
       </form>
     </>
   )
