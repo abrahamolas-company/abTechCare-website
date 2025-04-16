@@ -19,11 +19,11 @@ function DashboardNavbar() {
     const [isEngineerLoggedIn, setIsEngineerLoggedIn] = useState(false);
 
     const [user, setUser] = useState<Users>()
-      const [loading, setLoading] = useState(false)
+      // const [loading, setLoading] = useState(false)
 
     async function fetchUsers(id: number) {
         //show the loader
-        setLoading(true);
+        // setLoading(true);
     
     
         getUsers(id)
@@ -38,7 +38,7 @@ function DashboardNavbar() {
             toast.error('An error occurred. Please try again.');
           })
           .finally(() => {
-            setLoading(false);
+            // setLoading(false);
           });
       }
     

@@ -41,7 +41,6 @@ function TrackYourRepairPage() {
 
   const [repairOrder, setRepairOrder] = useState<RepairOrderResponse>()
   const [loading, setLoading] = useState(false)
-  let isDelivered = true
 
   const getRepairOrderByOrderId = useGetRepairOrderByOrderId()
 

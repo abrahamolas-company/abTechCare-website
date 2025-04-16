@@ -1,12 +1,12 @@
 'use client'
-import React, {  useState } from 'react'
+import React from 'react'
 import { sectionPadding } from '@/app/styles/styles'
 import images from '@/public/images'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { easeOutExpo } from '../constants/easings'
 import Link from 'next/link'
-import PickupAndDeliveryModal from '../modal/PickupAndDeliveryModal'
+// import PickupAndDeliveryModal from '../modal/PickupAndDeliveryModal'
 
 export default function Herosection() {
     // const [isPickupAndDeliveryModalOpen, setIsPickupAndDeliveryModalOpen] = useState(false)

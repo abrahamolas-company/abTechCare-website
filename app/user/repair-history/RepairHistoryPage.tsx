@@ -1,7 +1,7 @@
 'use client'
 import { useGetUserRepairOrders } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
-import { RepairOrderResponse, UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
+import {  UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
 import React, { useEffect, useState } from 'react'
@@ -11,12 +11,12 @@ function RepairHistoryPage() {
 
   const getUserRepairOrders = useGetUserRepairOrders()
 
-  const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
-  const [loading, setLoading] = useState(false)
+  // const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
+  // const [loading, setLoading] = useState(false)
 
   async function fetchUserRepairOrders(id: number) {
     //show the loader
-    setLoading(true);
+    // setLoading(true);
 
 
     getUserRepairOrders(id)
@@ -31,7 +31,7 @@ function RepairHistoryPage() {
         toast.error('An error occurred. Please try again.');
       })
       .finally(() => {
-        setLoading(false);
+        // setLoading(false);
       });
   }
 

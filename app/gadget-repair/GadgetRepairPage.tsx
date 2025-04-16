@@ -77,7 +77,7 @@ function GadgetRepairPage() {
       formData.append('issueDescription', issueDescription);
 
       // Append image files
-      imageFiles.forEach((file, index) => {
+      imageFiles.forEach((file) => {
         if (file) {
           formData.append('gadgetImages', file);
         }

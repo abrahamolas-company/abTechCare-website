@@ -70,6 +70,7 @@ export function useLogout() {
                     }
                 );
             } catch (error) {
+                console.error('Logout request failed:', error);
                 // If the token is expired, the logout request might fail, but we still clear storage
                 console.warn("Logout request failed (token may be expired)");
             }
