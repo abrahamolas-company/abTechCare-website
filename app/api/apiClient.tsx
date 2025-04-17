@@ -3,6 +3,7 @@ import ApiRoutes from "./apiRoutes";
 import { LoginUser, RegisterUserRequest } from "../components/models/IRegisterUser";
 import { LoginEngineer, RegisterEngineerRequest, UpdateEngineerRequest } from "../components/models/IRegisterEngineer";
 import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
+import { CreateOrderPickup } from "../components/models/OrderLogistics";
 
 export const API = axios.create({
     baseURL: ApiRoutes.BASE_URL_DEV,
@@ -79,7 +80,7 @@ export function useLogout() {
             sessionStorage.removeItem('token');
             sessionStorage.removeItem('roles');
             sessionStorage.removeItem('redirectPath');
-            sessionStorage.removeItem('orderId');
+            // sessionStorage.removeItem('orderId');
             localStorage.removeItem('userId'); // Clear localStorage if used
             localStorage.removeItem('engineerId'); // Clear localStorage if used
 
@@ -200,6 +201,19 @@ export function useCreateRepairOrder() {
     }
 
     return createRepairOrder;
+}
+
+// Api call to create order pickup
+export function useCreateOrderPickup() {
+    async function createOrderPickup(data: CreateOrderPickup) {
+        // Fire the request
+        const response = await API.post(ApiRoutes.CreateOrderPickup, data);
+
+        // Return the response
+        return response;
+    }
+
+    return createOrderPickup;
 }
 
 

@@ -3,7 +3,7 @@ export function catchError(error: any) {
   // If we have a response error
   if (error.response) {
     // Log the error
-    console.error("Response Error:", error.response.data);
+    console.log("Response Error:", error.response.data);
   }
   // Otherwise, if we could not reach the server...
   else if (error.request) {
@@ -13,6 +13,6 @@ export function catchError(error: any) {
   // Otherwise... some error occurred in the build up of the request
   else {
     // Log the error
-    console.error("Request Build Up Error:", error.message);
+    console.log("Request Build Up Error:", error.message);
   }
 }

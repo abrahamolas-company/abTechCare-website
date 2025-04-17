@@ -46,6 +46,9 @@ export default class ApiRoutes {
 
     // Api route to create repair order
     static CreateRepairOrder: string = "api/v1/repair-order";
+
+    // Api route to create order pickup
+    static CreateOrderPickup: string = "api/v1/order-logistics/pickup";
     // Api route to fetch user repair order
     static fetchUserRepairOrders: string = "api/v1/repair-order/user";
     // Api route to fetch user by user id
