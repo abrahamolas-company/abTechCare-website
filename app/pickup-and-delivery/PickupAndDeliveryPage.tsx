@@ -63,12 +63,15 @@ function PickupAndDeliveryPage() {
   // Format time to 24-hour (e.g., "08:00 AM" → "08:00")
   const formatTimeTo24Hour = (time12h: string): string => {
     const [time, period] = time12h.split(' ')
-    let [hours, minutes] = time.split(':')
+    let hours: string
+    const [hoursStr, minutes] = time.split(':')
     
-    if (period === 'PM' && hours !== '12') {
-      hours = String(Number(hours) + 12)
-    } else if (period === 'AM' && hours === '12') {
+    if (period === 'PM' && hoursStr !== '12') {
+      hours = String(Number(hoursStr) + 12)
+    } else if (period === 'AM' && hoursStr === '12') {
       hours = '00'
+    } else {
+      hours = hoursStr
     }
     
     return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`
