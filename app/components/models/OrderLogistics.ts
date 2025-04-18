@@ -12,5 +12,5 @@ export interface CreateOrderPickup{
 
 export enum PaymentOption{
     OUTRIGHT="OUTRIGHT",
-    FLEXIBLE="FLEXIBLE"
+    FLEXIBLE_PAYMENT="FLEXIBLE_PAYMENT"
 }

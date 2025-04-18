@@ -100,7 +100,6 @@ function TrackYourRepairPage() {
         return status
     }
   }
-  let isComplete = true
 
   useEffect(() => {
     const storedId = sessionStorage.getItem('orderId');
@@ -193,8 +192,7 @@ function TrackYourRepairPage() {
             Submit
           </button> */}
 
-        {/* {repairOrder?.orderStatus == 'COMPLETED' && <RateRepairService />} */}
-        {isComplete && <RateRepairService />}
+        {repairOrder?.orderStatus == 'COMPLETED' && <RateRepairService />}
       </form>
     </>
   )

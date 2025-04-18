@@ -93,7 +93,11 @@ export const Dropdown = ({ label, options, onSelect, selectedOption }: Props) =>
                 if (onSelect) onSelect(option);
                 setIsOpen(false);
               }}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
+              className={`p-2 cursor-pointer transition-colors ${
+                option === selectedOption
+                  ? 'bg-[#FFCC29] text-[#211D1D]' // Yellow background for selected item
+                  : 'hover:bg-gray-100' // Normal hover state for others
+              }`}
             >
               {option}
             </div>

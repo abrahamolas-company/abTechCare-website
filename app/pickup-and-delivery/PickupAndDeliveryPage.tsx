@@ -30,7 +30,7 @@ const states = ["Lagos"] // Add more states if needed
 
 const paymentOptions = [
   { label: "Outright Payment", value: PaymentOption.OUTRIGHT },
-  { label: "Flexible Payment", value: PaymentOption.FLEXIBLE }
+  { label: "Flexible Payment", value: PaymentOption.FLEXIBLE_PAYMENT }
 ]
 
 const timeSlots = [
@@ -183,8 +183,16 @@ function PickupAndDeliveryPage() {
         })
         .catch((error) => {
           // console.error('Error details:', error.response?.data)
-          catchError(error)
-          toast.error('Failed to create pickup')
+          // catchError(error)
+          // toast.error('Failed to create pickup')
+
+          if (error.response?.data?.message === "Cannot create a new logistics order until the previous one is delivered or canceled.") {
+            toast.error(error.response.data.message)
+          } else {
+            // Fallback to generic error handling
+            catchError(error)
+            toast.error('Failed to create pickup')
+          }
         })
     } finally {
       setIsLoading(false)
