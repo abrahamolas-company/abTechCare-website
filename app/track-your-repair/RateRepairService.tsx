@@ -37,8 +37,11 @@ console.log('rating'+ " " +rating , 'comments'+ " " + comments)
             rating,
             comments
         })
-            .then(() => {
+            .then((response) => {
+                console.log({response})
                 toast.success('Thank you for your feedback!')
+                setComments('')
+                setRating(0)
                 router.push('/')
             })
             .catch((error) => {
