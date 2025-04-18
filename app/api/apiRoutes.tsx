@@ -53,5 +53,7 @@ export default class ApiRoutes {
     static fetchUserRepairOrders: string = "api/v1/repair-order/user";
     // Api route to fetch user by user id
     static fetchUsers: string = "api/v1/users";
+    // Api route to rate a service
+    static AddRatings: string = "api/v1/ratings";
 
 }

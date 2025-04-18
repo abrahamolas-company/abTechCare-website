@@ -4,6 +4,7 @@ import { LoginUser, RegisterUserRequest } from "../components/models/IRegisterUs
 import { LoginEngineer, RegisterEngineerRequest, UpdateEngineerRequest } from "../components/models/IRegisterEngineer";
 import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
 import { CreateOrderPickup } from "../components/models/OrderLogistics";
+import { Ratings } from "../components/models/IRatings";
 
 export const API = axios.create({
     baseURL: ApiRoutes.BASE_URL_DEV,
@@ -214,6 +215,19 @@ export function useCreateOrderPickup() {
     }
 
     return createOrderPickup;
+}
+
+// Api call to add ratings
+export function useAddRatings() {
+    async function addRatings(data: Ratings) {
+        // Fire the request
+        const response = await API.post(ApiRoutes.AddRatings, data);
+
+        // Return the response
+        return response;
+    }
+
+    return addRatings;
 }
 
 
