@@ -49,11 +49,17 @@ export default class ApiRoutes {
 
     // Api route to create order pickup
     static CreateOrderPickup: string = "api/v1/order-logistics/pickup";
+
     // Api route to fetch user repair order
     static fetchUserRepairOrders: string = "api/v1/repair-order/user";
+
     // Api route to fetch user by user id
     static fetchUsers: string = "api/v1/users";
+
     // Api route to rate a service
     static AddRatings: string = "api/v1/ratings";
+
+    // News Letter
+    static NewsLetterSubscribe: string = "api/v1/newsletter/subscribe";
 
 }

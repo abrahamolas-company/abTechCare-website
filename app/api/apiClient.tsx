@@ -230,6 +230,19 @@ export function useAddRatings() {
     return addRatings;
 }
 
+// Api for Newsletter subscription
+export function useNewsLetterSubscription() {
+    async function newsLetterSubscription(email: string) {
+        // Fire the request
+        const response = await API.post(ApiRoutes.NewsLetterSubscribe, { email });
+
+        // Return the response
+        return response;
+    }
+
+    return newsLetterSubscription;
+}
+
 
 // Api call to fetch repair order by order number
 export function useGetRepairOrderByOrderId() {
