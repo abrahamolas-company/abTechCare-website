@@ -4,7 +4,7 @@ import { Icons } from '../ui/icons';
 // import NewsLetterSubscription from '../NewsLetterSubscription';
 import { ApplicationRoutes } from '../constants/applicationRoutes';
 import { useNewsLetterSubscription } from '@/app/api/apiClient';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { emailRegex } from '../constants/emailRegex';
 import { toast } from 'sonner';
 import { catchError } from '../constants/catchError';

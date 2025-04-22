@@ -50,7 +50,7 @@ function ResetPasswordPage() {
         }
 
         await resetPassword(data)
-            .then((response) => {
+            .then(() => {
                 setFormValues({ password: '' } as ResetPasswordRequest);
                 toast.success('Password reset successfully');
                 router.push('/login')
