@@ -3,27 +3,56 @@ import React, { useEffect, useRef, useState, FormEvent } from 'react'
 import GadgetRepairHerosection from './Herosection'
 import { sectionPadding } from '../styles/styles'
 import Label from '../components/ui/label'
-import Input from '../components/ui/input'
 import TextArea from '../components/ui/textarea'
 import { Icons } from '../components/ui/icons'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { useCreateRepairOrder } from '../api/apiClient'
+import { useCreateRepairOrder, useGetGatgets } from '../api/apiClient'
 import { catchError } from '../components/constants/catchError'
+import { FetchGadgets } from '../components/models/IGadget'
+import useOuterClick from '../components/hooks/useOuterClick'
 
 function GadgetRepairPage() {
   const CreateRepairOrder = useCreateRepairOrder()
+  const getGadgets = useGetGatgets()
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
   const [video, setVideo] = useState<string | null>(null);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [videoFile, setVideoFile] = useState<File | null>(null);
-  const [gadget, setGadget] = useState('');
+  const [selectedGadgetId, setSelectedGadgetId] = useState<number>();
   const [issueDescription, setIssueDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userId, setUserId] = useState<number>();
   const toastShown = useRef(false);
+  const [gadgets, setGadgets] = useState<FetchGadgets[]>()
+  const [loading, setLoading] = useState(false)
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useOuterClick(dropdownRef, setIsOpen);
+
+
+  async function fetchGadgets() {
+    //show the loader
+    setLoading(true);
+    getGadgets()
+      .then((response) => {
+        console.log(response.data.data.data);
+
+        setGadgets(response.data.data.data)
+        // toast.success('Repair order fetched successfully')
+      })
+      .catch((error) => {
+        catchError(error);
+        toast.error('An error occurred. Please try again.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, index: number, type: "image" | "video") => {
     const file = event.target.files?.[0];
@@ -45,12 +74,17 @@ function GadgetRepairPage() {
     event.target.value = ""; // Reset input
   };
 
+  const handleGadgetSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = Number(e.target.value)
+    setSelectedGadgetId(selectedId)
+  }
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     // Validate required fields
-    if (!gadget.trim()) {
-      toast.error('Please enter the gadget to be repaired');
+    if (!selectedGadgetId) {
+      toast.error('Please select a gadget');
       return;
     }
 
@@ -73,7 +107,7 @@ function GadgetRepairPage() {
       }
 
       const formData = new FormData();
-      formData.append('gadget', gadget);
+      formData.append('gadgetId', selectedGadgetId.toString()); // Send the gadget ID
       formData.append('issueDescription', issueDescription);
 
       // Append image files
@@ -92,6 +126,10 @@ function GadgetRepairPage() {
       if (userId) {
         formData.append('userId', userId.toString());
       }
+      //  Debug: log form data
+      for (let [key, value] of formData.entries()) {
+        console.log(key, value)
+      }
 
       await CreateRepairOrder(formData)
         .then((response) => {
@@ -103,12 +141,12 @@ function GadgetRepairPage() {
           toast.success('Repair order created successfully!.You will be redirected to the pickup and delivery page');
 
           // Reset form
-          setGadget('');
-          setIssueDescription('');
-          setImages([]);
-          setVideo(null);
-          setImageFiles([]);
-          setVideoFile(null);
+          setSelectedGadgetId(undefined)
+          setIssueDescription('')
+          setImages([])
+          setVideo(null)
+          setImageFiles([])
+          setVideoFile(null)
         })
         .catch((error) => {
           // Display specific error message if available
@@ -133,6 +171,10 @@ function GadgetRepairPage() {
   }, []);
 
   useEffect(() => {
+    fetchGadgets()
+  }, []);
+
+  useEffect(() => {
     const token = sessionStorage.getItem('token');
     if (!token && !toastShown.current) {
       toast.warning('You are not logged in. Redirecting to the login page...', {
@@ -153,14 +195,28 @@ function GadgetRepairPage() {
         onSubmit={handleSubmit}
         className={`${sectionPadding} pt-10 w-full mx-auto lg:w-[80%] flex flex-col gap-5 `}
       >
+
         <div className="flex flex-col gap-[6px]">
-          <Label>Input the Gadget to be Repaired</Label>
-          <Input
-            placeholder='Example: Iphone 15 Pro Max, 128gb, titinuim colur'
-            value={gadget}
-            onChange={(e) => setGadget(e.target.value)}
-          />
+          <Label>Select the Gadget to be Repaired</Label>
+          <select
+            value={selectedGadgetId}
+            onChange={handleGadgetSelect}
+            className="w-full p-3  bg-transparent border-[1px] border-[#211D1D] rounded-md outline-none"
+            required
+          >
+            <option value="">Select a gadget</option>
+            {loading ? (
+              <option disabled>Loading gadgets...</option>
+            ) : (
+              gadgets?.map((gadgetItem) => (
+                <option key={gadgetItem.id} value={gadgetItem.id} className=''>
+                  {gadgetItem.model}
+                </option>
+              ))
+            )}
+          </select>
         </div>
+
         <div className="flex flex-col gap-[6px]">
           <Label>Describe your gadget fault in details</Label>
           <TextArea
@@ -271,3 +327,6 @@ function GadgetRepairPage() {
 }
 
 export default GadgetRepairPage
+
+
+

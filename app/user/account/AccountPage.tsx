@@ -4,6 +4,7 @@ import { catchError } from '@/app/components/constants/catchError'
 import { RegisterUserRequest } from '@/app/components/models/IRegisterUser'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
+import { useUserContext } from '@/app/components/shared/UserContext'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'
 import React, { FormEvent, useEffect, useState } from 'react'
@@ -11,9 +12,12 @@ import { toast } from 'sonner'
 
 function AccountPage() {
 
-  const updateEngineerProfile = useUpdateUserProfile();
+  const updateUserProfile = useUpdateUserProfile();
 
-  const [engineerId, setEngineerId] = useState<number>();
+ 
+  const {user, fetchUsers} = useUserContext();
+
+  const [userId, setUserId] = useState<number>();
   const [isUpdating, setIsUpdating] = useState(false);
 
   const [formValues, setFormValues] = useState<RegisterUserRequest>();
@@ -26,11 +30,11 @@ function AccountPage() {
 
       // construct the data
       const data = {
-          id: engineerId as number,
+          id: userId as number,
           data: formValues as RegisterUserRequest
       }
 
-      await updateEngineerProfile(data)
+      await updateUserProfile(data)
           .then((response) => {
               console.log({ response })
 
@@ -62,7 +66,8 @@ function AccountPage() {
   useEffect(() => {
       const storedId = localStorage.getItem('userId');
       if (storedId) {
-          setEngineerId(JSON.parse(storedId));
+          setUserId(JSON.parse(storedId));
+          fetchUsers(JSON.parse(storedId));
       }
       console.log({ storedId })
   }, []);
@@ -80,26 +85,26 @@ function AccountPage() {
               <tbody className="text-sm text-[#211D1D]">
               <tr className="text-sm">
                   <td className="px-3 py-2 border border-[#211D1D] font-light text-start">First Name</td>
-                  <td className="px-5 py-2 border border-[#211D1D] font-light text-start">Israel</td>
+                  <td className="px-5 py-2 border border-[#211D1D] font-light text-start">{user?.firstName}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Last Name</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Olayaju</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.lastName}</td>
                  
                 </tr>
               
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">E-mail Addres</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">israelolayanju8@gmail.com</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.email}</td>
                 
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Contact Number</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">09098339187</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.phoneNumber}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Gender</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Female</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.gender}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Are you over 18 years?</td>

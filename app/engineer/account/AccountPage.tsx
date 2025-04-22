@@ -4,6 +4,7 @@ import { catchError } from '@/app/components/constants/catchError'
 import { UpdateEngineerRequest } from '@/app/components/models/IRegisterEngineer'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
+import { useUserContext } from '@/app/components/shared/UserContext'
 import Input from '@/app/components/ui/input'
 import Label from '@/app/components/ui/label'
 import React, { FormEvent, useEffect, useState } from 'react'
@@ -12,6 +13,9 @@ import { toast } from 'sonner'
 function AccountPage() {
 
   const updateEngineerProfile = useUpdateEngineerProfile();
+
+  const { engineer, fetchEngineer } = useUserContext();
+  console.log({engineer})
 
   const [engineerId, setEngineerId] = useState<number>();
   const [isUpdating, setIsUpdating] = useState(false);
@@ -67,6 +71,14 @@ function AccountPage() {
       console.log({ storedId })
   }, []);
 
+  useEffect(() => {
+    const storedId = localStorage.getItem('engineerId');
+    if (storedId) {
+      const id = JSON.parse(storedId);
+      fetchEngineer(id);
+    }
+  }, []);
+
   return (
     <div>
       <DashboardHero />
@@ -81,34 +93,34 @@ function AccountPage() {
               <tbody className="text-sm text-[#211D1D]">
               <tr className="text-sm">
                   <td className="px-3 py-2 border border-[#211D1D] font-light text-start">First Name</td>
-                  <td className="px-5 py-2 border border-[#211D1D] font-light text-start">Israel</td>
+                  <td className="px-5 py-2 border border-[#211D1D] font-light text-start">{engineer?.firstName}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Last Name</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Olayaju</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.lastName}</td>
                  
                 </tr>
               
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">E-mail Addres</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">israelolayanju8@gmail.com</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.email}</td>
                 
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Contact Number</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">09098339187</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.phoneNumber}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Office Address</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Office Address</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.officeAAddress}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Account Name</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Account Name</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.accountName}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Account Number</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Account Number</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{engineer?.accountNumber}</td>
                 </tr>
                 <tr>
                 </tr>

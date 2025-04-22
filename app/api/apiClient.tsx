@@ -51,6 +51,7 @@ export function useLoginEngineer() {
     return loginUser;
 }
 
+
 export function useLogout() {
     async function logOut() {
         try {
@@ -249,50 +250,83 @@ export function useGetRepairOrderByOrderId() {
     async function getRepairOrderByOrderId(orderId: number) {
         const token = sessionStorage.getItem('token');
         if (!token) throw new Error('No authorization token found');
-  
+
         const response = await API.get(`${ApiRoutes.CreateRepairOrder}/${orderId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
         });
         return response;
-     
+
     }
     return getRepairOrderByOrderId;
-  }
-  
+}
+
 
 // Api call to fetch user repair order by order number
 export function useGetUserRepairOrders() {
     async function getUserRepairOrders(userId: number) {
         const token = sessionStorage.getItem('token');
         if (!token) throw new Error('No authorization token found');
-  
+
         const response = await API.get(`${ApiRoutes.fetchUserRepairOrders}/${userId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
         });
         return response;
-     
+
     }
     return getUserRepairOrders;
-  }
-  
+}
+
 // Api call to fetch user by user id
 export function useGetUsers() {
     async function getUsers(userId: number) {
         const token = sessionStorage.getItem('token');
         if (!token) throw new Error('No authorization token found');
-  
+
         const response = await API.get(`${ApiRoutes.fetchUsers}/${userId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
         });
         return response;
-     
+
     }
     return getUsers;
-  }
-  
+}
+
+// Api call to fetch engineer by id
+export function useGetEngineer() {
+    async function getEngineer(id: number) {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+
+        const response = await API.get(`${ApiRoutes.fetchEngineer}/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return response;
+
+    }
+    return getEngineer;
+}
+
+// Api call to fetch gadgets
+export function useGetGatgets() {
+    async function getGatgets() {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+
+        const response = await API.get(`${ApiRoutes.fetchGadgets}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return response;
+
+    }
+    return getGatgets;
+}

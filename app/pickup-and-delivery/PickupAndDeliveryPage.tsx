@@ -269,7 +269,7 @@ function PickupAndDeliveryPage() {
               <span>{selectedTime}</span>
               <Icons.DownWardArrow className={`transform transition-transform ${isTimeOpen ? "rotate-180" : "rotate-0"}`} />
             </button>
-            <span className='flex items-center text-gray-500 text-xs'><Icons.Bike/> Delivery fees would be charged irrespective of your location.</span>
+            <span className='flex items-center mt-1 text-gray-500 text-xs'><Icons.Bike/> Delivery fees would be charged irrespective of your location.</span>
 
             {isTimeOpen && (
               <div className="absolute z-10 w-full bg-white max-h-[200px] overflow-y-auto border border-gray-300 rounded-md shadow-lg mt-1">

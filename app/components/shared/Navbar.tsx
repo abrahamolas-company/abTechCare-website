@@ -11,10 +11,13 @@ import ServiceDropdowComponent from './ServiceDropdowComponent';
 import SupportDropdownComponent from './SupportDropdownComponent';
 import MobileNavMenu from './MobileNavMenu';
 import { Roles } from '../models/IRegisterUser';
+import { useUserContext } from './UserContext';
 
 function Navbar() {
     const pathname = usePathname();
     const router = useRouter()
+
+    const {user, fetchUsers,engineer, fetchEngineer} = useUserContext();
 
     const [mobileNavIsVisible, setMobileNavIsvisible] = useState(false);
     const [isServiceDropDownOpen, setIsServiceDropDownOpen] = useState(false);
@@ -84,6 +87,24 @@ function Navbar() {
             }
         }
     }, []);
+
+    
+
+    useEffect(() => {
+        const storedId = localStorage.getItem('userId');
+        if (storedId) {
+          const id = JSON.parse(storedId);
+          fetchUsers(id);
+        }
+      }, []);
+
+    useEffect(() => {
+        const storedId = localStorage.getItem('engineerId');
+        if (storedId) {
+          const id = JSON.parse(storedId);
+          fetchEngineer(id);
+        }
+      }, []);
 
     return (
         <nav className={`${sectionPadding} absolute top-0 left-0 w-full z-50 p-5 bg-transparent`}>
@@ -171,15 +192,19 @@ function Navbar() {
                     )}
 
                     {isUserLoggedIn && !isEngineerLoggedIn &&
-                        <Link href={'/user/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                            My Dashboard
-                        </Link>
+                        // <Link href={'/user/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                        //     My Dashboard
+                        // </Link>
+                        <Link href={'/user/dashboard'} className='flex text-sm whitespace-nowrap text-white items-center gap-2 hover:text-[#FFCC29]'><Icons.WhiteUser />{user?.lastName} {user?.firstName}</Link>
+
                     }
 
                     {!isUserLoggedIn && isEngineerLoggedIn &&
-                        <Link href={'/engineer/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                            My Dashboard
-                        </Link>
+                        // <Link href={'/engineer/dashboard'} className={`bg-[#FFCC29] font-medium  text-sm rounded-lg  py-3 px-10 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                        //     My Dashboard
+                        // </Link>
+                        <Link href={'/engineer/dashboard'} className='flex text-sm whitespace-nowrap text-white items-center gap-2 hover:text-[#FFCC29]'><Icons.WhiteUser />{engineer?.lastName} {engineer?.firstName}</Link>
+
                     }
 
 
@@ -223,15 +248,18 @@ function Navbar() {
                 }
 
                 {isUserLoggedIn && !isEngineerLoggedIn &&
-                    <Link href={'/user/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                        My Dashboard
-                    </Link>
+                    // <Link href={'/user/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                    //     My Dashboard
+                    // </Link>
+                    <Link href={'/user/dashboard'} className='lg:hidden flex text-sm whitespace-nowrap text-white items-center gap-2 hover:text-[#FFCC29]'><Icons.WhiteUser />{user?.lastName} {user?.firstName}</Link>
+
                 }
 
                 {!isUserLoggedIn && isEngineerLoggedIn &&
-                    <Link href={'/engineer/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
-                        My Dashboard
-                    </Link>
+                    // <Link href={'/engineer/dashboard'} className={`lg:hidden bg-[#FFCC29] font-medium  text-sm rounded-[5px]  py-2 px-7 transition-all ease-in-out duration-300 border border-[#FFCC29] hover:bg-transparent text-[#211D1D] hover:text-white`}>
+                    //     My Dashboard
+                    // </Link>
+                    <Link href={'/engineer/dashboard'} className='lg:hidden flex text-sm whitespace-nowrap text-white items-center gap-2 hover:text-[#FFCC29]'><Icons.WhiteUser />{engineer?.lastName} {engineer?.firstName}</Link>
                 }
 
                 {mobileNavIsVisible && <MobileNavMenu setMobileNavIsvisible={setMobileNavIsvisible} mobileNavIsVisible={mobileNavIsVisible} isServiceDropDownOpen={isServiceDropDownOpen} setIsServiceDropDownOpen={setIsServiceDropDownOpen} isSupportDropDownOpen={isSupportDropDownOpen} setIsSupportDropDownOpen={setIsSupportDropDownOpen} servicesDropdownRef={servicesDropdownRef}

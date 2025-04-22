@@ -24,7 +24,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                     Gadget Repair
                 </li>
             </Link>
-            <Link
+            {/* <Link
                 href={ApplicationRoutes.FlexiblePayment}
                 onClick={() => {
                     setIsServiceDropDownOpen(false)
@@ -35,8 +35,8 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                     Flexible Payment
                 </li>
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
                 href={ApplicationRoutes.GadgetInsurance}
                 onClick={() => {
                     setIsServiceDropDownOpen(false)
@@ -47,7 +47,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                     Gadget Insurance
                 </li>
-            </Link>
+            </Link> */}
             {/* <Link
                 href={ApplicationRoutes.PickupandDelivery}
                 onClick={() => {
@@ -72,7 +72,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                     Track your Repair
                 </li>
             </Link>
-            <Link
+            {/* <Link
                 href={ApplicationRoutes.Quote}
                 onClick={() => {
                     setIsServiceDropDownOpen(false)
@@ -83,8 +83,8 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                 Get a quote
                 </li>
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
                 href={ApplicationRoutes.B2BServices}
                 onClick={() => {
                     setIsServiceDropDownOpen(false)
@@ -95,7 +95,7 @@ const ServiceDropdowComponent = ({ setIsServiceDropDownOpen, setMobileNavIsvisib
                 <li className="text-sm whitespace-nowrap rounded-lg hover:text-[#FFCC29]">
                 B2B Services
                 </li>
-            </Link>
+            </Link> */}
         </ul>
     )
 }
