@@ -11,7 +11,6 @@ import { toast } from 'sonner'
 import { useCreateRepairOrder, useGetGatgets } from '../api/apiClient'
 import { catchError } from '../components/constants/catchError'
 import { FetchGadgets } from '../components/models/IGadget'
-import useOuterClick from '../components/hooks/useOuterClick'
 
 function GadgetRepairPage() {
   const CreateRepairOrder = useCreateRepairOrder()
@@ -28,12 +27,6 @@ function GadgetRepairPage() {
   const toastShown = useRef(false);
   const [gadgets, setGadgets] = useState<FetchGadgets[]>()
   const [loading, setLoading] = useState(false)
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useOuterClick(dropdownRef, setIsOpen);
-
 
   async function fetchGadgets() {
     //show the loader
@@ -127,7 +120,7 @@ function GadgetRepairPage() {
         formData.append('userId', userId.toString());
       }
       //  Debug: log form data
-      for (let [key, value] of formData.entries()) {
+      for (const [key, value] of formData.entries()) {
         console.log(key, value)
       }
 
@@ -204,7 +197,7 @@ function GadgetRepairPage() {
             className="w-full p-3  bg-transparent border-[1px] border-[#211D1D] rounded-md outline-none"
             required
           >
-            <option value="">Select a gadget</option>
+            <option value="placeholder:text-[#D9D9D9]">Select a gadget</option>
             {loading ? (
               <option disabled>Loading gadgets...</option>
             ) : (
