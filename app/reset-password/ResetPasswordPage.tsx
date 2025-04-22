@@ -22,6 +22,9 @@ function ResetPasswordPage() {
 
     const token = searchParams.get('token');
 
+    // Re-encode the token to match the original URL-encoded form
+    const encodedToken = token ? encodeURIComponent(token) : '';
+
     const email = searchParams.get('email');
     const [isLoading, setIsLoading] = useState(false)
 
@@ -45,7 +48,7 @@ function ResetPasswordPage() {
 
         const data: ResetPasswordRequest = {
             password: formValues?.password as string,
-            token: token as string,
+            token: encodedToken as string,
             email: email as string
         }
 
