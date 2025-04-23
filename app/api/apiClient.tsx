@@ -5,11 +5,52 @@ import { LoginEngineer, RegisterEngineerRequest, UpdateEngineerRequest } from ".
 import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
 import { CreateOrderPickup } from "../components/models/OrderLogistics";
 import { Ratings } from "../components/models/IRatings";
+import { toast } from "sonner";
 
 export const API = axios.create({
     baseURL: ApiRoutes.BASE_URL_DEV,
     withCredentials: true,
 });
+
+// Add response interceptor
+// API.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//       if (error.response?.status === 401) {
+//         // Token expired or unauthorized
+//         toast.error('Your session has expired. Please sign in again.');
+//         sessionStorage.removeItem('token');
+//         sessionStorage.removeItem('roles');
+//         window.location.href = '/user/signin'; // Using window.location to ensure full page reload
+//       }
+//       return Promise.reject(error);
+//     }
+//   );
+
+// API.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//       if (error.response?.status === 401) {
+//         // Token expired or unauthorized
+//         const currentPath = window.location.pathname;
+        
+//         // Clear session storage
+//         sessionStorage.removeItem('token');
+//         sessionStorage.removeItem('roles');
+        
+//         // Show toast message
+//         toast.error('Your session has expired. Please sign in again.');
+        
+//         // Redirect based on current path
+//         if (currentPath.startsWith('/engineer')) {
+//           window.location.href = '/engineer/signin';
+//         } else {
+//           window.location.href = '/user/signin';
+//         }
+//       }
+//       return Promise.reject(error);
+//     }
+//   );
 
 // Api call to create new user
 export function useRegisterUser() {

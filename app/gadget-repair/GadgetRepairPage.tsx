@@ -47,9 +47,36 @@ function GadgetRepairPage() {
       });
   }
 
+  // const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, index: number, type: "image" | "video") => {
+  //   const file = event.target.files?.[0];
+  //   if (!file) return;
+
+  //   if (type === "image") {
+  //     const newImages = [...images];
+  //     newImages[index] = URL.createObjectURL(file);
+  //     setImages(newImages);
+
+  //     const newImageFiles = [...imageFiles];
+  //     newImageFiles[index] = file;
+  //     setImageFiles(newImageFiles);
+  //   } else {
+  //     setVideo(URL.createObjectURL(file));
+  //     setVideoFile(file);
+  //   }
+
+  //   event.target.value = ""; // Reset input
+  // };
+
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, index: number, type: "image" | "video") => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    // Validate file type
+    if (type === "video" && !file.type.includes("video/")) {
+      toast.error("Please upload a valid video file");
+      return;
+    }
 
     if (type === "image") {
       const newImages = [...images];
@@ -60,6 +87,11 @@ function GadgetRepairPage() {
       newImageFiles[index] = file;
       setImageFiles(newImageFiles);
     } else {
+      // Validate video size (50MB max)
+      if (file.size > 50 * 1024 * 1024) {
+        toast.error("Video must be smaller than 50MB");
+        return;
+      }
       setVideo(URL.createObjectURL(file));
       setVideoFile(file);
     }
@@ -104,15 +136,24 @@ function GadgetRepairPage() {
       formData.append('issueDescription', issueDescription);
 
       // Append image files
-      imageFiles.forEach((file) => {
-        if (file) {
-          formData.append('gadgetImages', file);
-        }
-      });
+      // imageFiles.forEach((file) => {
+      //   if (file) {
+      //     formData.append('gadgetImages', file);
+      //   }
+      // });
 
-      // Append video file if exists
+      // // Append video file if exists
+      // if (videoFile) {
+      //   formData.append('gadgetVideo', videoFile);
+      // }
+
+       // Append ALL files (2 images + 1 video) to gadgetimages
+       imageFiles.forEach(file => {
+        if (file) formData.append('gadgetimages', file);
+      });
+      
       if (videoFile) {
-        formData.append('gadgetVideo', videoFile);
+        formData.append('gadgetimages', videoFile);
       }
 
       // Add UserId if available
