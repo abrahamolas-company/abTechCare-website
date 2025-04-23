@@ -5,7 +5,6 @@ import { LoginEngineer, RegisterEngineerRequest, UpdateEngineerRequest } from ".
 import { ForgotPasswordRequest, ResetPasswordRequest } from "../components/models/IPassword";
 import { CreateOrderPickup } from "../components/models/OrderLogistics";
 import { Ratings } from "../components/models/IRatings";
-import { toast } from "sonner";
 
 export const API = axios.create({
     baseURL: ApiRoutes.BASE_URL_DEV,
