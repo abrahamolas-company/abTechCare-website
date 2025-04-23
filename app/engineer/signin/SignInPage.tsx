@@ -193,7 +193,7 @@ function SignInPage() {
                     {loading ? "Loading" : "Sign In"}
                 </button>
                 <Link href={'/forgot-password'} className='mb-5 text-center text-sm text-[#717170] hover:text-[#FFCC29]'>Forgot Password?</Link>
-                <p className=' text-sm text-[#717170] text-center'>Don&apos;t have an account yet? <Link href={'/engineer/signup'} className='text-[#FFCC29]'>create an account</Link></p>
+                {/* <p className=' text-sm text-[#717170] text-center'>Don&apos;t have an account yet? <Link href={'/engineer/signup'} className='text-[#FFCC29]'>create an account</Link></p> */}
             </form>
         </section>
     )
