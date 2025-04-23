@@ -56,6 +56,16 @@ function SignUpPage() {
                 return false;
             }
         }
+
+            // Specific validation for phone number
+    if (formValues?.phoneNumber) {
+        const phoneRegex = /^[0-9]{11,15}$/;
+        if (!phoneRegex.test(formValues.phoneNumber)) {
+            toast.error('Phone number must be 11-15 digits');
+            return false;
+        }
+    }
+
         return true;
     };
 
@@ -188,7 +198,8 @@ function SignUpPage() {
                                 id="phoneNumber"
                                 value={formValues?.phoneNumber}
                                 onChange={(e) => onformValueChange(e)}
-                                className='!mt-1' placeholder='Enter your contact  number' />
+                                className='!mt-1' placeholder='Enter your contact  number'
+                                />
                         </div>
                     </div>
                     <div className="w-full md:w-1/2">
