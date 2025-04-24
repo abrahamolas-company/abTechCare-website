@@ -40,7 +40,7 @@ function GadgetRepairPage() {
       })
       .catch((error) => {
         catchError(error);
-        toast.error('An error occurred. Please try again.');
+        // toast.error('An error occurred. Please try again.');
       })
       .finally(() => {
         setLoading(false);
