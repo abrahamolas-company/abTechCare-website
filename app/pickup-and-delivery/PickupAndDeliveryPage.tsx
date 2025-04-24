@@ -34,16 +34,15 @@ const paymentOptions = [
 ]
 
 const timeSlots = [
-  "08:00 AM",
-  "09:00 AM", 
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "01:00 PM",
-  "02:00 PM",
-  "03:00 PM",
-  "04:00 PM",
-  "05:00 PM"
+  "08:00 AM - 09:00 AM",
+  "09:00 AM - 10:00 AM",
+  "10:00 AM - 11:00 AM",
+  "11:00 AM - 12:00 PM",
+  "12:00 PM - 01:00 PM",
+  "01:00 PM - 02:00 PM",
+  "02:00 PM - 03:00 PM",
+  "03:00 PM - 04:00 PM",
+  "04:00 PM - 05:00 PM"
 ]
 
 function PickupAndDeliveryPage() {
@@ -61,8 +60,26 @@ function PickupAndDeliveryPage() {
   const [orderId, setOrderId] = useState<string | null>(null)
 
   // Format time to 24-hour (e.g., "08:00 AM" → "08:00")
-  const formatTimeTo24Hour = (time12h: string): string => {
-    const [time, period] = time12h.split(' ')
+  // const formatTimeTo24Hour = (time12h: string): string => {
+  //   const [time, period] = time12h.split(' ')
+  //   let hours: string
+  //   const [hoursStr, minutes] = time.split(':')
+    
+  //   if (period === 'PM' && hoursStr !== '12') {
+  //     hours = String(Number(hoursStr) + 12)
+  //   } else if (period === 'AM' && hoursStr === '12') {
+  //     hours = '00'
+  //   } else {
+  //     hours = hoursStr
+  //   }
+    
+  //   return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`
+  // }
+
+  const formatTimeTo24Hour = (timeRange: string): string => {
+    // Extract the start time (first part before the dash)
+    const startTime = timeRange.split(' - ')[0]
+    const [time, period] = startTime.split(' ')
     let hours: string
     const [hoursStr, minutes] = time.split(':')
     
@@ -74,24 +91,8 @@ function PickupAndDeliveryPage() {
       hours = hoursStr
     }
     
-    return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`
+    return `${hours.padStart(2, '0')}:${minutes}`
   }
-
-  // Convert phone number to local format (e.g., "+234803..." → "0803...")
-  // const formatPhoneNumber = (phone: string): string => {
-  //   const digits = phone.replace(/\D/g, '')
-  //   if (digits.startsWith('234') && digits.length === 12) {
-  //     return '0' + digits.slice(3)
-  //   }
-  //   if (phone.startsWith('+234') && digits.length === 13) {
-  //     return '0' + digits.slice(3)
-  //   }
-  //   return digits
-  // }
-
-  // const validatePhoneNumber = (phone: string): boolean => {
-  //   return /^0[7-9]\d{9}$/.test(phone.replace(/\D/g, ''))
-  // }
 
   const validateForm = (): boolean => {
     const requiredFields = ['country', 'state', 'lga', 'street', 'phoneNumber', 'paymentOption']
@@ -116,6 +117,15 @@ function PickupAndDeliveryPage() {
         toast.error(`Please fill in ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`)
         return false
       }
+    }
+
+      // Specific validation for phone number
+      if (formValues?.phoneNumber) {
+        const phoneRegex = /^[0-9]{11,15}$/;
+        if (!phoneRegex.test(formValues.phoneNumber)) {
+            toast.error('Phone number must be 11-15 digits');
+            return false;
+        }
     }
 
     return true
@@ -170,7 +180,6 @@ function PickupAndDeliveryPage() {
         pickupDate: formValues.pickupDate!,
         pickupTime: formValues.pickupTime!,
         phoneNumber:formValues.phoneNumber!,
-        // phoneNumber: formatPhoneNumber(formValues.phoneNumber!),
         paymentOption: formValues.paymentOption!.toUpperCase() as PaymentOption
       }
 

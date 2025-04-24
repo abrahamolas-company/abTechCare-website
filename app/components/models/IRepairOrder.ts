@@ -10,17 +10,12 @@ export interface RepairOrderResponse{
 export interface UserRepairOrdersResponse{
     id: number;
     orderId: string;
-    gadgetId: string;
-    gadget:string;
-    logisticsId: string;
+    price:number;
     issueDescription: string;
     createdAt: string;
-    updatedAt: string;
-    pickupDate: string;
-    gadgetImages: string[];
-    status: OrderStatus,
-    paymentStatus: "PENDING",
-    orderDeliveryId: string
+    gadgetBrand: string;
+    gadgetModel: string;
+    status: OrderStatus
 }
 export enum OrderStatus {
     PENDING = "PENDING",

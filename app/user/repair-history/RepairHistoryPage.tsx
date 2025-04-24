@@ -1,26 +1,27 @@
 'use client'
 import { useGetUserRepairOrders } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
+import { UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 function RepairHistoryPage() {
 
   const getUserRepairOrders = useGetUserRepairOrders()
 
-  // const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
-  // const [loading, setLoading] = useState(false)
+  const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
+  const [loading, setLoading] = useState(false)
 
   async function fetchUserRepairOrders(id: number) {
     //show the loader
-    // setLoading(true);
+    setLoading(true);
 
 
     getUserRepairOrders(id)
       .then((response) => {
-        console.log({ response });
+        console.log(response.data.data.content );
 
         // setRepairOrder(data.data)
         // toast.success('Repair order fetched successfully')
