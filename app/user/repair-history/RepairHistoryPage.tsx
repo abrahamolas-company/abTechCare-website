@@ -11,12 +11,12 @@ function RepairHistoryPage() {
 
   const getUserRepairOrders = useGetUserRepairOrders()
 
-  const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
-  const [loading, setLoading] = useState(false)
+  // const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
+  // const [loading, setLoading] = useState(false)
 
   async function fetchUserRepairOrders(id: number) {
     //show the loader
-    setLoading(true);
+    // setLoading(true);
 
 
     getUserRepairOrders(id)
