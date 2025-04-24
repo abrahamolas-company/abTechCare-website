@@ -1,10 +1,10 @@
 'use client'
 import { useGetUserRepairOrders } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
-import { UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
+// import { UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { toast } from 'sonner'
 
 function RepairHistoryPage() {
