@@ -14,7 +14,7 @@ export default function Herosection() {
         <>
             {/* {isPickupAndDeliveryModalOpen && <PickupAndDeliveryModal isPickupAndDeliveryModalOpen={isPickupAndDeliveryModalOpen} setIsPickupAndDeliveryModalOpen={setIsPickupAndDeliveryModalOpen} />} */}
             <section className={`${sectionPadding} pt-52 md:pt-56 relative after:absolute after:blur-[100px] after:rounded-full after:w-80 after:h-60 after:bg-white/10 after:contents after:top-0 after:left-0 after:z-10`}>
-                <div className='absolute top-0 left-0 h-[459px] md:h-[600px] w-full lg:h-[75vh]'>
+                <div className='absolute top-0 left-0 h-[459px] md:h-[600px] w-full lg:h-[75vh] 2xl:h-[60vh]'>
                     <Image src={images.home_hero} alt="Hero background" className='w-full h-full object-cover transition-opacity duration-1000 ease-in-out' />
                     <div className='absolute top-0 left-0 w-full h-full bg-black opacity-50'></div>
                 </div>

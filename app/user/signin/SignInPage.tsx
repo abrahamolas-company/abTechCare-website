@@ -142,35 +142,6 @@ function SignInPage() {
         }
     }, []);
 
-    // Add this useEffect to your SignInPage component
-// useEffect(() => {
-//     const checkTokenExpiration = () => {
-//       const token = sessionStorage.getItem('token');
-//       if (!token) return;
-  
-//       // Optional: You can decode the JWT to check expiration time
-//       // This requires jwt-decode package: npm install jwt-decode
-//       try {
-//         const decodedToken = jwtDecode(token);
-//         console.log({decodedToken})
-//         if (decodedToken.exp as number * 1000 < Date.now()) {
-//           toast.error('Your session has expired. Please sign in again.');
-//           sessionStorage.removeItem('token');
-//           sessionStorage.removeItem('roles');
-//           router.push('/user/signin');
-//         }
-//       } catch (error) {
-//         console.error('Error decoding token:', error);
-//       }
-//     };
-  
-//     // Check token on component mount
-//     checkTokenExpiration();
-  
-//     // Optional: Set up periodic checks (e.g., every 5 minutes)
-//     const interval = setInterval(checkTokenExpiration, 5 * 60 * 1000);
-//     return () => clearInterval(interval);
-//   }, [router]);
 
     return (
         <section className={`${sectionPadding} pb-24`}>
