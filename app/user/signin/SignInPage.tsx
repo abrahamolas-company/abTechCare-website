@@ -111,8 +111,12 @@ function SignInPage() {
                     router.push(redirectPath);
                 })
                 .catch((error) => {
-                    catchError(error);
-                    toast.error('An error occurred. Please try again.');
+                    if (error.response?.status === 401) {
+                        toast.error('Invalid email/phone number or password');
+                    } else {
+                        catchError(error);
+                        toast.error('An error occurred. Please try again.');
+                    }
                 })
                 .finally(() => {
                     setLoading(false);
