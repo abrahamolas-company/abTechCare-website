@@ -321,7 +321,7 @@ export function useGetUserRepairOrders() {
 }
 
 // Api call to fetch user by user id
-export function useGetUsers() {
+export function useGetUser() {
     async function getUsers(userId: number) {
         const token = sessionStorage.getItem('token');
         if (!token) throw new Error('No authorization token found');

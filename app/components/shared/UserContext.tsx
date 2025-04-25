@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { catchError } from '../constants/catchError';
 import { EngineerResponse, Users } from '../models/IUsers';
-import { useGetEngineer, useGetUsers } from '@/app/api/apiClient';
+import { useGetEngineer, useGetUser } from '@/app/api/apiClient';
 
 interface UserContextType {
   user: Users | undefined;
@@ -13,7 +13,7 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const getUsers = useGetUsers();
+  const getUsers = useGetUser();
   const getEngineer = useGetEngineer();
   const [user, setUser] = useState<Users>();
   const [engineer, setEngineer] = useState<EngineerResponse>();
