@@ -27,7 +27,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       })
       .catch((error) => {
         catchError(error);
-        toast.error('An error occurred. Please try again.');
+        // toast.error('An error occurred. Please try again.');
       });
   };
 
@@ -39,7 +39,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       })
       .catch((error) => {
         catchError(error);
-        toast.error('An error occurred. Please try again.');
+        // toast.error('An error occurred. Please try again.');
       });
   };
 
