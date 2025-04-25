@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { catchError } from '../constants/catchError';
 import { EngineerResponse, Users } from '../models/IUsers';
 import { useGetEngineer, useGetUsers } from '@/app/api/apiClient';
-import { toast } from 'sonner';
 
 interface UserContextType {
   user: Users | undefined;
