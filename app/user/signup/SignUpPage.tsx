@@ -57,14 +57,14 @@ function SignUpPage() {
             }
         }
 
-            // Specific validation for phone number
-    if (formValues?.phoneNumber) {
-        const phoneRegex = /^[0-9]{11,15}$/;
-        if (!phoneRegex.test(formValues.phoneNumber)) {
-            toast.error('Phone number must be 11-15 digits');
-            return false;
+        // Specific validation for phone number
+        if (formValues?.phoneNumber) {
+            const phoneRegex = /^[0-9]{11,15}$/;
+            if (!phoneRegex.test(formValues.phoneNumber)) {
+                toast.error('Phone number must be 11-15 digits');
+                return false;
+            }
         }
-    }
 
         return true;
     };
@@ -72,36 +72,50 @@ function SignUpPage() {
     async function handleFormSubmission(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-         // Validate form fields
-         if (!validateForm()) {
+        // Validate form fields
+        if (!validateForm()) {
             return;
         }
 
         // Show the loader
         setLoading(true);
 
-            await registerUser(formValues as RegisterUserRequest)
-                .then((response) => {
-                    console.log(response);
+        await registerUser(formValues as RegisterUserRequest)
+            .then((response) => {
+                console.log(response);
 
-                    // Display success
-                    toast.success("You have successfully created an account.");
+                // Display success
+                toast.success("You have successfully created an account.");
 
-                    localStorage.setItem("userId", JSON.stringify(response.data.data.id));
+                localStorage.setItem("userId", JSON.stringify(response.data.data.id));
 
-                    // Redirect to login page
-                    router.push(`/user/signin`);
-                })
-                .catch((error) => {
+                // Redirect to login page
+                router.push(`/user/signin`);
+            })
+            .catch((error) => {
+                // Check if the error response indicates that the user already exists
+                if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message.toLowerCase();
+
+                    if (errorMessage.includes('email')) {
+                        toast.error(`A user with this email exist`);
+                    } else if (errorMessage.includes('phone')) {
+                        toast.error(`A user with this phone number exist`);
+                    } else {
+                        // Generic error message for other cases
+                        catchError(error);
+                        toast.error('An error occurred. Please try again.');
+                    }
+                } else {
+                    // Generic error message if the error format is unexpected
                     catchError(error);
                     toast.error('An error occurred. Please try again.');
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }
-
-
 
     const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
@@ -168,7 +182,7 @@ function SignUpPage() {
                                 onChange={(e) => onformValueChange(e)}
                                 className='!mt-1'
                                 placeholder='Enter your E-mail Address' />
-                          
+
                         </div>
                         <div className="mb-7">
                             <Label htmlFor='firstName'>First Name</Label>
@@ -199,7 +213,7 @@ function SignUpPage() {
                                 value={formValues?.phoneNumber}
                                 onChange={(e) => onformValueChange(e)}
                                 className='!mt-1' placeholder='Enter your contact  number'
-                                />
+                            />
                         </div>
                     </div>
                     <div className="w-full md:w-1/2">

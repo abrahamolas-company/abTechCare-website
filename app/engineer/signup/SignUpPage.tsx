@@ -72,11 +72,24 @@ function SignUpPage() {
 
             })
             .catch((error) => {
-                // Display error
-                toast.error(`An error occurred. Please try again`);
+                  // Check if the error response indicates that the user already exists
+                  if (error.response && error.response.data && error.response.data.message) {
+                    const errorMessage = error.response.data.message.toLowerCase();
 
-                // If we have a response error
-                catchError(error)
+                    if (errorMessage.includes('email')) {
+                        toast.error(`A user with this email exist`);
+                    } else if (errorMessage.includes('phone')) {
+                        toast.error(`A user with this phone number exist`);
+                    } else {
+                        // Generic error message for other cases
+                        catchError(error);
+                        toast.error('An error occurred. Please try again.');
+                    }
+                } else {
+                    // Generic error message if the error format is unexpected
+                    catchError(error);
+                    toast.error('An error occurred. Please try again.');
+                }
 
             })
             .finally(() => {
