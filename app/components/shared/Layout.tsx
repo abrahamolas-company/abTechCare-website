@@ -38,16 +38,43 @@ export default function Layout({ children }: Props) {
                         }}
                     />
                     <UserProvider>
-                        {!pathname.includes('/user/dashboard') && !pathname.includes('/engineer/dashboard') && !pathname.includes('/user/account') && !pathname.includes('/engineer/account') && !pathname.includes('/user/payments') && !pathname.includes('/user/invoice') && !pathname.includes('/user/repair-history') && !pathname.includes('/user/signin') && !pathname.includes('/forgot-password') && !pathname.includes('/user/signup') && !pathname.includes('/reset-password') && !pathname.includes('/engineer/signin') && !pathname.includes('/engineer/signup') && <Navbar />}
+                        {!pathname.includes('/user/dashboard') &&
+                            !pathname.includes('/engineer/dashboard')
+                            && !pathname.includes('/user/account') &&
+                            !pathname.includes('/engineer/account') &&
+                            !pathname.includes('/user/payments') &&
+                            !pathname.includes('/user/invoice') &&
+                            !pathname.includes('/user/repair-history') &&
+                            !pathname.includes('/user/signin') &&
+                            !pathname.includes('/forgot-password') &&
+                            !pathname.includes('/user/signup') &&
+                            !pathname.includes('/reset-password') &&
+                            !pathname.includes('/engineer/signin') &&
+                            !pathname.includes('/engineer/signup') &&
+                            !pathname.includes('/admin') &&
+                            <Navbar />
+                        }
+
                         {(pathname.includes('/user/dashboard') ||
                             pathname.includes('/engineer/dashboard') ||
                             pathname.includes('/user/payments') ||
                             pathname.includes('/user/invoice') ||
                             pathname.includes('/user/account') ||
                             pathname.includes('/engineer/account') ||
-                            pathname.includes('/user/repair-history')) && <DashboardNavbar />}
+                            pathname.includes('/user/repair-history')) &&
+                            <DashboardNavbar />
+                        }
                         {children}
-                        {!pathname.includes('/user/dashboard') && !pathname.includes('/engineer/dashboard') && !pathname.includes('/user/account') && !pathname.includes('/engineer/account') && !pathname.includes('/user/payments') && !pathname.includes('/user/invoice') && !pathname.includes('/user/repair-history') && <Footer />}
+                        {!pathname.includes('/user/dashboard') &&
+                            !pathname.includes('/engineer/dashboard') &&
+                            !pathname.includes('/user/account') &&
+                            !pathname.includes('/engineer/account') &&
+                            !pathname.includes('/user/payments') &&
+                            !pathname.includes('/user/invoice') &&
+                            !pathname.includes('/user/repair-history') &&
+                            !pathname.includes('/admin') &&
+                            <Footer />
+                        }
                     </UserProvider>
 
                 </>
