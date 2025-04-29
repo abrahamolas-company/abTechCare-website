@@ -44,9 +44,9 @@ const AdminSidebar = () => {
             </button>
 
             {isOpen &&
-                <div className='lg:w-[113px] lg:h-[60px] relative mx-auto mb-5'>
+                <Link href={'/admin'} className='w-[113px] h-[60px] relative mx-auto mb-5'>
                     <Image src={images.logo} alt='Logo' className='w-full h-full object-contain' />
-                </div>
+                </Link>
             }
 
             <nav className="flex flex-col min-h-[80vh] items-center">

@@ -6,9 +6,11 @@ export interface Users{
     firstName: string,
     lastName: string,
     phoneNumber: string,
+    dateOfBirth: string,
     createdAt: string,
     updatedAt: string | null,
     gender: string,
+    over18: boolean,
     roles: Roles[]
 }
 

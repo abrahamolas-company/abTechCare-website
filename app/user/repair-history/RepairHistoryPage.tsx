@@ -1,37 +1,31 @@
 'use client'
-import { useGetUserRepairOrders } from '@/app/api/apiClient'
+import { useGetUserRepairHistory, useGetUserRepairOrders } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
-// import { UserRepairOrdersResponse } from '@/app/components/models/IRepairOrder'
+import { UserRepairHistoryResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
 import Sidebar from '@/app/components/shared/Sidebar'
-import React, { useEffect } from 'react'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 function RepairHistoryPage() {
+  const getUserRepairHistory = useGetUserRepairHistory()
+  const [repairHistorys, setRepairHistorys] = useState<UserRepairHistoryResponse[]>()
+  const [loading, setLoading] = useState(true) 
 
-  const getUserRepairOrders = useGetUserRepairOrders()
-
-  // const [repairOrders, setRepairOrders] = useState<UserRepairOrdersResponse[]>()
-  // const [loading, setLoading] = useState(false)
-
-  async function fetchUserRepairOrders(id: number) {
-    //show the loader
-    // setLoading(true);
-
-
-    getUserRepairOrders(id)
+  async function fetchUserRepairHistorys(id: number) {
+    setLoading(true);
+    getUserRepairHistory(id)
       .then((response) => {
-        console.log(response.data.data.content );
-
-        // setRepairOrder(data.data)
-        // toast.success('Repair order fetched successfully')
+        console.log(response.data.data.data)
+        setRepairHistorys(response.data.data.data)
       })
       .catch((error) => {
         catchError(error);
-        toast.error('An error occurred. Please try again.');
+        toast.error('Error fetching user order history.');
       })
       .finally(() => {
-        // setLoading(false);
+        setLoading(false);
       });
   }
 
@@ -39,7 +33,7 @@ function RepairHistoryPage() {
     const storedId = localStorage.getItem('userId');
     if (storedId) {
       const id = JSON.parse(storedId);
-      fetchUserRepairOrders(id);
+      fetchUserRepairHistorys(id);
     }
   }, []);
   return (
@@ -49,36 +43,46 @@ function RepairHistoryPage() {
             <Sidebar />  
             <main className="flex-1 px-6 py-10 bg-white h-[90vh] overflow-y-auto">
 
-        {/* My payment Section */}
         <section className="bg-[#D9D9D929] mb-20 p-4 rounded-lg shadow-md overflow-x-auto">
           <h2 className="text-base font-light mb-4">Repair History</h2>
-          <table className="w-full text-black border-collapse border border-[#211D1D]">
-            <thead>
-              <tr className="text-sm">
-                <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order</th>
-                <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order No</th>
-                <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order Date</th>
-                <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Delivery Status</th>
-                <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Amount</th>
-              </tr>
-            </thead>
-            <tbody className='text-sm'>
-              <tr>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">Iphone 12 Pro Screen Replacement </td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">000000000</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">02-13-2025</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">Successful</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">₦200,000</td>
-              </tr>
-              <tr>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">Laptop Board Repair</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">000000000</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">02-13-2025</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">Instant</td>
-                <td className="px-3 py-2 border border-[#211D1D] font-light">₦500,000</td>
-              </tr>
-            </tbody>
-          </table>
+          {loading ? (
+              // Show loader while loading
+              <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+              </div>
+            ) : (
+              // Show table when data is loaded
+              <table className="w-full text-black border-collapse border border-[#211D1D]">
+                <thead>
+                  <tr className="text-sm">
+                    <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order</th>
+                    <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order No</th>
+                    <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Order Date </th>
+                    <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Delivery Status</th>
+                    <th className="px-3 py-2 border border-[#211D1D] font-light text-start">Amount</th>
+                  </tr>
+                </thead>
+                <tbody className='text-sm'>
+                  {repairHistorys?.length ? (
+                    repairHistorys.map((history, index) => (
+                      <tr key={index}>
+                        <td className="px-3 py-2 border border-[#211D1D] font-light">{history.faultDescriptions}</td>
+                        <td className="px-3 py-2 border border-[#211D1D] font-light">{history.orderId}</td>
+                        <td className="px-3 py-2 border border-[#211D1D] font-light">{moment(history.orderCreatedAt).format('YYYY-MM-DD')}</td>
+                        <td className="px-3 py-2 border border-[#211D1D] font-light">{history.deliveryStatus}</td>
+                        <td className="px-3 py-2 border border-[#211D1D] font-light">₦{history.price}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={7} className="px-3 py-6 text-center border border-[#211D1D] font-light">
+                        No repair history found
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            )}
         </section>
 
       </main>

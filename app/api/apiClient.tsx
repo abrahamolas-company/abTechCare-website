@@ -303,13 +303,29 @@ export function useGetRepairOrderByOrderId() {
 }
 
 
-// Api call to fetch user repair order by order number
+// Api call to fetch user repair order
 export function useGetUserRepairOrders() {
     async function getUserRepairOrders(userId: number) {
         const token = sessionStorage.getItem('token');
         if (!token) throw new Error('No authorization token found');
 
         const response = await API.get(`${ApiRoutes.fetchUserRepairOrders}/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        return response;
+
+    }
+    return getUserRepairOrders;
+}
+// Api call to fetch user repair history
+export function useGetUserRepairHistory() {
+    async function getUserRepairOrders(userId: number) {
+        const token = sessionStorage.getItem('token');
+        if (!token) throw new Error('No authorization token found');
+
+        const response = await API.get(`${ApiRoutes.fetchUserRepairHistory}/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },

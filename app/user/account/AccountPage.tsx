@@ -108,11 +108,11 @@ function AccountPage() {
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Are you over 18 years?</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">Yes</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.over18 ? 'Yes' : 'No'}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 border border-[#211D1D] font-light">Date of Birth</td>
-                  <td className="px-3 py-2 border border-[#211D1D] font-light">11/07/2000</td>
+                  <td className="px-3 py-2 border border-[#211D1D] font-light">{user?.dateOfBirth}</td>
                 </tr>
               </tbody>
             </table>
