@@ -1,36 +1,14 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Icons } from "../ui/icons";
 import Link from "next/link";
 import { useState } from "react";
-import { useLogout } from "@/app/api/apiClient";
-import { toast } from "sonner";
-import { catchError } from "../constants/catchError";
 import Image from "next/image";
 import images from "@/public/images";
 
 const AdminSidebar = () => {
     const pathname = usePathname();
-    const router = useRouter()
     const [isOpen, setIsOpen] = useState(true);
-    const logout = useLogout()
-    const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-    async function Logout() {
-        setIsLoggingOut(true);
-        await logout()
-            .then((response) => {
-                console.log("Response: ", response);
-                router.push('/');
-                toast.success('Logout successful');
-            })
-            .catch((error) => {
-                catchError(error)
-            })
-            .finally(() => {
-                setIsLoggingOut(false);
-            })
-    }
 
     return (
         <aside

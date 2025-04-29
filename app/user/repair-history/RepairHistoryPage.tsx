@@ -1,5 +1,5 @@
 'use client'
-import { useGetUserRepairHistory, useGetUserRepairOrders } from '@/app/api/apiClient'
+import { useGetUserRepairHistory } from '@/app/api/apiClient'
 import { catchError } from '@/app/components/constants/catchError'
 import { UserRepairHistoryResponse } from '@/app/components/models/IRepairOrder'
 import DashboardHero from '@/app/components/shared/DashboardHero'
