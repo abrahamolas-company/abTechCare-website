@@ -1,0 +1,80 @@
+name: Deploy to EC2
+
+on:
+  # workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      EC2_USER: ${{ secrets.EC2_USER }}
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+      - name: Set up SSH keys
+        run: |
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > /tmp/ec2_key
+          chmod 600 /tmp/ec2_key
+          echo "Private SSH key set up successfully."
+  
+      - name: Add EC2 Host to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ env.EC2_HOST }} >> ~/.ssh/known_hosts
+          echo "EC2 Host added to known hosts."
+        
+      - name: Set repository name
+        run: |
+          echo "REPO_NAME=$(basename ${{ github.repository }})" >> $GITHUB_ENV
+  
+      - name: Test SSH Connection
+        run: |
+          echo "Testing SSH connection to ${{ env.EC2_USER }}@${{ env.EC2_HOST }}"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ env.EC2_USER }}@${{ env.EC2_HOST }} "echo 'SSH connection successful'"
+  
+      - name: Pull latest code on EC2
+        run: |
+          echo "Pulling latest code on EC2"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ env.EC2_USER }}@${{ env.EC2_HOST }} "
+            cd ${{ secrets.PROJECT_DIR}}/${{ env.REPO_NAME }} &&
+            git fetch origin &&
+            git reset --hard origin/main
+          "
+      
+      - name: Build frontend container
+        run: |
+          echo "Building the frontend container on EC2"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            cd ${PROJECT_DIR} &&
+            docker-compose build frontend
+          "
+
+      - name: Bring down frontend container
+        run: |
+          echo "Bringing down the frontend container on EC2"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            cd ${PROJECT_DIR} &&
+            docker-compose stop frontend &&
+            docker-compose rm -f frontend
+          "
+
+      - name: Bring up frontend container
+        run: |
+          echo "Bringing up the frontend container on EC2"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            cd ${PROJECT_DIR} &&
+            docker-compose up -d frontend
+          "
+
+      - name: Check Docker container logs
+        run: |
+          echo "Checking Docker container logs for frontend"
+          ssh -i /tmp/ec2_key -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            docker logs abtechcare_frontend_1
+          "
