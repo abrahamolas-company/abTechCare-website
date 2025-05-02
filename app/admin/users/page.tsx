@@ -1,8 +1,37 @@
+'use client'
+import { useFetchAllUsers } from '@/app/api/apiClient'
+import { catchError } from '@/app/components/constants/catchError'
+import { FetchAllUsers } from '@/app/components/models/IAdmin'
 import AdminSidebar from '@/app/components/shared/AdminSidebar'
 import AdminTopbar from '@/app/components/shared/AdminTopbar'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function Users() {
+    const fetchAllUsers = useFetchAllUsers()
+    const [users, setUsers] = useState<FetchAllUsers[]>()
+    const [loading, setLoading] = useState(true)
+
+    async function fetchUsers() {
+        setLoading(true);
+        fetchAllUsers()
+            .then((response) => {
+                console.log(response.data.data)
+                setUsers(response.data.data)
+            })
+            .catch((error) => {
+                catchError(error);
+                toast.error('Error fetching users.');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
     return (
         <main className='flex h-screen overflow-x-auto'>
             <AdminSidebar />
@@ -38,8 +67,16 @@ function Users() {
 
                 <section className="bg-[#383434] w-full border border-[#717170] mb-20 px-4 pt-5 rounded-lg overflow-x-auto">
                     <h2 className="text-base font-light mb-4 pl-3 w-full">Users</h2>
-                    <table className="w-full border-collapse whitespace-nowrap">
-                        <thead>
+
+                    {loading ? (
+                        // Show loader while loading
+                        <div className="flex justify-center items-center h-64">
+                            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+                        </div>
+                    ) : (
+                        // Show table when data is loaded
+                        <table className="w-full border-collapse whitespace-nowrap">
+                             <thead>
                             <tr className="text-sm">
                                 <th className="p-3 border-b border-b-[#717170] font-light text-start">First Name</th>
                                 <th className="p-3 border-b border-b-[#717170] font-light text-start">Last Name</th>
@@ -50,27 +87,29 @@ function Users() {
                                 <th className="p-3 border-b border-b-[#717170] font-light text-start">Date of Birth</th>
                             </tr>
                         </thead>
-                        <tbody className='text-sm'>
-                            <tr>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Favour </td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Udoh</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">favourudoh455@gmail.com</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">08037828877</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Male</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Above 18 years</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">03/Dec</td>
-                            </tr>
-                            <tr>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Favour </td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Udoh</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">favourudoh455@gmail.com</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">08037828877</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Male</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">Above 18 years</td>
-                                <td className="p-3 border-b border-b-[#717170] font-light">03/Dec</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody className='text-sm'>
+                                {users?.length ? (
+                                    users.map((user, index) => (
+                                        <tr key={index}>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.firstName} </td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.lastName}</td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.email}</td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.phoneNumber}</td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.gender}</td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.over18 ? 'Above 18 years' : 'Below 18 years'}</td>
+                                        <td className="p-3 border-b border-b-[#717170] font-light">{user.dateOfBirth}</td>
+                                    </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={7} className="px-3 py-6 text-center border border-[#211D1D] font-light">
+                                            No users found
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    )}
                 </section>
             </div>
         </main>

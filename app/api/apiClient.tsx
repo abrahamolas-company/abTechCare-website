@@ -386,3 +386,21 @@ export function useGetGatgets() {
     }
     return getGatgets;
 }
+
+// Api call to fetch all engineers
+export function useFetchAllEngineers() {
+    async function fetchAllEngineers() {
+        const response = await API.get(`${ApiRoutes.FetchAllEngineers}`);
+        return response;
+    }
+    return fetchAllEngineers;
+}
+
+// Api call to fetch all users
+export function useFetchAllUsers() {
+    async function fetchAllUsers() {
+        const response = await API.get(`${ApiRoutes.FetchAllUsers}`);
+        return response;
+    }
+    return fetchAllUsers;
+}

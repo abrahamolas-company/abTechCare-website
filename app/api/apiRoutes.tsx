@@ -71,4 +71,10 @@ export default class ApiRoutes {
     // News Letter
     static NewsLetterSubscribe: string = "api/v1/newsletter/subscribe";
 
+    // Fetch engineers as an admin
+    static FetchAllEngineers: string = "api/v1/admins/all-engineers";
+
+    // Fetch users as an admin
+    static FetchAllUsers: string = "api/v1/admins/all-users";
+
 }
