@@ -50,3 +50,9 @@
   scrollbar-width: thin;
   scrollbar-color: #f1f1f1 #f1f1f1;
 }
+
+:root {
+  --hero-offset-mobile: 150px;
+  --hero-offset-md: 100px;
+  --hero-offset-lg: 100px;
+}

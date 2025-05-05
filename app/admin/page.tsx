@@ -35,14 +35,14 @@ const AdminDashboard = () => {
         },
     ]
     return (
-        <main className='flex h-screen overflow-x-auto'>
+        <main className='flex h-screen'>
             <AdminSidebar />
             <div className="flex-1 pl-6 pr-10 py-6 flex flex-col gap-10 bg-[#211D1D] text-white h-screen overflow-y-auto">
                 <AdminTopbar />
                 <div className="flex flex-col gap-7">
 
                     {/* KPIS */}
-                    <div className="flex items-center gap-10">
+                    <div className="flex items-center gap-10 overflow-x-auto">
                         {kpis.map((kpi, index) => (
                             <div className="bg-white rounded-[10px] text-[#211D1D] pb-3 min-w-[280px]" key={index}>
                                 <p className='bg-[#FFCC29] text-sm font-light px-5 rounded-[10px] py-2 mb-5'>{kpi.name}</p>
@@ -55,7 +55,7 @@ const AdminDashboard = () => {
                     </div>
 
                     {/* Bar Chart */}
-                    <div className="flex gap-7">
+                    <div className="flex gap-7 overflow-x-auto">
                         {/* Chart */}
                         <div className="bg-white h-[330px] rounded-[10px] w-full min-w-[800px]">
                             <p className='text-[#211D1D] bg-[#FFCC29] text-sm font-light px-5 rounded-[10px] py-3 mb-5'>Transaction Flow</p>

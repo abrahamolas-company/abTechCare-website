@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 function BookARepairSection() {
     return (
-        <section className='bg-[#FFCC2914] pt-20 md:pt-52 lg:pt-44 2xl:pt-[150px]  grid place-items-center'>
+        <section className='bg-[#FFCC2914] pt-14 md:pt-20 grid place-items-center'>
             <div className={`${sectionPadding} flex flex-col md:flex-row justify-center gap-5 md:gap-14 pt-8 pb-16 md:pt-0`}>
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
